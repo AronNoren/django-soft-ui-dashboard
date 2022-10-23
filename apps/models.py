@@ -49,7 +49,5 @@ class Lucy(models.Model):
     class Meta:
         app_label = 'dyn_datatables'
 
-    coin_name = models.CharField(max_length=100)
-    date = models.DateField()
-    returns = models.FloatField(null=True)
-    cumprod = models.FloatField(null=True)
+    name = models.CharField(max_length=100)
+
