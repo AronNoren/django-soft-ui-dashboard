@@ -190,6 +190,7 @@ if GITHUB_AUTH:
 API_GENERATOR = {
     # Register models below
     'books': "Book",
+    'lucy': "Lucy",
 }
 
 REST_FRAMEWORK = {
