@@ -51,5 +51,5 @@ class Lucy(models.Model):
 
     coin_name = models.CharField(max_length=100)
     date = models.DateField()
-    returns = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal(0.00))
-    cumprod = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal(0.00))
+    returns = models.DoubleField(null=True)
+    cumprod = models.DoubleField(null=True)
