@@ -44,3 +44,12 @@ class Book(models.Model):
         app_label = 'dyn_datatables'
 
     name = models.CharField(max_length=100)
+    
+class Lucy(models.Model):
+    class Meta:
+        app_label = 'dyn_datatables'
+
+    coin_name = models.CharField(max_length=100)
+    date = models.DateField()
+    returns = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal(0.00))
+    cumprod = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal(0.00))
