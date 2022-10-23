@@ -43,7 +43,9 @@ class Book(models.Model):
     class Meta:
         app_label = 'dyn_datatables'
 
-    name = models.CharField(max_length=100)
+    coin = models.CharField(max_length=100)
+    returns = models.CharField(max_length=100)
+    cumprod = models.CharField(max_length=100)
     
 class Lucy(models.Model):
     class Meta:
