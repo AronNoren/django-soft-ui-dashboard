@@ -206,6 +206,7 @@ DYNAMIC_DATATB = {
     'endpoint': 'Model', # don't change this line
 
     # Register models below
-    'books': "Book",     
+    'books': "Book",
+    'lucy': "Lucy",
 }
 
