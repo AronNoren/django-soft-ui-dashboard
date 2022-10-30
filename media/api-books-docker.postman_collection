@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "",
-		"name": "AppSeed Django API GEN",
+		"name": "AppSeed Django API GEN (Docker)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -203,7 +203,7 @@
 	"variable": [
 		{
 			"key": "base_address",
-			"value": "localhost:8000",
+			"value": "localhost:5085",
 			"type": "string"
 		}
 	]
