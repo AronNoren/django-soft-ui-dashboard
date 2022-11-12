@@ -1,47 +1,23 @@
-{% extends 'layouts/base.html' %}
-
-{% block title %} API Sample {% endblock title %}
-
-<!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
-
-{% block content %}
-
-  <!DOCTYPE html>
-
-    <head>Hej</head>
+<!DOCTYPE html>
+<html>
+    <head></head>
 
     <body>
         <ul id="myList"></ul>
-    <script>
-    var list = document.getElementById("myList");
-    list.appendChild("abc);
-    let displayList = ['abc', '123'];
-    displayList.push("abc);
-    let li = document.createElement("li");
-    li.innerText = "abc;
-    list.appendChild(li);
-    
-    let requestAction = 'post' // for update/add record
-    let data = []
-    const modelName = 'books'
-    const token = localStorage.getItem('token') || ''
-    const itemContainer = document.querySelector('.list-group')
-    fetch(`/api/${modelName}/`,{
-        method: 'GET',
-        headers: {
-            'Authorization': `token ${token}`
-        }
-    })
+        <script>
+
+            let displayList = ['Apples', 'Oranges', 'Grapes', 'Berries', 'Watermelon'];
+
+            fetch(`https://pokeapi.co/api/v2/pokemon`)
             .then(function(response){
                 return response.json()
             })
             .then((data) => {
                 var list = document.getElementById("myList");
                 data.results.forEach((item) => {
-                    displayList.push(item.coin);
+                    displayList.push(item.name);
                     let li = document.createElement("li");
-                    li.innerText = item.coin;
+                    li.innerText = item.name;
                     list.appendChild(li);
                 })
                 console.log(displayList)
@@ -49,44 +25,9 @@
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
             });
-    </script>
+
+             
+
+        </script>
     </body>
-  
-{% endblock content %}
-
-<!-- Specific JS goes HERE --> 
-{% block javascripts %}
-<script>
-    let displayList = ['abc', '123'];
-    let requestAction = 'post' // for update/add record
-    let data = []
-    const modelName = 'books'
-    const token = localStorage.getItem('token') || ''
-    const itemContainer = document.querySelector('.list-group')
-    fetch(`/api/${modelName}/`,{
-        method: 'GET',
-        headers: {
-            'Authorization': `token ${token}`
-        }
-    })
-            .then(function(response){
-                return response.json()
-            })
-            .then((data) => {
-                var list = document.getElementById("myList");
-                data.results.forEach((item) => {
-                    displayList.push(item.coin);
-                    let li = document.createElement("li");
-                    li.innerText = item.coin;
-                    list.appendChild(li);
-                })
-                console.log(displayList)
-            })
-            .catch((err) => {
-                console.log(`Error fetching: ${err}`)
-            });
-</script>
-<script src="{{ ASSETS_ROOT }}/js/model.js"></script>
-
-
-{% endblock javascripts %}
+</html>
