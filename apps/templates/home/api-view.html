@@ -5,19 +5,25 @@
     <body>
         <ul id="myList"></ul>
         <script>
-
+            const modelName = 'books'
+            const token = localStorage.getItem('token') || ''
+   
             let displayList = ['Apples', 'Oranges', 'Grapes', 'Berries', 'Watermelon'];
-
-            fetch(`https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/`)
+            fetch(`/api/${modelName}/`,{
+             method: 'GET',
+             headers: {
+            'Authorization': `token ${token}`
+             }
+             })
             .then(function(response){
                 return response.json()
             })
             .then((data) => {
                 var list = document.getElementById("myList");
                 data.results.forEach((item) => {
-                    displayList.push(item.data.coin);
+                    displayList.push(item.coin);
                     let li = document.createElement("li");
-                    li.innerText = item.data.coin;
+                    li.innerText = item.coin;
                     list.appendChild(li);
                 })
                 console.log(displayList)
