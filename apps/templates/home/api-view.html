@@ -14,7 +14,14 @@
     <body>
         <ul id="myList"></ul>
     <script>
+    var list = document.getElementById("myList");
+    list.appendChild("abc);
     let displayList = ['abc', '123'];
+    displayList.push("abc);
+    let li = document.createElement("li");
+    li.innerText = "abc;
+    list.appendChild(li);
+    
     let requestAction = 'post' // for update/add record
     let data = []
     const modelName = 'books'
