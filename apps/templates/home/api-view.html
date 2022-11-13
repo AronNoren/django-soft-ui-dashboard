@@ -126,35 +126,33 @@
     document.getElementById("r1take").innerHTML = "a";
     document.getElementById("r1stop").innerHTML = "b";
     document.getElementById("r1current").innerHTML = "a";
-            const modelName = 'books'
-            const token = localStorage.getItem('token') || ''
+    <!--        const modelName = 'books'
+    <!--        const token = localStorage.getItem('token') || ''
    
-            let displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-            fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
-             method: 'GET',
-             headers: {
-            'Authorization': `token ${token}`
-             }
-             })
-            .then(function(response){
-                return response.json()
-            })
-            .then((res) => {
-                data = res.data
-                
-                document.getElementById("r1name").innerHTML = "A";
-                document.getElementById("r1price").innerHTML = "1";
-                document.getElementById("r1weight").innerHTML = "1";
-                document.getElementById("r1take").innerHTML = "a";
-                document.getElementById("r1stop").innerHTML = "b";
-                document.getElementById("r1current").innerHTML = "a";
-            })
-            .catch((err) => {
-                console.log(`Error fetching: ${err}`)
-            });
+    <!--        let displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
+    <!--        fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
+    <!--         method: 'GET',
+    <!--         headers: {
+    <!--        'Authorization': `token ${token}`
+    <!--         }
+    <!--         })
+    <!--        .then(function(response){
+    <!--            return response.json()
+    <!--        })
+    <!--        .then((res) => {
+    <!--            data = res.data
+    <!--            
+    <!--            document.getElementById("r1name").innerHTML = "A";
+    <!--            document.getElementById("r1price").innerHTML = "1";
+    <!--            document.getElementById("r1weight").innerHTML = "1";
+    <!--            document.getElementById("r1take").innerHTML = "a";
+    <!--            document.getElementById("r1stop").innerHTML = "b";
+    <!--            document.getElementById("r1current").innerHTML = "a";
+    <!--        })
+    <!--        .catch((err) => {
+    <!--            console.log(`Error fetching: ${err}`)
+    <!--        });
 
-    var data1 = "$100";
-    var data2 = "$80";
 
 
   </script>
