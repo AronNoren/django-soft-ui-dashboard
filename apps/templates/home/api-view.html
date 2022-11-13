@@ -104,8 +104,9 @@
                     let li = document.createElement("li");
                     li.innerText = item.coin;
                     list.appendChild(li);
-                    document.getElementById("r1name").innerHTML = item.coin;
+                    document.getElementById("r1price").innerHTML = item.coin;
                 })
+                document.getElementById("r1name").innerHTML = list[0];
                 console.log(displayList)
             })
             .catch((err) => {
