@@ -27,23 +27,23 @@
                             <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
+                            <h6 class="mb-0 text-sm" id = "r1name">BTC</h6>
                           </div>
                         </div>
                       </td>
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">BTC</h6>
+                            <h6 class="mb-0 text-sm" id = "r1price">19,840-19,890</h6>
                           </div>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> $14,000 </span>
+                        <span class="text-xs font-weight-bold" id = "r1weight"> 5% </span>
                       </td>
                       <td class="align-middle">
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r1take">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -55,7 +55,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r1stop">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -67,7 +67,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r1current">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -118,4 +118,20 @@
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
+  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+  <script>
+    function myFunction() {
+      var number = "123";
+      document.getElementById("myText").innerHTML = number;
+    }
+    var data1 = "$100";
+    var data2 = "$80";
+
+    document.getElementById("r1name").innerHTML = data1;
+    document.getElementById("r1price").innerHTML = data2;
+    document.getElementById("r1weight").innerHTML = data2;
+    document.getElementById("r1take").innerHTML = data2;
+    document.getElementById("r1stop").innerHTML = data2;
+    document.getElementById("r1current").innerHTML = data2;
+  </script>
 {% endblock javascripts %}
