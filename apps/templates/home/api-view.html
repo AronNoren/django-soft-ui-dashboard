@@ -136,15 +136,14 @@
             })
             .then((res) => {
                 data = res.data
-                
-                var list = document.getElementById("myList");
-                    document.getElementById("r1name").innerHTML = diList[0];
-                    document.getElementById("r1price").innerHTML = diList[1];
-                    document.getElementById("r1weight").innerHTML = diList[2];
-                    document.getElementById("r1take").innerHTML = diList[3];
-                    document.getElementById("r1stop").innerHTML = diList[4];
-                    document.getElementById("r1current").innerHTML = "a";
-                console.log(displayList)
+                let diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
+                document.getElementById("r1name").innerHTML = diList[0];
+                document.getElementById("r1price").innerHTML = diList[1];
+                document.getElementById("r1weight").innerHTML = diList[2];
+                document.getElementById("r1take").innerHTML = diList[3];
+                document.getElementById("r1stop").innerHTML = diList[4];
+                document.getElementById("r1current").innerHTML = "a";
+                console.log(data)
             })
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
