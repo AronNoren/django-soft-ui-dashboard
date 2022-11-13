@@ -136,20 +136,12 @@
             .then((res) => {
                 data = res.data
                 
-                var list = document.getElementById("myList");
-                res.data.forEach((item) => {
-                    displayList.push(item.coin);
-                    let li = document.createElement("li");
-                    li.innerText = item.coin;
-                    list.appendChild(li);
-                  })
                 document.getElementById("r1name").innerHTML = data[0].coin;
                 document.getElementById("r1price").innerHTML = data[0].returns;
                 document.getElementById("r1weight").innerHTML = "1";
                 document.getElementById("r1take").innerHTML = "a";
                 document.getElementById("r1stop").innerHTML = "b";
                 document.getElementById("r1current").innerHTML = data[0].cumprod;
-                console.log(displayList)
             })
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
