@@ -120,12 +120,12 @@
 {% block javascripts %}
   <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
   <script>
-    const displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-    document.getElementById("r1name").innerHTML = displayList[0];
-    document.getElementById("r1price").innerHTML = displayList[1];
-    document.getElementById("r1weight").innerHTML = displayList[2];
-    document.getElementById("r1take").innerHTML = displayList[3];
-    document.getElementById("r1stop").innerHTML = displayList[4];
+    var diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
+    document.getElementById("r1name").innerHTML = diList[0];
+    document.getElementById("r1price").innerHTML = diList[1];
+    document.getElementById("r1weight").innerHTML = diList[2];
+    document.getElementById("r1take").innerHTML = diList[3];
+    document.getElementById("r1stop").innerHTML = diList[4];
     document.getElementById("r1current").innerHTML = "a";
     <!--        const modelName = 'books'
     <!--        const token = localStorage.getItem('token') || ''
