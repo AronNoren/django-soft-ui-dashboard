@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head></head>
+{% extends 'layouts/base.html' %}
 
-    <body>
-        
-<table class="table align-items-center mb-0">
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="card-body px-0 pb-2">
+              <div class="table-responsive">        
+                <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
@@ -74,6 +78,8 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
         <ul id="myList"></ul>
         <script>
             const modelName = 'books'
@@ -108,5 +114,8 @@
              
 
         </script>
-    </body>
-</html>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+{% endblock javascripts %}
