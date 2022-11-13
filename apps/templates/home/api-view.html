@@ -120,13 +120,47 @@
 {% block javascripts %}
   <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
   <script>
-    var diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-    document.getElementById("r1name").innerHTML = diList[0];
-    document.getElementById("r1price").innerHTML = diList[1];
-    document.getElementById("r1weight").innerHTML = diList[2];
-    document.getElementById("r1take").innerHTML = diList[3];
-    document.getElementById("r1stop").innerHTML = diList[4];
-    document.getElementById("r1current").innerHTML = "a";
+    const modelName = 'books'
+        var diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
+            const token = localStorage.getItem('token') || ''
+   
+            let displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
+            fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
+             method: 'GET',
+             headers: {
+            'Authorization': `token ${token}`
+             }
+             })
+            .then(function(response){
+                return response.json()
+            })
+            .then((res) => {
+                data = res.data
+                
+                var list = document.getElementById("myList");
+                    document.getElementById("r1name").innerHTML = diList[0];
+                    document.getElementById("r1price").innerHTML = diList[1];
+                    document.getElementById("r1weight").innerHTML = diList[2];
+                    document.getElementById("r1take").innerHTML = diList[3];
+                    document.getElementById("r1stop").innerHTML = diList[4];
+                    document.getElementById("r1current").innerHTML = "a";
+                console.log(displayList)
+            })
+            .catch((err) => {
+                console.log(`Error fetching: ${err}`)
+            });
+    
+    
+    
+    
+    
+
+    <!--document.getElementById("r1name").innerHTML = diList[0];
+    <!--document.getElementById("r1price").innerHTML = diList[1];
+    <!--document.getElementById("r1weight").innerHTML = diList[2];
+    <!--document.getElementById("r1take").innerHTML = diList[3];
+    <!--document.getElementById("r1stop").innerHTML = diList[4];
+    <!--document.getElementById("r1current").innerHTML = "a";
     <!--        const modelName = 'books'
     <!--        const token = localStorage.getItem('token') || ''
    
