@@ -602,26 +602,6 @@
             let displayList_name = [];
             let displayList_returns = [];
             let displayList_cumprod = [];
-            document.getElementById("r1name").innerHTML = "BTC_test";
-            document.getElementById("r1current").innerHTML = "1";
-            document.getElementById("r2name").innerHTML = "ETH_test";
-            document.getElementById("r2current").innerHTML = "1";
-            document.getElementById("r3name").innerHTML = "XRP";
-            document.getElementById("r3current").innerHTML = "1";
-            document.getElementById("r4name").innerHTML = "ADA";
-            document.getElementById("r4current").innerHTML = "1";
-            document.getElementById("r5name").innerHTML = "BNB";
-            document.getElementById("r5current").innerHTML = "1";
-            document.getElementById("r6name").innerHTML = "TRX";
-            document.getElementById("r6current").innerHTML = "1";
-            document.getElementById("r7name").innerHTML = "ATOM";
-            document.getElementById("r7current").innerHTML = "1";
-            document.getElementById("r8name").innerHTML = "DOGE";
-            document.getElementById("r8current").innerHTML = "1";
-            document.getElementById("r9name").innerHTML = "AVA";
-            document.getElementById("r9current").innerHTML = "1";
-            document.getElementById("r10name").innerHTML = "BAT";
-            document.getElementById("r10current").innerHTML = "1";
             fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
              method: 'GET',
              headers: {
@@ -644,6 +624,22 @@
                 document.getElementById("r1current").innerHTML = displayList_cumprod[0];
                 document.getElementById("r2name").innerHTML = displayList[1];
                 document.getElementById("r2current").innerHTML = displayList_cumprod[1];
+                document.getElementById("r3name").innerHTML = displayList[2];
+                document.getElementById("r3current").innerHTML = displayList_cumprod[2];
+                document.getElementById("r4name").innerHTML = displayList[3];
+                document.getElementById("r4current").innerHTML = displayList_cumprod[3];
+              document.getElementById("r5name").innerHTML = displayList[4];
+                document.getElementById("r5current").innerHTML = displayList_cumprod[4];
+                document.getElementById("r6name").innerHTML = displayList[5];
+                document.getElementById("r6current").innerHTML = displayList_cumprod[5];
+              document.getElementById("r7name").innerHTML = displayList[6];
+                document.getElementById("r7current").innerHTML = displayList_cumprod[6];
+                document.getElementById("r8name").innerHTML = displayList[7];
+                document.getElementById("r8current").innerHTML = displayList_cumprod[7];
+              document.getElementById("r9name").innerHTML = displayList[8];
+                document.getElementById("r9current").innerHTML = displayList_cumprod[8];
+                document.getElementById("r10name").innerHTML = displayList[9];
+                document.getElementById("r10current").innerHTML = displayList_cumprod[9];
                 
                 console.log(displayList)
             })
