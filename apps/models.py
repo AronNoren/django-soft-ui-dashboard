@@ -47,9 +47,15 @@ class Book(models.Model):
     returns = models.CharField(max_length=100)
     cumprod = models.CharField(max_length=100)
     
-class Lucy(models.Model):
+class Portfolio(models.Model):
     class Meta:
         app_label = 'dyn_datatables'
 
-    name = models.CharField(max_length=100)
+    token = models.CharField(max_length=100)
+    buy = models.CharField(max_length=100)
+    weight = models.CharField(max_length=100)
+    amount = models.CharField(max_length=100)
+    current = models.CharField(max_length=100)
+    
+    
 
