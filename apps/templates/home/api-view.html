@@ -14,7 +14,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Entry Price</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Weight</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Take Profit</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">amount</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stop Loss</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current Position</th>
                     </tr>
@@ -43,7 +43,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r1take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r1amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -100,7 +100,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r2take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r2amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -157,7 +157,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r3take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r3amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -214,7 +214,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r4take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r4amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -271,7 +271,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r5take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r5amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -328,7 +328,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r6take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r6amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -385,7 +385,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r7take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r7amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -442,7 +442,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r8take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r8amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -499,7 +499,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r9take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r9amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -556,7 +556,7 @@
                         <div class="progress-wrapper w-75 mx-auto">
                           <div class="progress-info">
                             <div class="progress-percentage">
-                              <span class="text-xs font-weight-bold" id = "r10take">3%</span>
+                              <span class="text-xs font-weight-bold" id = "r10amount">3%</span>
                             </div>
                           </div>
                           <div class="progress">
@@ -595,13 +595,15 @@
             </div>
 
         <script>
-            const modelName = 'books'
+            const modelName = 'portfolio'
             const token = localStorage.getItem('token') || ''
    
             let displayList = [];
             let displayList_name = [];
+            let displayList_buy = [];
+            let displayList_weight = [];
             let displayList_returns = [];
-            let displayList_cumprod = [];
+            let displayList_amount = [];
             fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
              method: 'GET',
              headers: {
@@ -615,33 +617,84 @@
                 data = res.data
                 
                 res.data.forEach((item) => {
-                    displayList.push(item.coin);
-                    displayList_name.push(item.coin);
-                    displayList_returns.push(item.returns);
-                    displayList_cumprod.push(item.cumprod);
+                    displayList.push(item.token);
+                    displayList_name.push(item.token);
+                    displayList_buy.push(item.buy);
+                    displayList_returns.push(item.current);
+                    displayList_weight.push(item.weight);
+                    displayList_amount.push(item.amount);
                 })
-                document.getElementById("r1name").innerHTML = displayList[0];
-                document.getElementById("r1current").innerHTML = displayList_cumprod[0];
-                document.getElementById("r2name").innerHTML = displayList[1];
-                document.getElementById("r2current").innerHTML = displayList_cumprod[1];
-                document.getElementById("r3name").innerHTML = displayList[2];
-                document.getElementById("r3current").innerHTML = displayList_cumprod[2];
-                document.getElementById("r4name").innerHTML = displayList[3];
-                document.getElementById("r4current").innerHTML = displayList_cumprod[3];
-              document.getElementById("r5name").innerHTML = displayList[4];
-                document.getElementById("r5current").innerHTML = displayList_cumprod[4];
-                document.getElementById("r6name").innerHTML = displayList[5];
-                document.getElementById("r6current").innerHTML = displayList_cumprod[5];
-              document.getElementById("r7name").innerHTML = displayList[6];
-                document.getElementById("r7current").innerHTML = displayList_cumprod[6];
-                document.getElementById("r8name").innerHTML = displayList[7];
-                document.getElementById("r8current").innerHTML = displayList_cumprod[7];
-              document.getElementById("r9name").innerHTML = displayList[8];
-                document.getElementById("r9current").innerHTML = displayList_cumprod[8];
-                document.getElementById("r10name").innerHTML = displayList[9];
-                document.getElementById("r10current").innerHTML = displayList_cumprod[9];
+                document.getElementById("r1name").innerHTML = displayList_name[0];
+                document.getElementById("r1price").innerHTML = displayList_buy[0];
+                document.getElementById("r1weight").innerHTML = displayList_weight[0];
+                document.getElementById("r1amount").innerHTML = displayList_amount[0];
+                document.getElementById("r1stop").innerHTML = "10%";
+                document.getElementById("r1current").innerHTML = displayList_returns[0];
                 
-                console.log(displayList)
+                document.getElementById("r2name").innerHTML = displayList_name[1];
+                document.getElementById("r2price").innerHTML = displayList_buy[1];
+                document.getElementById("r2weight").innerHTML = displayList_weight[1];
+                document.getElementById("r2amount").innerHTML = displayList_amount[1];
+                document.getElementById("r2stop").innerHTML = "10%";
+                document.getElementById("r2current").innerHTML = displayList_returns[1];
+              
+                document.getElementById("r3name").innerHTML = displayList_name[2];
+                document.getElementById("r3price").innerHTML = displayList_buy[2];
+                document.getElementById("r3weight").innerHTML = displayList_weight[2];
+                document.getElementById("r3amount").innerHTML = displayList_amount[2];
+                document.getElementById("r3stop").innerHTML = "10%";
+                document.getElementById("r3current").innerHTML = displayList_returns[2];
+              
+                document.getElementById("r4name").innerHTML = displayList_name[3];
+                document.getElementById("r4price").innerHTML = displayList_buy[3];
+                document.getElementById("r4weight").innerHTML = displayList_weight[3];
+                document.getElementById("r4amount").innerHTML = displayList_amount[3];
+                document.getElementById("r4stop").innerHTML = "10%";
+                document.getElementById("r4current").innerHTML = displayList_returns[3];
+              
+                document.getElementById("r5name").innerHTML = displayList_name[4];
+                document.getElementById("r5price").innerHTML = displayList_buy[4];
+                document.getElementById("r5weight").innerHTML = displayList_weight[4];
+                document.getElementById("r5amount").innerHTML = displayList_amount[4];
+                document.getElementById("r5stop").innerHTML = "10%";
+                document.getElementById("r5current").innerHTML = displayList_returns[4];
+              
+                document.getElementById("r6name").innerHTML = displayList_name[5];
+                document.getElementById("r6price").innerHTML = displayList_buy[5];
+                document.getElementById("r6weight").innerHTML = displayList_weight[5];
+                document.getElementById("r6amount").innerHTML = displayList_amount[5];
+                document.getElementById("r6stop").innerHTML = "10%";
+                document.getElementById("r6current").innerHTML = displayList_returns[5];
+              
+                document.getElementById("r7name").innerHTML = displayList_name[6];
+                document.getElementById("r7price").innerHTML = displayList_buy[6];
+                document.getElementById("r7weight").innerHTML = displayList_weight[6];
+                document.getElementById("r7amount").innerHTML = displayList_amount[6];
+                document.getElementById("r7stop").innerHTML = "10%";
+                document.getElementById("r7current").innerHTML = displayList_returns[6];
+             
+                document.getElementById("r8name").innerHTML = displayList_name[7];
+                document.getElementById("r8price").innerHTML = displayList_buy[7];
+                document.getElementById("r8weight").innerHTML = displayList_weight[7];
+                document.getElementById("r8amount").innerHTML = displayList_amount[7];
+                document.getElementById("r8stop").innerHTML = "10%";
+                document.getElementById("r8current").innerHTML = displayList_returns[7];
+              
+                document.getElementById("r9name").innerHTML = displayList_name[8];
+                document.getElementById("r9price").innerHTML = displayList_buy[8];
+                document.getElementById("r9weight").innerHTML = displayList_weight[8];
+                document.getElementById("r9amount").innerHTML = displayList_amount[8];
+                document.getElementById("r9stop").innerHTML = "10%";
+                document.getElementById("r9current").innerHTML = displayList_returns[8];
+              
+                document.getElementById("r10name").innerHTML = displayList_name[9];
+                document.getElementById("r10price").innerHTML = displayList_buy[9];
+                document.getElementById("r10weight").innerHTML = displayList_weight[9];
+                document.getElementById("r10amount").innerHTML = displayList_amount[9];
+                document.getElementById("r10stop").innerHTML = "10%";
+                document.getElementById("r10current").innerHTML = displayList_returns[9];
+              
+                console.log(displayList_name)
             })
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
@@ -656,34 +709,7 @@
 {% block javascripts %}
   <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
   <script>
-    const modelName = 'books'
-        var diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-            const token = localStorage.getItem('token') || ''
-   
-            let displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-            fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
-             method: 'GET',
-             headers: {
-            'Authorization': `token ${token}`
-             }
-             })
-            .then(function(response){
-                return response.json()
-            })
-            .then((res) => {
-                data = res.data
-                let diList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-                document.getElementById("r1name").innerHTML = diList[0];
-                document.getElementById("r1price").innerHTML = diList[1];
-                document.getElementById("r1weight").innerHTML = diList[2];
-                document.getElementById("r1take").innerHTML = diList[3];
-                document.getElementById("r1stop").innerHTML = diList[4];
-                document.getElementById("r1current").innerHTML = "a";
-                console.log(data)
-            })
-            .catch((err) => {
-                console.log(`Error fetching: ${err}`)
-            });
+
     
     
     
