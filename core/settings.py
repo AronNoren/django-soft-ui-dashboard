@@ -190,7 +190,7 @@ if GITHUB_AUTH:
 API_GENERATOR = {
     # Register models below
     'books': "Book",
-    'lucy': "Lucy",
+    'portfolio': "Portfolio",
 }
 
 REST_FRAMEWORK = {
@@ -208,6 +208,6 @@ DYNAMIC_DATATB = {
 
     # Register models below
     'books': "Book",
-    'lucy': "Lucy",
+    'portfolio': "Portfolio",
 }
 
