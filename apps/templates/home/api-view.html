@@ -44,6 +44,14 @@
           </div>
         </div>
       </div>
+<div class="row mt-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
+                <input type="text" id="invest" name="Amount to invest" />
+                <br />
+                <input type="button" value="Solve" onClick="calc(this)">
+
+        </div>
+      </div>
 
 <div class="row my-4">
   <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
@@ -744,8 +752,26 @@
                 console.log(`Error fetching: ${err}`)
             });
 
-             
-
+            <!-- calculate investments
+           
+            function calc(form) {
+                let displayList_amount = [];
+                var A = document.getElementById("invest").value;
+                displayList_buy.forEach((item) => {
+                         displayList_amount.push(A/item);
+                })
+                document.getElementById("r1amount").innerHTML = displayList_amount[0];
+                document.getElementById("r2amount").innerHTML = displayList_amount[1];
+                document.getElementById("r3amount").innerHTML = displayList_amount[2];
+                document.getElementById("r4amount").innerHTML = displayList_amount[3];    
+                document.getElementById("r5amount").innerHTML = displayList_amount[4];
+                document.getElementById("r6amount").innerHTML = displayList_amount[5];
+                document.getElementById("r7amount").innerHTML = displayList_amount[6];
+                document.getElementById("r8amount").innerHTML = displayList_amount[7];
+                document.getElementById("r9amount").innerHTML = displayList_amount[8];
+                document.getElementById("r10amount").innerHTML = displayList_amount[9];
+                return false;
+                }
         </script>
 {% endblock content %}
 
