@@ -776,7 +776,7 @@
                 let displayList_amount = [];
                 var A = document.getElementById("invest").value;
                 displayList_buy.forEach((item) => {
-                         displayList_amount.push(A/item);
+                         displayList_amount.push(A/(item*10));
                 })
                 document.getElementById("r1amount").innerHTML = displayList_amount[0];
                 document.getElementById("r2amount").innerHTML = displayList_amount[1];
