@@ -683,10 +683,14 @@
           </div>
         </div>
       </div>
-         
 
-          <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
-          <script>
+ {% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+  <script>  
+
             const modelName = 'portfolio'
             const token = localStorage.getItem('token') || ''
    
@@ -986,15 +990,7 @@
         },
       },
     });
-           
-           
-        </script>
-{% endblock content %}
-
-<!-- Specific JS goes HERE --> 
-{% block javascripts %}
-  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
-  <script>
+          
 
     
     
