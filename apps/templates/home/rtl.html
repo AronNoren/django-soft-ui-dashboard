@@ -291,12 +291,12 @@
            
 
     var ctx = document.getElementById("chart-bars").getContext("2d");
-    let displayList_name = ["ZIL","RUNE","XMR","NEAR","CAKE","CVX","LUNA","EOS","COMP","AAVE"];
-    let displayList_buy = [10,9,8,7,6,5,4,3,2,1];
+    let displayList_name_ = ["ZIL","RUNE","XMR","NEAR","CAKE","CVX","LUNA","EOS","COMP","AAVE"];
+    let displayList_buy_ = [10,9,8,7,6,5,4,3,2,1];
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: displayList_name,
+        labels: displayList_name_,
         datasets: [{
           label: "Sales",
           tension: 0.4,
@@ -304,7 +304,7 @@
           borderRadius: 4,
           borderSkipped: false,
           backgroundColor: "#fff",
-          data: displayList_buy,
+          data: displayList_buy_,
           maxBarThickness: 6
         }, ],
       },
