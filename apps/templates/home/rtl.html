@@ -183,7 +183,7 @@
                 res.data.forEach((item) => {
                     displayList.push(item.token);
                     displayList_name.push(item.token);
-                    displayList_buy.push(item.buy);
+                    displayList_buy.push(parseFloat(item.buy));
                     displayList_returns.push(item.current);
                     displayList_weight.push(item.weight);
                     displayList_amount.push(item.amount);
@@ -215,7 +215,7 @@
                   borderRadius: 4,
                   borderSkipped: false,
                   backgroundColor: "#fff",
-                  data: displayList_buy_,
+                  data: displayList_buy,
                   maxBarThickness: 6
                 }, ],
               },
