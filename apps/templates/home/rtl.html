@@ -188,82 +188,11 @@
                     displayList_weight.push(item.weight);
                     displayList_amount.push(item.amount);
                 })
-                document.getElementById("r1name").innerHTML = displayList_name[0];
-                document.getElementById("r1price").innerHTML = displayList_buy[0];
-                document.getElementById("r1weight").innerHTML = displayList_weight[0];
-                document.getElementById("r1amount").innerHTML = displayList_amount[0];
-                document.getElementById("r1stop").innerHTML = "10%";
-                document.getElementById("r1current").innerHTML = displayList_returns[0];
-                
-                document.getElementById("r2name").innerHTML = displayList_name[1];
-                document.getElementById("r2price").innerHTML = displayList_buy[1];
-                document.getElementById("r2weight").innerHTML = displayList_weight[1];
-                document.getElementById("r2amount").innerHTML = displayList_amount[1];
-                document.getElementById("r2stop").innerHTML = "10%";
-                document.getElementById("r2current").innerHTML = displayList_returns[1];
-              
-                document.getElementById("r3name").innerHTML = displayList_name[2];
-                document.getElementById("r3price").innerHTML = displayList_buy[2];
-                document.getElementById("r3weight").innerHTML = displayList_weight[2];
-                document.getElementById("r3amount").innerHTML = displayList_amount[2];
-                document.getElementById("r3stop").innerHTML = "10%";
-                document.getElementById("r3current").innerHTML = displayList_returns[2];
-              
-                document.getElementById("r4name").innerHTML = displayList_name[3];
-                document.getElementById("r4price").innerHTML = displayList_buy[3];
-                document.getElementById("r4weight").innerHTML = displayList_weight[3];
-                document.getElementById("r4amount").innerHTML = displayList_amount[3];
-                document.getElementById("r4stop").innerHTML = "10%";
-                document.getElementById("r4current").innerHTML = displayList_returns[3];
-              
-                document.getElementById("r5name").innerHTML = displayList_name[4];
-                document.getElementById("r5price").innerHTML = displayList_buy[4];
-                document.getElementById("r5weight").innerHTML = displayList_weight[4];
-                document.getElementById("r5amount").innerHTML = displayList_amount[4];
-                document.getElementById("r5stop").innerHTML = "10%";
-                document.getElementById("r5current").innerHTML = displayList_returns[4];
-              
-                document.getElementById("r6name").innerHTML = displayList_name[5];
-                document.getElementById("r6price").innerHTML = displayList_buy[5];
-                document.getElementById("r6weight").innerHTML = displayList_weight[5];
-                document.getElementById("r6amount").innerHTML = displayList_amount[5];
-                document.getElementById("r6stop").innerHTML = "10%";
-                document.getElementById("r6current").innerHTML = displayList_returns[5];
-              
-                document.getElementById("r7name").innerHTML = displayList_name[6];
-                document.getElementById("r7price").innerHTML = displayList_buy[6];
-                document.getElementById("r7weight").innerHTML = displayList_weight[6];
-                document.getElementById("r7amount").innerHTML = displayList_amount[6];
-                document.getElementById("r7stop").innerHTML = "10%";
-                document.getElementById("r7current").innerHTML = displayList_returns[6];
-             
-                document.getElementById("r8name").innerHTML = displayList_name[7];
-                document.getElementById("r8price").innerHTML = displayList_buy[7];
-                document.getElementById("r8weight").innerHTML = displayList_weight[7];
-                document.getElementById("r8amount").innerHTML = displayList_amount[7];
-                document.getElementById("r8stop").innerHTML = "10%";
-                document.getElementById("r8current").innerHTML = displayList_returns[7];
-              
-                document.getElementById("r9name").innerHTML = displayList_name[8];
-                document.getElementById("r9price").innerHTML = displayList_buy[8];
-                document.getElementById("r9weight").innerHTML = displayList_weight[8];
-                document.getElementById("r9amount").innerHTML = displayList_amount[8];
-                document.getElementById("r9stop").innerHTML = "10%";
-                document.getElementById("r9current").innerHTML = displayList_returns[8];
-              
-                document.getElementById("r10name").innerHTML = displayList_name[9];
-                document.getElementById("r10price").innerHTML = displayList_buy[9];
-                document.getElementById("r10weight").innerHTML = displayList_weight[9];
-                document.getElementById("r10amount").innerHTML = displayList_amount[9];
-                document.getElementById("r10stop").innerHTML = "10%";
-                document.getElementById("r10current").innerHTML = displayList_returns[9];
+
               
                 console.log(displayList_name)
              
-             
-             
-             
-             
+
              
             })
             .catch((err) => {
@@ -278,7 +207,7 @@
             new Chart(ctx, {
               type: "bar",
               data: {
-                labels: displayList_name,
+                labels: displayList_name_,
                 datasets: [{
                   label: "Sales",
                   tension: 0.4,
@@ -339,31 +268,6 @@
               },
             });
    
-   
-   
-            function calc(form) {
-                let displayList_amount = [];
-                var A = document.getElementById("invest").value;
-                displayList_buy.forEach((item) => {
-                         displayList_amount.push(A/(item*10));
-                })
-                document.getElementById("r1amount").innerHTML = displayList_amount[0];
-                document.getElementById("r2amount").innerHTML = displayList_amount[1];
-                document.getElementById("r3amount").innerHTML = displayList_amount[2];
-                document.getElementById("r4amount").innerHTML = displayList_amount[3];    
-                document.getElementById("r5amount").innerHTML = displayList_amount[4];
-                document.getElementById("r6amount").innerHTML = displayList_amount[5];
-                document.getElementById("r7amount").innerHTML = displayList_amount[6];
-                document.getElementById("r8amount").innerHTML = displayList_amount[7];
-                document.getElementById("r9amount").innerHTML = displayList_amount[8];
-                document.getElementById("r10amount").innerHTML = displayList_amount[9];
-                return false;
-                }
-           
-           
-           
-           
-           
 
    
 
