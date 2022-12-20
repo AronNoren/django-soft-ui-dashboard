@@ -291,7 +291,8 @@
            
 
     var ctx = document.getElementById("chart-bars").getContext("2d");
-
+    let displayList_name = ["ZIL","RUNE","XMR","NEAR","CAKE","CVX","LUNA","EOS","COMP","AAVE"];
+    let displayList_buy = [10,9,8,7,6,5,4,3,2,1];
     new Chart(ctx, {
       type: "bar",
       data: {
