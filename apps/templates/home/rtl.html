@@ -37,6 +37,7 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+ <script src="https://d3js.org/d3.v5.min.js"></script> 
  <script>
 
   // Set the dimensions of the chart
@@ -52,8 +53,7 @@
   };
 
   // Set the data for the chart'v
- <script src="https://d3js.org/d3.v5.min.js"></script>
- <script>  
+
   var data = [
     { date: '2022-01-01', price: 10 },
     { date: '2022-01-02', price: 20 },
