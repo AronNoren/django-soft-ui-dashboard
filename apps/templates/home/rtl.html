@@ -33,24 +33,26 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
   <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
+ <script src="https://d3js.org/d3.v5.min.js"></script>
   <script>  
-  axios.get('https://api.binance.com/api/v3/ticker/price', {
-  params: {
-    symbol: 'BTCUSDT'
-  },
-  headers: {
-    'X-MBX-APIKEY': 'iyZaS4J8fDJwn5Fmusp3lAUn0eD7Uclo7PVEb1HluhL1LqD4dq4bRYC2OEgGdgI0'
-  }
-})
-.then(response => {
-  console.log(response.data);
-})
-.catch(error => {
-  console.log(error);
-});
-   
-<!-- Include the D3.js library -->
+ <!--
+<!--  axios.get('https://api.binance.com/api/v3/ticker/price', {
+<!--  params: {
+<!--    symbol: 'BTCUSDT'
+<!--  },
+<!--  headers: {
+<!--    'X-MBX-APIKEY': 'iyZaS4J8fDJwn5Fmusp3lAUn0eD7Uclo7PVEb1HluhL1LqD4dq4bRYC2OEgGdgI0'
+<!--  }
+<!--})
+<!--.then(response => {
+<!--  console.log(response.data);
+<!--})
+<!--.catch(error => {
+<!--  console.log(error);
+<!--});
+<!--   
+<!--Include the D3.js library 
+
 
 
   // Set the dimensions of the chart
