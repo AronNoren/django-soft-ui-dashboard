@@ -40,7 +40,7 @@
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
 var BTCdata = [
-    { 0: '2022-01-01', 1: 10, 2:0,3:0,4:0 },
+    { 0: '2022-01-01', 1: 10, 2:0,3:0,4:5 },
     { 0: '2022-01-02', 1: 40, 2:0,3:0,4:0 },
     { 0: '2022-01-03', 1: 30, 2:0,3:0,4:0 },
     { 0: '2022-01-04', 1: 40, 2:0,3:0,4:0 },
@@ -53,7 +53,7 @@ axios.get('https://api.binance.com/api/v3/klines', {
   }
 })
 .then(response => {
-  var BTCdata = response.data;
+  BTCdata = response.data;
   console.log(response.data);
 })
 .catch(error => {
