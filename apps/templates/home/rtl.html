@@ -54,7 +54,8 @@ axios.get('https://api.binance.com/api/v3/klines', {
 })
 .then(response => {
   BTCdata = response.data;
-  console.log(response.data);
+  console.log(BTCdata);
+  
 })
 .catch(error => {
   console.log(error);
@@ -70,16 +71,8 @@ axios.get('https://api.binance.com/api/v3/klines', {
     bottom: 30,
     left: 50
   };
-
+  console.log(BTCdata);
   // Set the data for the chart'v
-
-  var data = [
-    { date: '2022-01-01', price: 10 },
-    { date: '2022-01-02', price: 40 },
-    { date: '2022-01-03', price: 30 },
-    { date: '2022-01-04', price: 40 },
-    { date: '2022-01-05', price: 45 }
-  ];
   const price = BTCdata.map(function(item) {
   return item[4];
 });
