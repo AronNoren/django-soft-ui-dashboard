@@ -70,7 +70,7 @@
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: data.date,
+        labels: ['a','b','c'],
         datasets: [{
           label: "Sales",
           tension: 0.4,
@@ -78,7 +78,7 @@
           borderRadius: 4,
           borderSkipped: false,
           backgroundColor: "#fff",
-          data: data.price,
+          data: [1,2,3],
           maxBarThickness: 6
         }, ],
       },
