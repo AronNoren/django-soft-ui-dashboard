@@ -75,11 +75,11 @@ axios.get('https://api.binance.com/api/v3/klines', {
     { date: '2022-01-05', price: 45 }
   ];
   const price = data.map(function(item) {
-  return item.price;
+  return new Date(item.price);
 });
 
   const date =data.map(function(item) {
-  return item.date;
+  return new Date(item.date);
 });
 
   // Set the scales for the chart
