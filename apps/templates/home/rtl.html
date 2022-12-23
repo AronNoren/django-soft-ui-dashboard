@@ -60,6 +60,13 @@
     { date: '2022-01-04', price: 40 },
     { date: '2022-01-05', price: 45 }
   ];
+  const price = data.map(function(item) {
+  return item.price;
+});
+
+  const date =data.map(function(item) {
+  return item.date;
+});
 
   // Set the scales for the chart
          
@@ -74,7 +81,7 @@
     new Chart(ctx, {
       type: "line",
       data: {
-        labels: data.date,
+        labels: price,
         datasets: [{
           label: "Sales",
           tension: 0.4,
@@ -84,7 +91,7 @@
           borderColor: "#cb0c9f",
           borderWidth: 3,
           backgroundColor: gradientStroke1,
-          data: data.price,
+          data: date,
           maxBarThickness: 6
         }, ],
       },
