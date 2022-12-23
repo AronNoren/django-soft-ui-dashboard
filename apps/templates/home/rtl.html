@@ -55,36 +55,14 @@ axios.get('https://api.binance.com/api/v3/klines', {
 .then(response => {
   BTCdata = response.data;
   console.log(BTCdata);
-  
-})
-.catch(error => {
-  console.log(error);
-});
-  // Set the dimensions of the chart
-  var width = 500;
-  var height = 300;
-
-  // Set the margins of the chart
-  var margin = {
-    top: 20,
-    right: 20,
-    bottom: 30,
-    left: 50
-  };
-  console.log(BTCdata);
-  // Set the data for the chart'v
-  const price = BTCdata.map(function(item) {
+    const price = BTCdata.map(function(item) {
   return item[4];
 });
 
   const date =BTCdata.map(function(item) {
   return new Date(item[0]);
 });
-
-  // Set the scales for the chart
-         
-
-    var ctx = document.getElementById("chart").getContext("2d");
+  var ctx = document.getElementById("chart").getContext("2d");
 
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -185,6 +163,30 @@ axios.get('https://api.binance.com/api/v3/klines', {
         },
       },
     });
+})
+.catch(error => {
+  console.log(error);
+  
+});
+  // Set the dimensions of the chart
+  var width = 500;
+  var height = 300;
+
+  // Set the margins of the chart
+  var margin = {
+    top: 20,
+    right: 20,
+    bottom: 30,
+    left: 50
+  };
+  console.log(BTCdata);
+  // Set the data for the chart'v
+
+
+  // Set the scales for the chart
+         
+
+  
 
 
   </script>
