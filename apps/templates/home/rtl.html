@@ -37,6 +37,7 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
 axios.get('https://api.binance.com/api/v3/ticker/price', {
   params: {
