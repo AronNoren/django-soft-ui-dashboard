@@ -38,7 +38,21 @@
 {% block javascripts %}
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
  <script>
-
+axios.get('https://api.binance.com/api/v3/ticker/price', {
+  params: {
+    symbol: 'BTCUSDT'
+  },
+  headers: {
+    'X-MBX-APIKEY': 'iyZaS4J8fDJwn5Fmusp3lAUn0eD7Uclo7PVEb1HluhL1LqD4dq4bRYC2OEgGdgI0'
+  }
+})
+.then(response => {
+  var BTCdata = response.data;
+  console.log(response.data);
+})
+.catch(error => {
+  console.log(error);
+});
   // Set the dimensions of the chart
   var width = 500;
   var height = 300;
