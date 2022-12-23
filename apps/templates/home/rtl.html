@@ -55,10 +55,10 @@
 
   var data = [
     { date: '2022-01-01', price: 10 },
-    { date: '2022-01-02', price: 20 },
+    { date: '2022-01-02', price: 40 },
     { date: '2022-01-03', price: 30 },
     { date: '2022-01-04', price: 40 },
-    { date: '2022-01-05', price: 50 }
+    { date: '2022-01-05', price: 45 }
   ];
 
   // Set the scales for the chart
@@ -74,7 +74,7 @@
     new Chart(ctx, {
       type: "line",
       data: {
-        labels: ['a','b','c'],
+        labels: data.date,
         datasets: [{
           label: "Sales",
           tension: 0.4,
@@ -84,7 +84,7 @@
           borderColor: "#cb0c9f",
           borderWidth: 3,
           backgroundColor: gradientStroke1,
-          data: [1,2,3],
+          data: data.price,
           maxBarThickness: 6
         }, ],
       },
