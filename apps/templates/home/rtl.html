@@ -81,7 +81,7 @@ axios.get('https://api.binance.com/api/v3/klines', {
     { date: '2022-01-05', price: 45 }
   ];
   const price = BTCdata.map(function(item) {
-  return new Date(item[4]);
+  return item[4];
 });
 
   const date =BTCdata.map(function(item) {
