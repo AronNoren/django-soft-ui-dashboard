@@ -39,7 +39,7 @@
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
-
+var BTCdata;
 axios.get('https://api.binance.com/api/v3/klines', {
   params: {
     symbol: 'BTCUSDT',
