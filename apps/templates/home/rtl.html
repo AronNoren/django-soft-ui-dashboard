@@ -41,7 +41,8 @@
  <script>
 axios.get('https://api.binance.com/api/v3/ticker/price', {
   params: {
-    symbol: 'BTCUSDT'
+    symbol: 'BTCUSDT',
+    interval: '1M'
   },
   headers: {
     'X-MBX-APIKEY': 'iyZaS4J8fDJwn5Fmusp3lAUn0eD7Uclo7PVEb1HluhL1LqD4dq4bRYC2OEgGdgI0'
