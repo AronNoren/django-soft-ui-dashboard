@@ -57,5 +57,19 @@ class Portfolio(models.Model):
     amount = models.CharField(max_length=100)
     current = models.CharField(max_length=100)
     
+class Returns(models.Model):
+    class Meta:
+        app_label = 'dyn_datatables'
+
+    date = models.CharField(max_length=100)
+    dailyreturnLucy = models.CharField(max_length=100)
+    cumdailyreturnLucy = models.CharField(max_length=100)
+    dailyreturnLucyhold = models.CharField(max_length=100)
+    cumdailyreturnLucyhold = models.CharField(max_length=100)
+    dailyreturnBTC = models.CharField(max_length=100)
+    cumdailyreturnBTC = models.CharField(max_length=100)
+    dailyreturnBTChold = models.CharField(max_length=100)
+    cumdailyreturnBTChold = models.CharField(max_length=100)
+
     
 
