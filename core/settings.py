@@ -191,6 +191,7 @@ API_GENERATOR = {
     # Register models below
     'books': "Book",
     'portfolio': "Portfolio",
+    'returns': "Returns",
 }
 
 REST_FRAMEWORK = {
@@ -209,5 +210,6 @@ DYNAMIC_DATATB = {
     # Register models below
     'books': "Book",
     'portfolio': "Portfolio",
+    'returns': "Returns",
 }
 
