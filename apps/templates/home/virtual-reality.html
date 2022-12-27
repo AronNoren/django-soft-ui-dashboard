@@ -43,14 +43,14 @@
   const modelName = 'returns'
   const token = localStorage.getItem('token') || ''
 
-  let returnsLucy = [];
-  let cumreturnsLucy = [];
-  let returnsLucyhold = [];
-  let cumreturnsLucyhold = [];
-  let returnsBTC = [];
-  let cumreturnsBTC = [];
-  let returnsBTChold = [];
-  let cumreturnsBTChold = [];       
+  let returnsLucytemp = [];
+  let cumreturnsLucytemp = [];
+  let returnsLucyholdtemp = [];
+  let cumreturnsLucyholdtemp = [];
+  let returnsBTCtemp = [];
+  let cumreturnsBTCtemp = [];
+  let returnsBTCholdtemp = [];
+  let cumreturnsBTCholdtemp = [];       
   let date = [];
   fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/returns/',{
    method: 'GET',
@@ -66,23 +66,23 @@
 
       res.data.forEach((item) => {
           date.push(item.date);
-          returnsLucy.push(item.dailyreturnLucy);
-          returnsLucyhold.push(item.dailyreturnLucyhold);
-          returnsBTC.push(item.dailyreturnBTC);
-          returnsBTChold.push(item.dailyreturnBTChold);
-          cumreturnsLucy.push(item.cumdailyreturnLucy);
-          cumreturnsLucyhold.push(item.cumdailyreturnLucyhold);
-          cumreturnsBTC.push(item.cumdailyreturnBTC);
-          cumreturnsBTChold.push(item.cumdailyreturnBTChold);
-          const returnsLucy = ffill(returnsLucy, 0);
-          const cumreturnsLucy = ffill(cumreturnsLucy, 0);
-          const returnsLucyhold = ffill(returnsLucyhold, 0);
-          const cumreturnsLucyhold = ffill(cumreturnsLucyhold, 0);
-          const returnsBTC = ffill(returnsBTC, 0);
-          const cumreturnsBTC = ffill(cumreturnsBTC, 0);
-          const returnsBTChold = ffill(returnsBTChold, 0);
-          const cumreturnsBTChold = ffill(cumreturnsBTChold, 0);
-          const filledArray = ffill(filledArray, 0);
+          returnsLucytemp.push(item.dailyreturnLucy);
+          returnsLucyholdtemp.push(item.dailyreturnLucyhold);
+          returnsBTCtemp.push(item.dailyreturnBTC);
+          returnsBTCholdtemp.push(item.dailyreturnBTChold);
+          cumreturnsLucytemp.push(item.cumdailyreturnLucy);
+          cumreturnsLucyholdtemp.push(item.cumdailyreturnLucyhold);
+          cumreturnsBTCtemp.push(item.cumdailyreturnBTC);
+          cumreturnsBTCholdtemp.push(item.cumdailyreturnBTChold);
+          const returnsLucy = ffill(returnsLucytemp, 0);
+          const cumreturnsLucy = ffill(cumreturnsLucytemp, 0);
+          const returnsLucyhold = ffill(returnsLucyholdtemp, 0);
+          const cumreturnsLucyhold = ffill(cumreturnsLucyholdtemp, 0);
+          const returnsBTC = ffill(returnsBTCtemp, 0);
+          const cumreturnsBTC = ffill(cumreturnsBTCtemp, 0);
+          const returnsBTChold = ffill(returnsBTCholdtemp, 0);
+          const cumreturnsBTChold = ffill(cumreturnsBTCholdtemp, 0);
+          
       });
     
     const ffill = (array, defaultValue = null) => {
