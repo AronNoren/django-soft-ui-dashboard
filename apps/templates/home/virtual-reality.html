@@ -83,6 +83,9 @@
           cumreturnsLucyholdtemp.push(item.cumdailyreturnLucyhold);
           cumreturnsBTCtemp.push(item.cumdailyreturnBTC);
           cumreturnsBTCholdtemp.push(item.cumdailyreturnBTChold);
+
+          
+      });
           const returnsLucy = ffill(returnsLucytemp, 0);
           const cumreturnsLucy = ffill(cumreturnsLucytemp, 0);
           const returnsLucyhold = ffill(returnsLucyholdtemp, 0);
@@ -91,9 +94,6 @@
           const cumreturnsBTC = ffill(cumreturnsBTCtemp, 0);
           const returnsBTChold = ffill(returnsBTCholdtemp, 0);
           const cumreturnsBTChold = ffill(cumreturnsBTCholdtemp, 0);
-          
-      });
-    
 
 
     var ctx = document.getElementById("chart").getContext("2d");
