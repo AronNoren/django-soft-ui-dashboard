@@ -39,14 +39,6 @@
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
-let BTCdata = [
-    { 0: '2022-01-01', 1: 10, 2:0,3:0,4:5 },
-    { 0: '2022-01-02', 1: 40, 2:0,3:0,4:0 },
-    { 0: '2022-01-03', 1: 30, 2:0,3:0,4:0 },
-    { 0: '2022-01-04', 1: 40, 2:0,3:0,4:0 },
-    { 0: '2022-01-05', 1: 45, 2:0,3:0,4:0 }
-  ];
-   
   ///
   const modelName = 'returns'
   const token = localStorage.getItem('token') || ''
@@ -74,8 +66,8 @@ let BTCdata = [
           returnslucyhold.push(item.dailyreturnLucyhold);
           returnsBTC.push(item.dailyreturnBTC);
           returnsBTChold.push(item.dailyreturnBTChold);
-      })
-      var ctx = document.getElementById("chart").getContext("2d");
+      });
+    var ctx = document.getElementById("chart").getContext("2d");
 
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -89,7 +81,7 @@ let BTCdata = [
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
          
-        new Chart(ctx, {
+      new Chart(ctx, {
       type: "line",
       data: {
         labels: date,
@@ -175,6 +167,7 @@ let BTCdata = [
           },
         },
       },
+     });
 })
 .catch(error => {
   console.log(error);
