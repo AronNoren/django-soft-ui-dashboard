@@ -44,9 +44,13 @@
   const token = localStorage.getItem('token') || ''
 
   let returnsLucy = [];
+  let cumreturnsLucy = [];
   let returnslucyhold = [];
+  let cumreturnslucyhold = [];
   let returnsBTC = [];
+  let cumreturnsBTC = [];
   let returnsBTChold = [];
+  let cumreturnsBTChold = [];       
   let date = [];
   fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/returns/',{
    method: 'GET',
@@ -66,6 +70,10 @@
           returnslucyhold.push(item.dailyreturnLucyhold);
           returnsBTC.push(item.dailyreturnBTC);
           returnsBTChold.push(item.dailyreturnBTChold);
+          cumreturnsLucy.push(item.cumdailyreturnLucy);
+          cumreturnslucyhold.push(item.cumdailyreturnLucyhold);
+          cumreturnsBTC.push(item.cumdailyreturnBTC);
+          cumreturnsBTChold.push(item.cumdailyreturnBTChold);
       });
     var ctx = document.getElementById("chart").getContext("2d");
 
@@ -86,7 +94,7 @@
       data: {
         labels: date,
         datasets: [{
-            label: "Mobile apps",
+            label: "Lucy returns",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -94,12 +102,12 @@
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: returnsBTC,
+            data: cumreturnsLucy,
             maxBarThickness: 6
 
           },
           {
-            label: "Websites",
+            label: "BTC returns",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -107,7 +115,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke2,
             fill: true,
-            data: returnsBTChold,
+            data: cumreturnsBTChold,
             maxBarThickness: 6
           },
         ],
