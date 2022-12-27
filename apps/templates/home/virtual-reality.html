@@ -63,8 +63,17 @@
   })
   .then((res) => {
       data = res.data
-
+      const ffill = (array, defaultValue = null) => {
+         return array.reduce((acc, curr) => {
+        if (curr === null || curr === undefined) {
+      curr = acc[acc.length - 1];
+         }
+         acc.push(curr);
+         return acc;
+        }, [defaultValue]);
+    };
       res.data.forEach((item) => {
+          
           date.push(item.date);
           returnsLucytemp.push(item.dailyreturnLucy);
           returnsLucyholdtemp.push(item.dailyreturnLucyhold);
@@ -85,15 +94,7 @@
           
       });
     
-    const ffill = (array, defaultValue = null) => {
-         return array.reduce((acc, curr) => {
-        if (curr === null || curr === undefined) {
-      curr = acc[acc.length - 1];
-         }
-         acc.push(curr);
-         return acc;
-        }, [defaultValue]);
-    };
+
 
     var ctx = document.getElementById("chart").getContext("2d");
     
