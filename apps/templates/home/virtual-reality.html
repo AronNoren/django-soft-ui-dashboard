@@ -88,13 +88,25 @@
     gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
-         
+       
+    var gradientStroke3 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(120,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(172,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(120,23,39,0)'); //purple colors   
+       
+    var gradientStroke4 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(180,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(172,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(190,23,39,0)'); //purple colors   
+       
       new Chart(ctx, {
       type: "line",
       data: {
         labels: date,
         datasets: [{
-            label: "Lucy returns",
+            label: "Lucy",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -107,7 +119,33 @@
 
           },
           {
-            label: "BTC returns",
+            label: "Lucy no momentum",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: cumreturnsLucyhold,
+            maxBarThickness: 6
+
+          },
+          {
+            label: "BTC with momentum",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: cumreturnsBTC,
+            maxBarThickness: 6
+
+          },
+          {
+            label: "BTC",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
