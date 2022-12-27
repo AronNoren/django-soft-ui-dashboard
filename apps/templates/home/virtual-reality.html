@@ -135,36 +135,11 @@
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: cumreturnsLucy,
+            data: cumreturnsLucy.slice(0, 900),
             maxBarThickness: 6
 
           },
-          {
-            label: "Lucy no momentum",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: cumreturnsLucyhold,
-            maxBarThickness: 6
 
-          },
-          {
-            label: "BTC with momentum",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke3,
-            fill: true,
-            data: cumreturnsBTC,
-            maxBarThickness: 6
-
-          },
           {
             label: "BTC",
             tension: 0.4,
@@ -174,7 +149,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke4,
             fill: true,
-            data: cumreturnsBTChold,
+            data: cumreturnsBTChold.slice(0, 900),
             maxBarThickness: 6
           },
         ],
