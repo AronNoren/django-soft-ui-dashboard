@@ -74,6 +74,15 @@
           cumreturnsLucyhold.push(item.cumdailyreturnLucyhold);
           cumreturnsBTC.push(item.cumdailyreturnBTC);
           cumreturnsBTChold.push(item.cumdailyreturnBTChold);
+          const returnsLucy = ffill(returnsLucy, 0);
+          const cumreturnsLucy = ffill(cumreturnsLucy, 0);
+          const returnsLucyhold = ffill(returnsLucyhold, 0);
+          const cumreturnsLucyhold = ffill(cumreturnsLucyhold, 0);
+          const returnsBTC = ffill(returnsBTC, 0);
+          const cumreturnsBTC = ffill(cumreturnsBTC, 0);
+          const returnsBTChold = ffill(returnsBTChold, 0);
+          const cumreturnsBTChold = ffill(cumreturnsBTChold, 0);
+          const filledArray = ffill(filledArray, 0);
       });
     
     const ffill = (array, defaultValue = null) => {
@@ -85,15 +94,7 @@
          return acc;
         }, [defaultValue]);
     };
-    const returnsLucy = ffill(returnsLucy, 0);
-    const cumreturnsLucy = ffill(cumreturnsLucy, 0);
-    const returnsLucyhold = ffill(returnsLucyhold, 0);
-    const cumreturnsLucyhold = ffill(cumreturnsLucyhold, 0);
-    const returnsBTC = ffill(returnsBTC, 0);
-    const cumreturnsBTC = ffill(cumreturnsBTC, 0);
-    const returnsBTChold = ffill(returnsBTChold, 0);
-    const cumreturnsBTChold = ffill(cumreturnsBTChold, 0);
-    const filledArray = ffill(filledArray, 0);
+
     var ctx = document.getElementById("chart").getContext("2d");
     
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
