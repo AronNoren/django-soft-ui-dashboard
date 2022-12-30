@@ -269,12 +269,21 @@
 
   function filterDates(startDate, endDate) {
   // filter the data based on the start and end dates
-  var filteredData = datas.filter(function(datapoint) {
+   var filteredData = datas.filter(function(datapoint) {
     return datapoint.date >= startDate && datapoint.date <= endDate;
   });
-  // update the chart with the filtered data
-  myChart.data.datasets[0].data = filteredData;
-  myChart.update();
+
+  // calculate the cumulative product of the returns for each date
+  var cumulativeProduct = filteredData.reduce(function(acc, cur) {
+    return acc * cur.return;
+  }, 1);
+  var cumulativeProducts = filteredData.map(function(datapoint) {
+    return cumulativeProduct;
+  });
+
+  // update the chart with the cumulative products for each date
+  mychart.data.datasets[0].data = cumulativeProducts;
+  mychart.update();
 }
 
 // input element for the start date
