@@ -67,6 +67,13 @@
           </div>
         </div>
       </div>
+      <!-- start date input -->
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" value="2020-01-01">
+
+      <!-- end date input -->
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" value="2020-01-31">
 
 
 
@@ -164,10 +171,7 @@
     gradientStroke2.addColorStop(1, 'rgba(180,23,39,0.2)');
     gradientStroke2.addColorStop(0.2, 'rgba(172,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(190,23,39,0)'); //purple colors   
-       
-      new Chart(ctx, {
-      type: "line",
-      data: {
+      let datas = {
         labels: date,
         datasets: [{
             label: "Lucy",
@@ -196,7 +200,11 @@
             maxBarThickness: 6
           },
         ],
-      },
+      }
+        
+      let myChart = new Chart(ctx, {
+      type: "line",
+      data: datas,
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -259,7 +267,40 @@
   
 });
 
-  
+  function filterDates(startDate, endDate) {
+  // filter the data based on the start and end dates
+  var filteredData = datas.filter(function(datapoint) {
+    return datapoint.date >= startDate && datapoint.date <= endDate;
+  });
+  // update the chart with the filtered data
+  myChart.data.datasets[0].data = filteredData;
+  myChart.update();
+}
+
+// input element for the start date
+var startDateInput = document.getElementById('start-date');
+// input element for the end date
+var endDateInput = document.getElementById('end-date');
+
+// event listener for the start date input
+startDateInput.addEventListener('change', function() {
+  // get the start date from the input element
+  var startDate = new Date(startDateInput.value);
+  // get the end date from the input element
+  var endDate = new Date(endDateInput.value);
+  // filter the data based on the start and end dates
+  filterDates(startDate, endDate);
+});
+
+// event listener for the end date input
+endDateInput.addEventListener('change', function() {
+  // get the start date from the input element
+  var startDate = new Date(startDateInput.value);
+  // get the end date from the input element
+  var endDate = new Date(endDateInput.value);
+  // filter the data based on the start and end dates
+  filterDates(startDate, endDate);
+});
 
 
   </script>
