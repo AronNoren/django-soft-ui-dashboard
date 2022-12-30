@@ -102,6 +102,8 @@
   let returnsBTCholdtemp = [];
   let cumreturnsBTCholdtemp = [];       
   let date = [];
+  let datas = [];
+  var myChart;
   fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/returns/',{
    method: 'GET',
    headers: {
@@ -171,7 +173,7 @@
     gradientStroke2.addColorStop(1, 'rgba(180,23,39,0.2)');
     gradientStroke2.addColorStop(0.2, 'rgba(172,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(190,23,39,0)'); //purple colors   
-      let datas = {
+      var datas = {
         labels: date,
         datasets: [{
             label: "Lucy",
@@ -282,8 +284,8 @@
   });
 
   // update the chart with the cumulative products for each date
-  mychart.data.datasets[0].data = cumulativeProducts;
-  mychart.update();
+  myChart.data.datasets[0].data = cumulativeProducts;
+  myChart.update();
 }
 
 // input element for the start date
