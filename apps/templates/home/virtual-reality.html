@@ -103,7 +103,6 @@
   let cumreturnsBTCholdtemp = [];       
   let date = [];
   let datas = [];
-  var myChart;
   fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/returns/',{
    method: 'GET',
    headers: {
@@ -204,7 +203,7 @@
         ],
       }
         
-      let myChart = new Chart(ctx, {
+      var myChart = new Chart(ctx, {
       type: "line",
       data: datas,
       options: {
@@ -263,6 +262,7 @@
         },
       },
      });
+     window.myChart = myChart;
 })
 .catch(error => {
   console.log(error);
