@@ -117,7 +117,7 @@
     };
       res.data.forEach((item) => {
           
-          date.push(item.date);
+          date.push(item.date.slice(0, 10));
           returnsLucytemp.push(item.dailyreturnLucy);
           returnsLucyholdtemp.push(item.dailyreturnLucyhold);
           returnsBTCtemp.push(item.dailyreturnBTC);
