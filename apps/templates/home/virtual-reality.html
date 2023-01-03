@@ -252,7 +252,7 @@
      window.myChart = myChart;
         window.datas = datas;
         window.returnslucy = returnsLucy;
-        window.date = date;
+        window.dates = date;
 })
 .catch(error => {
   console.log(error);
@@ -272,7 +272,7 @@
   });
   console.log(filteredData);
        
-  var filteredDates = date.filter(function(date, index) {
+  var filteredDates = dates.filter(function(date, index) {
     return date >= startDate && date <= endDate;
   });
   console.log(filteredDates);
