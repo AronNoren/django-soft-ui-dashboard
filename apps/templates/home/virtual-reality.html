@@ -290,9 +290,11 @@
 }
 
 // input element for the start date
-var startDateInput = document.getElementById('start-date').toISOString();
-// input element for the end date
-var endDateInput = document.getElementById('end-date').toISOString();
+var startDateInput = document.getElementById('start-date');
+var startDateInput = startDateInput.toISOString();
+       // input element for the end date
+var endDateInput = document.getElementById('end-date');
+var endDateInput = endDateInput.toISOString();
 
 // event listener for the start date input
 startDateInput.addEventListener('change', function() {
