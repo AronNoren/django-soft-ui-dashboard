@@ -257,11 +257,13 @@
 });
 
   function filterDates(startDate, endDate) {
+  console.log(startDate);
+  console.log(datas);
   // filter the data based on the start and end dates
    var filteredData = datas.filter(function(datapoint) {
     return datapoint.date >= startDate && datapoint.date <= endDate;
   });
-
+ console.log(filteredData);
   // calculate the cumulative product of the returns for each date
   var cumulativeProduct = filteredData.reduce(function(acc, cur) {
     return acc * cur.return;
