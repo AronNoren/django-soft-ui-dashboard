@@ -251,6 +251,8 @@
      });
      window.myChart = myChart;
         window.datas = datas;
+        window.returnslucy = returnslucy;
+        window.date = date;
 })
 .catch(error => {
   console.log(error);
@@ -259,12 +261,21 @@
 
   function filterDates(startDate, endDate) {
   console.log(startDate);
-  console.log(datas);
-  // filter the data based on the start and end dates
-   var filteredData = datas.filter(function(datapoint) {
-    return datapoint.date >= startDate && datapoint.date <= endDate;
+  console.log(returnsLucy);
+
+ 
+
+
+  // update the chart with the cumulative products for each date
+   var filteredData = returnsLucy.filter(function(datapoint, index) {
+    return dates[index] >= startDate && dates[index] <= endDate;
   });
- console.log(filteredData);
+  console.log(filteredData);
+       
+  var filteredDates = date.filter(function(date, index) {
+    return date >= startDate && date <= endDate;
+  });
+  console.log(filteredDates);
   // calculate the cumulative product of the returns for each date
   var cumulativeProduct = filteredData.reduce(function(acc, cur) {
     return acc * cur.return;
@@ -272,9 +283,9 @@
   var cumulativeProducts = filteredData.map(function(datapoint) {
     return cumulativeProduct;
   });
-
-  // update the chart with the cumulative products for each date
+  // update the chart with the filtered data and dates
   myChart.data.datasets[0].data = cumulativeProducts;
+  myChart.data.labels = filteredDates;
   myChart.update();
 }
 
