@@ -291,10 +291,10 @@
 
 // input element for the start date
 var startDateInput = document.getElementById('start-date');
-var startDateInput = startDateInput.value.toISOString().split('T')[0];
+
        // input element for the end date
 var endDateInput = document.getElementById('end-date');
-var endDateInput = endDateInput.value.toISOString().split('T')[0];
+
 
 // event listener for the start date input
 startDateInput.addEventListener('change', function() {
@@ -310,8 +310,10 @@ startDateInput.addEventListener('change', function() {
 endDateInput.addEventListener('change', function() {
   // get the start date from the input element
   var startDate = new Date(startDateInput.value);
+  var startDate = startDate.toISOString().split('T')[0];
   // get the end date from the input element
   var endDate = new Date(endDateInput.value);
+  var endDate = endDate.toISOString().split('T')[0];
   // filter the data based on the start and end dates
   filterDates(startDate, endDate);
 });
