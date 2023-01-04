@@ -5,7 +5,33 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
+<style>
+  .btn-group button {
+  background-color: #04AA6D;
+  border: 1px solid green;
+  border-radius: 4px; /* Add this line */
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  float: left;
+}
 
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
 {% block content %}
 
 <!-- Create a container for the chart -->
@@ -130,7 +156,11 @@
 
 
 
-
+        <div class="btn-group">
+       <button >2020</button>
+       <button >2021</button>
+       <button >2022</button>
+       </div> 
 
       {% include "includes/footer.html" %}
 
@@ -434,31 +464,5 @@ for (var i = 0; i < startyear2.length; i++) {
 
   </script>
 {% endblock javascripts %}
-<style>
-  .btn-group button {
-  background-color: #04AA6D;
-  border: 1px solid green;
-  border-radius: 4px; /* Add this line */
-  color: white;
-  padding: 10px 24px;
-  cursor: pointer;
-  float: left;
-}
 
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
-}
-</style>
 
