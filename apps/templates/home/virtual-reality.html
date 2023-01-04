@@ -280,10 +280,12 @@
   var cumulativeProduct = filteredData.reduce(function(acc, cur) {
     return acc * cur.return;
   }, 1);
-  var cumulativeProducts = filteredData.map(function(datapoint) {
-    return cumulativeProduct;
-  });
+  //var cumulativeProducts = filteredData.map(function(datapoint) {
+  //  return cumulativeProduct;
+  //});
   // update the chart with the filtered data and dates
+  console.log(myChart.data.datasets[0].data);
+  console.log(cumulativeProducts);
   myChart.data.datasets[0].data = cumulativeProducts;
   myChart.data.labels = filteredDates;
   myChart.update();
