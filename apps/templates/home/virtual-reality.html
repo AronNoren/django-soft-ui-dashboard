@@ -266,7 +266,7 @@ function cumulativeproduct(returns) {
   for (var i = 0; i < returns.length; i++) {
     // if this is the first day, the cumulative product is just the return for that day
     if (i === 0) {
-      cumulativeProduct.push(returns[i]);
+      cumulativeProduct.push(1);
     }
     // for all other days, the cumulative product is the product of all previous returns
     else {
