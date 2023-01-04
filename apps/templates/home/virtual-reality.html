@@ -71,12 +71,10 @@
       <!-- start year dropdown menu -->
       <label for="start-year">Start Year:</label>
       <select id="start-year">
+        <option value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
       </select>
 
 
@@ -191,6 +189,19 @@
             maxBarThickness: 6
 
           },
+        {
+            label: "BTC",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: cumreturnsBTChold.slice(0, 900),
+            maxBarThickness: 6
+
+          },
         ],
       }
         
@@ -256,6 +267,7 @@
      window.myChart = myChart;
         window.datas = datas;
         window.returnslucy = returnsLucy;
+        window.returnsBTChold = returnsBTChold;
         window.dates = date;
 })
 .catch(error => {
@@ -289,21 +301,33 @@ function cumulativeproduct(returns) {
   function filterDates(startYear) {
 
   // update the chart with the cumulative products for each date
-   var filteredData = returnslucy.filter(function(datapoint, index) {
+   var filteredDatalucy = returnslucy.filter(function(datapoint, index) {
     return dates[index] >= startYear;
   });
        
   var filteredDates = dates.filter(function(date, index) {
     return date >= startYear;
   });
-  console.log(filteredDates);
   // calculate the cumulative product of the returns for each date
-  var cumulativeProducts = cumulativeproduct(filteredData)
+  var cumulativeProductslucy = cumulativeproduct(filteredDatalucy)
   //var cumulativeProducts = filteredData.map(function(datapoint) {
   //  return cumulativeProduct;
   //});
   // update the chart with the filtered data and dates
-  myChart.data.datasets[0].data = cumulativeProducts;
+  myChart.data.datasets[0].data = cumulativeProductslucy;
+        
+    var filteredDataBTC = returnsBTChold.filter(function(datapoint, index) {
+    return dates[index] >= startYear;
+  });
+
+  // calculate the cumulative product of the returns for each date
+  var cumulativeProductsBTC = cumulativeproduct(filteredDataBTC)
+  //var cumulativeProducts = filteredData.map(function(datapoint) {
+  //  return cumulativeProduct;
+  //});
+  // update the chart with the filtered data and dates
+  myChart.data.datasets[1].data = cumulativeProductsBTC;     
+  
   myChart.data.labels = filteredDates;
   myChart.update();
 }
