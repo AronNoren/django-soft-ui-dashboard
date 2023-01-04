@@ -118,22 +118,17 @@
                 </ul>
               </li>
         </div>
+        <div class="btn-group">
+       <button value = "2020" class = "yearbutton">2020</button>
+       <button value = "2021" class = "yearbutton">2021</button>
+       <button value = "2022" class = "yearbutton">2022</button>
+       </div> 
       </div>
       <!-- start date input -->
       
       <!-- start year dropdown menu -->
-      <label for="start-year">Start Year:</label>
-      <select id="start-year">
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-      </select>
-       <div class="btn-group">
-       <button value = "2021" class = "yearbutton">2021</button>
-       <button>Samsung</button>
-       <button>Sony</button>
-       </div> 
+
+
 
 
 
@@ -476,6 +471,31 @@ select#start-year[disabled] {
 
   /* Remove the box shadow */
   box-shadow: none;
+}
+      
+  .btn-group button {
+  background-color: #04AA6D; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
 }
 </style>
 
