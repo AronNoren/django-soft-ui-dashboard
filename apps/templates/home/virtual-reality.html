@@ -68,11 +68,22 @@
               
                 <li class="nav-item dropdown pe-3 d-flex align-items-center">
                   <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
-                    <i class="fa fa-bell cursor-pointer">YTD</i>
+                    YTD
                   </a>
                  <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                   <li class="mb-2">
-                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <a class="dropdown-item border-radius-md" value="2019">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">2019</span>
+                          </h6>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" value="2020">
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -83,7 +94,7 @@
                     </a>
                   </li>
                   <li class="mb-2">
-                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <a class="dropdown-item border-radius-md" value="2021">
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -94,7 +105,7 @@
                     </a>
                   </li>
                   <li class="mb-2">
-                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <a class="dropdown-item border-radius-md" value="2022">
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -118,7 +129,11 @@
         <option value="2021">2021</option>
         <option value="2022">2022</option>
       </select>
-
+       <div class="btn-group">
+       <button value = "2019">2019</button>
+       <button>Samsung</button>
+       <button>Sony</button>
+       </div> 
 
 
 
@@ -376,7 +391,7 @@ function cumulativeproduct(returns) {
 
 // input element for the start date
 var startyear = document.getElementById('start-year');
-
+var startyear2 = document.getElementById('dropdownMenuButton');
        // input element for the end date
 //var endDateInput = document.getElementById('end-date');
 
@@ -390,7 +405,14 @@ startyear.addEventListener('change', function() {
   // filter the data based on the start and end dates
   filterDates(startYear);
 });
-
+startyear2.addEventListener('change', function() {
+  // get the start date from the input element
+  var startYear = startyear.value;
+  // get the end date from the input element
+  //var endDate = new Date(endDateInput.value);
+  // filter the data based on the start and end dates
+  filterDates(startYear);
+});
 // event listener for the end date input
 //endDateInput.addEventListener('change', function() {
   // get the start date from the input element
