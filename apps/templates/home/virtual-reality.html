@@ -405,14 +405,25 @@ var startyear2 = document.getElementsByClassName('yearbutton');
   // filter the data based on the start and end dates
 //  filterDates(startYear);
 //});
-startyear2.addEventListener('click', function() {
+for (var i = 0; i < startyear2.length; i++) {
+  startyear2[i].addEventListener('click', function() {
+    // get the start date from the input element
+    var startYear2 = this.value;
+    // get the end date from the input element
+    //var endDate = new Date(endDateInput.value);
+    // filter the data based on the start and end dates
+    filterDates(startYear2);
+  });
+}
+
+//startyear2.addEventListener('click', function() {
   // get the start date from the input element
-  var startYear2 = startyear2.value;
+  //var startYear2 = startyear2.value;
   // get the end date from the input element
   //var endDate = new Date(endDateInput.value);
   // filter the data based on the start and end dates
-  filterDates(startYear2);
-});
+  //filterDates(startYear2);
+//});
 // event listener for the end date input
 //endDateInput.addEventListener('change', function() {
   // get the start date from the input element
