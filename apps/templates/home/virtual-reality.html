@@ -270,7 +270,12 @@ function cumulativeproduct(returns) {
     }
     // for all other days, the cumulative product is the product of all previous returns
     else {
-      cumulativeProduct.push(cumulativeProduct[i - 1] * returns[i]);
+      if (returns[i] === "nan") {
+      cumulativeProduct.push(cumulativeProduct[i - 1] * 1);
+      }
+      else {
+            cumulativeProduct.push(cumulativeProduct[i - 1] * returns[i]);
+      }
     }
   }
 
