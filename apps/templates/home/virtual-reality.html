@@ -258,13 +258,28 @@
   console.log(error);
   
 });
+function cumulativeproduct(returns) {
+  // initialize an array to store the cumulative product of the returns
+  var cumulativeProduct = [];
 
+  // calculate the cumulative product of the returns for each day
+  for (var i = 0; i < returns.length; i++) {
+    // if this is the first day, the cumulative product is just the return for that day
+    if (i === 0) {
+      cumulativeProduct.push(returns[i]);
+    }
+    // for all other days, the cumulative product is the product of all previous returns
+    else {
+      cumulativeProduct.push(cumulativeProduct[i - 1] * returns[i]);
+    }
+  }
+
+  // return the cumulative product array
+  return cumulativeProduct;
+}
   function filterDates(startDate, endDate) {
   console.log(startDate);
   console.log(returnslucy);
-
- 
-
 
   // update the chart with the cumulative products for each date
    var filteredData = returnslucy.filter(function(datapoint, index) {
@@ -277,9 +292,7 @@
   });
   console.log(filteredDates);
   // calculate the cumulative product of the returns for each date
-  var cumulativeProducts = filteredData.reduce(function(acc, cur) {
-    return acc * cur.return;
-  }, 1);
+  var cumulativeProducts = cumulativeproduct(filteredData)
   //var cumulativeProducts = filteredData.map(function(datapoint) {
   //  return cumulativeProduct;
   //});
