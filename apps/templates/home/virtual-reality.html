@@ -5,33 +5,7 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
-<style>
-  .btn-group button {
-  background-color: #04AA6D;
-  border: 1px solid green;
-  border-radius: 4px; /* Add this line */
-  color: white;
-  padding: 10px 24px;
-  cursor: pointer;
-  float: left;
-}
 
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
-}
-</style>
 {% block content %}
 
 <!-- Create a container for the chart -->
@@ -99,8 +73,8 @@
             <div class="col-md-4">
               <div class="card">
                 <div class="card-body text-center">
-                   <button value = "2020" class="btn bg-gradient-primary mb-0">2020</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button value = "2021" class="btn bg-gradient-primary mb-0">2021</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button value = "2022" class="btn bg-gradient-primary mb-0">2022</button>
-                  <p class="card-text">YTD Start Year</p>
+                   <button value = "2020" class="btn bg-gradient-primary mb-0">2020</button>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button value = "2021" class="btn bg-gradient-primary mb-0">2021</button>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button value = "2022" class="btn bg-gradient-primary mb-0">2022</button>
+                   <p class="text-sm mb-0 text-capitalize font-weight-bold">YTD Start Year</p>
                 </div>
               </div>
             </div>
@@ -365,7 +339,7 @@ function cumulativeproduct(returns) {
 
 // input element for the start date
 //var startyear = document.getElementById('start-year');
-var startyear2 = document.getElementsByClassName('btn bg-gradient-primary mb-0');
+var startyear = document.getElementsByClassName('btn bg-gradient-primary mb-0');
        // input element for the end date
 //var endDateInput = document.getElementById('end-date');
 
@@ -379,14 +353,14 @@ var startyear2 = document.getElementsByClassName('btn bg-gradient-primary mb-0')
   // filter the data based on the start and end dates
 //  filterDates(startYear);
 //});
-for (var i = 0; i < startyear2.length; i++) {
-  startyear2[i].addEventListener('click', function() {
+for (var i = 0; i < startyear.length; i++) {
+  startyear[i].addEventListener('click', function() {
     // get the start date from the input element
-    var startYear2 = this.value;
+    var startYear = this.value;
     // get the end date from the input element
     //var endDate = new Date(endDateInput.value);
     // filter the data based on the start and end dates
-    filterDates(startYear2);
+    filterDates(startYear);
   });
 }
 
