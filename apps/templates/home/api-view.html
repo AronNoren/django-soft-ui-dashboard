@@ -79,11 +79,11 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Entry Price</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price at recommendation</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Weight</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">amount</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stop Loss</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current Position</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount to purchase</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stop loss</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current position</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -627,7 +627,7 @@
                             </div>
                           </div>
                           <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="10%"></div>
                           </div>
                         </div>
                       </td>
@@ -639,7 +639,7 @@
                             </div>
                           </div>
                           <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="10%"></div>
                           </div>
                         </div>
                       </td>
@@ -651,7 +651,7 @@
                             </div>
                           </div>
                           <div class="progress">
-                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                            <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="10%"></div>
                           </div>
                         </div>
                       </td>
@@ -696,14 +696,14 @@
                 document.getElementById("r1name").innerHTML = displayList_name[0];
                 document.getElementById("r1price").innerHTML = displayList_buy[0];
                 document.getElementById("r1weight").innerHTML = displayList_weight[0];
-                document.getElementById("r1amount").innerHTML = displayList_amount[0];
+                document.getElementById("r1amount").innerHTML = parseFloat(displayList_amount[0].toPrecision(3));
                 document.getElementById("r1stop").innerHTML = "10%";
                 document.getElementById("r1current").innerHTML = displayList_returns[0];
                 
                 document.getElementById("r2name").innerHTML = displayList_name[1];
                 document.getElementById("r2price").innerHTML = displayList_buy[1];
                 document.getElementById("r2weight").innerHTML = displayList_weight[1];
-                document.getElementById("r2amount").innerHTML = displayList_amount[1];
+                document.getElementById("r2amount").innerHTML = parseFloat(displayList_amount[1].toPrecision(3));
                 document.getElementById("r2stop").innerHTML = "10%";
                 document.getElementById("r2current").innerHTML = displayList_returns[1];
               
@@ -802,40 +802,6 @@
     
     
     
-
-    <!--document.getElementById("r1name").innerHTML = diList[0];
-    <!--document.getElementById("r1price").innerHTML = diList[1];
-    <!--document.getElementById("r1weight").innerHTML = diList[2];
-    <!--document.getElementById("r1take").innerHTML = diList[3];
-    <!--document.getElementById("r1stop").innerHTML = diList[4];
-    <!--document.getElementById("r1current").innerHTML = "a";
-    <!--        const modelName = 'books'
-    <!--        const token = localStorage.getItem('token') || ''
-   
-    <!--        let displayList = ['Apples', 'Oranges', 'Grapes', 'Beries', 'Watermelon'];
-    <!--        fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/books/',{
-    <!--         method: 'GET',
-    <!--         headers: {
-    <!--        'Authorization': `token ${token}`
-    <!--         }
-    <!--         })
-    <!--        .then(function(response){
-    <!--            return response.json()
-    <!--        })
-    <!--        .then((res) => {
-    <!--            data = res.data
-    <!--            
-    <!--            document.getElementById("r1name").innerHTML = "A";
-    <!--            document.getElementById("r1price").innerHTML = "1";
-    <!--            document.getElementById("r1weight").innerHTML = "1";
-    <!--            document.getElementById("r1take").innerHTML = "a";
-    <!--            document.getElementById("r1stop").innerHTML = "b";
-    <!--            document.getElementById("r1current").innerHTML = "a";
-    <!--        })
-    <!--        .catch((err) => {
-    <!--            console.log(`Error fetching: ${err}`)
-    <!--        });
-
 
 
   </script>
