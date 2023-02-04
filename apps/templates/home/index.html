@@ -311,9 +311,10 @@ function cumulativeproduct(returns) {
     return dates[index] >= startYear;
   });
        
-  var filteredDates = dates.filter(function(date, index) {
+  var filteredDates_ = dates.filter(function(date, index) {
     return date >= startYear;
   });
+  var filteredDates = filteredDates_.sort()
   // calculate the cumulative product of the returns for each date
   var cumulativeProductslucy = cumulativeproduct(filteredDatalucy)
   //var cumulativeProducts = filteredData.map(function(datapoint) {
