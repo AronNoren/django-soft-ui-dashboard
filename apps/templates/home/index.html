@@ -287,7 +287,8 @@
 function averageYearlyReturn(dailyReturns, numDaysInYear) {
   // calculate average daily return
   let averageDailyReturn = dailyReturns.reduce((sum, current) => sum + current, 0) / dailyReturns.length;
-
+  console.log(dailyReturns);
+  console.log(averageDailyReturn);
   // annualize the average daily return
   return averageDailyReturn * numDaysInYear;
 }
