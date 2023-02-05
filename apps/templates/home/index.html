@@ -20,7 +20,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">BjorkFi YTD Return:</p>
                     <h5 class="font-weight-bolder mb-0">
-                      BjorkFi <span class="text-success text-sm font-weight-bolder">{{YearlyReturn}}</span>
+                      BjorkFi <span id="yearlyReturn" class="text-success text-sm font-weight-bolder"></span>
                     </h5>
                   </div>
                 </div>
@@ -276,7 +276,9 @@
         window.returnsBTChold = returnsBTChold;
         window.dates = date;
       filterDates('2020');
+       
       var YearlyReturn = '20%'
+      document.getElementById("yearlyReturn").innerHTML = YearlyReturn;
 })
 .catch(error => {
   console.log(error);
@@ -293,7 +295,8 @@ function averageYearlyReturn(dailyReturns, numDaysInYear) {
 function cumulativeproduct(returns) {
   // initialize an array to store the cumulative product of the returns
   var cumulativeProduct = [];
-  var YearlyReturn = "10%"// averageYearlyReturn(returns, 365);
+  var YearlyReturn = averageYearlyReturn(returns, 365);
+  document.getElementById("yearlyReturn").innerHTML = (yearlyReturn * 100).toFixed(2) + "%";
   // calculate the cumulative product of the returns for each day
   for (var i = 0; i < returns.length; i++) {
     // if this is the first day, the cumulative product is just the return for that day
