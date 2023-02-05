@@ -328,7 +328,7 @@ function cumulativeproduct(returns) {
   });
   var YearlyReturn = averageYearlyReturn(returnslucy);  
   console.log(YearlyReturn)
-  document.getElementById("yearlyReturn").innerHTML = (yearlyReturn * 100).toFixed(2) + "%";
+  document.getElementById("yearlyReturn").innerHTML = YearlyReturn//(yearlyReturn * 100).toFixed(2) + "%";
   var filteredDates_ = dates.filter(function(date, index) {
     return date >= startYear;
   });
