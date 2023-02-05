@@ -293,7 +293,7 @@ function averageYearlyReturn(dailyReturns, numDaysInYear) {
 function cumulativeproduct(returns) {
   // initialize an array to store the cumulative product of the returns
   var cumulativeProduct = [];
-  var YearlyReturn = averageYearlyReturn(returns, 365);
+  var YearlyReturn = "10%"// averageYearlyReturn(returns, 365);
   // calculate the cumulative product of the returns for each day
   for (var i = 0; i < returns.length; i++) {
     // if this is the first day, the cumulative product is just the return for that day
