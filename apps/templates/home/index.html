@@ -300,8 +300,6 @@ function averageYearlyReturn(dailyReturns) {
 function cumulativeproduct(returns) {
   // initialize an array to store the cumulative product of the returns
   var cumulativeProduct = [];
-  var YearlyReturn = averageYearlyReturn(returns);
-  document.getElementById("yearlyReturn").innerHTML = (yearlyReturn * 100).toFixed(2) + "%";
   // calculate the cumulative product of the returns for each day
   for (var i = 0; i < returns.length; i++) {
     // if this is the first day, the cumulative product is just the return for that day
@@ -328,7 +326,9 @@ function cumulativeproduct(returns) {
    var filteredDatalucy = returnslucy.filter(function(datapoint, index) {
     return dates[index] >= startYear;
   });
-       
+  var YearlyReturn = averageYearlyReturn(returnslucy);  
+  console.log(YearlyReturn)
+  document.getElementById("yearlyReturn").innerHTML = (yearlyReturn * 100).toFixed(2) + "%";
   var filteredDates_ = dates.filter(function(date, index) {
     return date >= startYear;
   });
