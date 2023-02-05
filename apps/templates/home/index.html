@@ -287,11 +287,12 @@
 function averageYearlyReturn(dailyReturns) {
   let cumulativeReturn = 1;
   for (let i = 1; i < dailyReturns.length; i++) {
-    if (dailyReturns[i] === "nan") { 
-      cumulativeReturn *= parseFloat(dailyReturns[i]);
+    let currentReturn = parseFloat(dailyReturns[i]);
+    console.log(currentReturn)
+    if (!isNaN(currentReturn)) {
+      cumulativeReturn *= currentReturn;
     }
   }
-  console.log(dailyReturns)
   console.log(cumulativeReturn)
   return (cumulativeReturn ** (365 / dailyReturns.length) - 1) * 100 + '%';
 }
