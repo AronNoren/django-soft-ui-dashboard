@@ -284,19 +284,18 @@
   console.log(error);
   
 });
-function averageYearlyReturn(dailyReturns, numDaysInYear) {
-  // calculate average daily return
-  let averageDailyReturn = dailyReturns.reduce((sum, current) => sum + current, 0) / dailyReturns.length;
-  console.log(dailyReturns);
-  console.log(averageDailyReturn);
-  // annualize the average daily return
-  return averageDailyReturn * numDaysInYear;
+function averageYearlyReturn(dailyReturns) {
+  let cumulativeReturn = 1;
+  for (let i = 1; i < dailyReturns.length; i++) {
+    cumulativeReturn *= parseFloat(dailyReturns[i]);
+  }
+  return (cumulativeReturn ** (365 / dailyReturns.length) - 1) * 100 + '%';
 }
 
 function cumulativeproduct(returns) {
   // initialize an array to store the cumulative product of the returns
   var cumulativeProduct = [];
-  var YearlyReturn = averageYearlyReturn(returns, 365);
+  var YearlyReturn = averageYearlyReturn(returns);
   document.getElementById("yearlyReturn").innerHTML = (yearlyReturn * 100).toFixed(2) + "%";
   // calculate the cumulative product of the returns for each day
   for (var i = 0; i < returns.length; i++) {
