@@ -276,9 +276,7 @@
         window.returnsBTChold = returnsBTChold;
         window.dates = date;
       filterDates('2020');
-       
-      var YearlyReturn = '20%'
-      document.getElementById("yearlyReturn").innerHTML = YearlyReturn;
+
 })
 .catch(error => {
   console.log(error);
@@ -294,7 +292,7 @@ function averageYearlyReturn(dailyReturns) {
     }
   }
   console.log(cumulativeReturn)
-  return (cumulativeReturn ** (365 / dailyReturns.length) - 1) * 100 + '%';
+  return ((cumulativeReturn ** (365 / dailyReturns.length) - 1) * 100).toFixed(2) + '%';
 }
 
 function cumulativeproduct(returns) {
@@ -326,8 +324,7 @@ function cumulativeproduct(returns) {
    var filteredDatalucy = returnslucy.filter(function(datapoint, index) {
     return dates[index] >= startYear;
   });
-  var YearlyReturn = averageYearlyReturn(returnslucy);  
-  console.log(YearlyReturn)
+  var YearlyReturn = averageYearlyReturn(filteredDatalucy);  
   document.getElementById("yearlyReturn").innerHTML = YearlyReturn//(yearlyReturn * 100).toFixed(2) + "%";
   var filteredDates_ = dates.filter(function(date, index) {
     return date >= startYear;
