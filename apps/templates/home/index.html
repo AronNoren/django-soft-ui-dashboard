@@ -275,15 +275,25 @@
         window.returnslucy = returnsLucy;
         window.returnsBTChold = returnsBTChold;
         window.dates = date;
+      filterDates('2020');
+      var YearlyReturn = '20%'
 })
 .catch(error => {
   console.log(error);
   
 });
+function averageYearlyReturn(dailyReturns, numDaysInYear) {
+  // calculate average daily return
+  let averageDailyReturn = dailyReturns.reduce((sum, current) => sum + current, 0) / dailyReturns.length;
+
+  // annualize the average daily return
+  return averageDailyReturn * numDaysInYear;
+}
+
 function cumulativeproduct(returns) {
   // initialize an array to store the cumulative product of the returns
   var cumulativeProduct = [];
-
+  var YearlyReturn = averageYearlyReturn(returns, 365);
   // calculate the cumulative product of the returns for each day
   for (var i = 0; i < returns.length; i++) {
     // if this is the first day, the cumulative product is just the return for that day
@@ -365,8 +375,7 @@ for (var i = 0; i < startyear.length; i++) {
     filterDates(startYear);
   });
 }
-filterDates('2020');
-var YearlyReturn = '20%'
+
 //startyear2.addEventListener('click', function() {
   // get the start date from the input element
   //var startYear2 = startyear2.value;
