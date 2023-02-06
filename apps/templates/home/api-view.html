@@ -663,6 +663,7 @@
           </div>
         </div>
       </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             const modelName = 'portfolio'
             const token = localStorage.getItem('token') || ''
@@ -768,7 +769,17 @@
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
             });
-
+             
+                
+            axios.get('https://api.binance.com/api/v3/ticker/price', {
+                  params: {
+                    symbol: 'LDOUSDT'
+                  }
+                })
+                .then(response => {
+                  console.log(response.data)
+                  document.getElementById("r10current").innerHTML = response.data
+                });
             <!-- calculate investments
            
             function calc(form) {
