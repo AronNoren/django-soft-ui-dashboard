@@ -782,7 +782,7 @@
                       console.log(`${symbol}USDT`);
                       console.log(response.data);
                       console.log(response.data['value']);
-                      document.getElementById(`r${index + 1}current`).innerHTML = response.data.price;
+                      document.getElementById(`r${index + 1}current`).innerHTML = (parseFloat(100*response.data.price/displayList_buy[index+1]).toPrecision(3)).toFixed(2) + '%';
                     });
                   });
 
