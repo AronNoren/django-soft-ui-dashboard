@@ -766,25 +766,45 @@
                 document.getElementById("r10current").innerHTML = displayList_returns[9];
                 console.log(displayList_name)
                  let increment = 1;
+                
+                const requests = displayList_name.map(symbol => {
+                  return axios.get('https://api.binance.com/api/v3/ticker/price', {
+                    params: {
+                      symbol: `${symbol}USDT`
+                    }
+                  });
+                });
 
-                for (const symbol of displayList_name) {
-                          axios.get('https://api.binance.com/api/v3/ticker/price', {
-                            params: {
-                              symbol: `${symbol}USDT`
-                            }
-                          })
-                          .then(response => {
-                            console.log(`${symbol}USDT`);
-                            console.log(response.data);
-                            console.log(response.data.price);
-                            document.getElementById(`r${increment}current`).innerHTML = response.data.price;
-                            increment = increment + 1;
-                          })
-                          .catch((err) => {
-                        console.log(`${symbol}USDT`);
-                        console.log(`Error fetching: ${err}`)
-                        });
-                }//End for loop
+                Promise.all(requests)
+                  .then(responses => {
+                    responses.forEach((response, index) => {
+                      const symbol = displayList_name[index];
+                      console.log(`${symbol}USDT`);
+                      console.log(response.data);
+                      console.log(response.data['value']);
+                      document.getElementById(`r${index + 1}current`).innerHTML = response.data.price;
+                    });
+                  });
+
+
+             //   for (const symbol of displayList_name) {
+             //             axios.get('https://api.binance.com/api/v3/ticker/price', {
+             //               params: {
+             //                 symbol: `${symbol}USDT`
+             //               }
+             //             })
+             //             .then(response => {
+             //               console.log(`${symbol}USDT`);
+             //               console.log(response.data);
+             //               console.log(response.data.price);
+             //               document.getElementById(`r${increment}current`).innerHTML = response.data.price;
+             //               increment = increment + 1;
+             //             })
+             //             .catch((err) => {
+             //           console.log(`${symbol}USDT`);
+             //           console.log(`Error fetching: ${err}`)
+             //           });
+             //   }//End for loop
             })
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
