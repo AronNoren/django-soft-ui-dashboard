@@ -769,30 +769,23 @@
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
             });
-            let increment = 0
-            for (const symbol of displayList_name) {
+               
+            let increment = 1;
+
+                for (const symbol of displayList_name) {
                   axios.get('https://api.binance.com/api/v3/ticker/price', {
                     params: {
-                      symbol: '${symbol}USDT'
+                      symbol: `${symbol}USDT`
                     }
                   })
                   .then(response => {
-                    console.log('${symbol}USDT')
-                    console.log(response.data)
-                    console.log(response.data['value'])
-                    document.getElementById('r1current${increment}').innerHTML = response.data.value
-                    increment = increment + 1
+                    console.log(`${symbol}USDT`);
+                    console.log(response.data);
+                    console.log(response.data.price);
+                    document.getElementById(`r${increment}current`).innerHTML = response.data.price;
+                    increment = increment + 1;
                   });
-                }  
-            axios.get('https://api.binance.com/api/v3/ticker/price', {
-                  params: {
-                    symbol: 'LDOUSDT'
-                  }
-                })
-                .then(response => {
-                  console.log(response.data)
-                  document.getElementById("r1current").innerHTML = response.data['value']
-                });
+                }
             <!-- calculate investments
            
             function calc(form) {
