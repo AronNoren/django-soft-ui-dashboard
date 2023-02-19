@@ -70,6 +70,23 @@
        </div>
 
 
+       <div class="row mt-4">
+        <div class="col-3 mb-xl-0 mb-0">
+        </div>
+          <div class="col-6 mb-xl-0 mb-0">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                 The market is currently trending and lucy is holding coins. So far this month Lucy has a return of 
+                    <h5 class="font-weight-bolder mb-0">
+                      BjorkFi <span id="MTDReturn" class="text-success text-sm font-weight-bolder"></span>
+                    </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+
 <div class="row my-4">
   <div class="col-11 mb-md-0 mb-4">
           <div class="card">
@@ -766,7 +783,7 @@
                 document.getElementById("r10current").innerHTML = displayList_returns[9];
                 console.log(displayList_name)
                  let increment = 1;
-                
+                let MTDreturns = 0;
                 const requests = displayList_name.map(symbol => {
                   return axios.get('https://api.binance.com/api/v3/ticker/price', {
                     params: {
@@ -783,9 +800,11 @@
                       console.log(response.data);
                       console.log(response.data['value']);
                       document.getElementById(`r${index + 1}current`).innerHTML = (100*((response.data.price/displayList_buy[index])-1)).toFixed(2) + '%';
+                      MTDreturns = MTDreturns + 100*((response.data.price/displayList_buy[index])-1);
                     });
                   });
-
+                  var MTDReturn = (MTDReturn/10).toFixed(2) + '%';  
+                 document.getElementById("yearlyReturn").innerHTML = MTDReturn
 
              //   for (const symbol of displayList_name) {
              //             axios.get('https://api.binance.com/api/v3/ticker/price', {
