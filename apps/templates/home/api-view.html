@@ -803,9 +803,9 @@
                       document.getElementById(`r${index + 1}current`).innerHTML = (100*((response.data.price/displayList_buy[index])-1)).toFixed(2) + '%';
                       MTDreturns = MTDreturns + 100*((response.data.price/displayList_buy[index])-1);
                     });
-                  });
-                  var MTDReturn = (MTDreturns/10).toFixed(2) + '%';  
-                 document.getElementById("MTDReturn").innerHTML = MTDReturn
+                   document.getElementById("MTDReturn").innerHTML = (MTDreturns/10).toFixed(2) + '%';
+                  });   
+                 
 
              //   for (const symbol of displayList_name) {
              //             axios.get('https://api.binance.com/api/v3/ticker/price', {
