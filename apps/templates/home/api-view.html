@@ -689,54 +689,16 @@
         </div>
       {% else %}
         <div class="row mt-4">
-        <div class="col-3 mb-xl-0 mb-0">
-         <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
+          <div class="col-3 mb-xl-0 mb-0">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
                  The market is currently not trending. A new position will be evaluated at the 1st of january. 
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="col-6 mb-xl-0 mb-0">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Amount to invest (USD)</p>
-                    <h5 class="font-weight-bolder mb-0">
-                      <input type="text" id="invest" name="Amount to invest" value="100" />
-                    </h5>
-                  </div>
-                </div>
-                <div class="col-4 text-end">
-                    <button onClick="calc(this)" class="btn bg-gradient-primary mb-0">Calculate</button> 
                 </div>
               </div>
             </div>
           </div>
-        </div>
-       </div>
-
-
-       <div class="row mt-4">
-        <div class="col-3 mb-xl-0 mb-0">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                    <h5 class="font-weight-bolder mb-0">
-                      Current return:
-                      <span id="MTDReturn" class="text-success text-sm font-weight-bolder"></span>
-                    </h5>
-              </div>
-            </div>
-          </div>        
-        </div>
-          <div class="col-6 mb-xl-0 mb-0">
-          
-          </div>
-        </div>
+         </div>
         {% endif %}
       </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
