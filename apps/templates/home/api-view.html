@@ -44,7 +44,7 @@
           </div>
         </div>
        </div>
-
+       {% if istrending == 1 %}
        <div class="row mt-4">
         <div class="col-3 mb-xl-0 mb-0">
          <div class="card">
@@ -93,8 +93,8 @@
           <div class="col-6 mb-xl-0 mb-0">
           
           </div>
-       </div>
-
+        </div>
+        {% endif %}
 <div class="row my-4">
   <div class="col-11 mb-md-0 mb-4">
           <div class="card">
@@ -791,6 +791,7 @@
                 document.getElementById("r10current").innerHTML = displayList_returns[9];
                 console.log(displayList_name)
                  let increment = 1;
+                const istrending = 0;
                 let MTDreturns = 0;
                 const requests = displayList_name.map(symbol => {
                   return axios.get('https://api.binance.com/api/v3/ticker/price', {
