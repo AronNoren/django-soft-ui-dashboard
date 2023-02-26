@@ -1,11 +1,8 @@
 {% extends 'layouts/base.html' %}
 
 {% block title %} Dashboard {% endblock title %}
-{% block javascripts %} 
-  <script>
-  const istrending = 1;  //set var
-  </script>
-{% endblock javascripts %}
+
+
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
@@ -47,7 +44,7 @@
           </div>
         </div>
        </div>
-       {% if istrending == 1 %}
+       {% if istrending == "1" %}
        <div class="row mt-4">
         <div class="col-3 mb-xl-0 mb-0">
          <div class="card">
@@ -723,9 +720,9 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
         <script>
-          
+    const istrending = "1";  //set var   
     // Plot if not trending 
-    if (istrending == 0) {
+    if (istrending == "0") {
     var ctx = document.getElementById("chart").getContext("2d");
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
     gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
