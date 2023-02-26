@@ -44,7 +44,7 @@
           </div>
         </div>
        </div>
-       {% if istrending != 1 %}
+       {% if istrending == 1 %}
        <div class="row mt-4">
         <div class="col-3 mb-xl-0 mb-0">
          <div class="card">
@@ -712,8 +712,9 @@
                     </div>
                   </div>  
                 </div>
+              </div>
         {% endif %}
-      </div>
+      
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
         <script>
