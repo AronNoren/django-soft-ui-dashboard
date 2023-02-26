@@ -718,7 +718,7 @@
         <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
         <script>
                 
-                
+    const istrending = 1;            
     // Plot if not trending   
     var ctx = document.getElementById("chart").getContext("2d");
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
@@ -936,7 +936,7 @@
                 document.getElementById("r10current").innerHTML = displayList_returns[9];
                 console.log(displayList_name)
                  let increment = 1;
-                const istrending = 1;
+                
                 let MTDreturns = 0;
                 const requests = displayList_name.map(symbol => {
                   return axios.get('https://api.binance.com/api/v3/ticker/price', {
