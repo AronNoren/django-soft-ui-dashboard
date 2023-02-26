@@ -873,7 +873,7 @@
                 document.getElementById("r1price").innerHTML = parseFloat(displayList_buy[0]).toPrecision(3);
                 document.getElementById("r1weight").innerHTML = displayList_weight[0];
                 document.getElementById("r1amount").innerHTML = parseFloat(displayList_amount[0]).toPrecision(3);
-                document.getElementById("r1stop").innerHTML = "10%";
+                document.getElementById("r1stop").innerHTML = (displayList_buy[0]*0.9).toPrecision(3);
                 document.getElementById("r1current").innerHTML = displayList_returns[0];
                 
                 document.getElementById("r2name").innerHTML = displayList_name[1];
