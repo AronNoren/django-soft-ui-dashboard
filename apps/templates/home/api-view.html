@@ -719,7 +719,8 @@
         <script>
                 
     const istrending = 1;            
-    // Plot if not trending   
+    // Plot if not trending 
+    if (istrending == 0) {
     var ctx = document.getElementById("chart").getContext("2d");
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
     gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
@@ -832,7 +833,7 @@
         },
       },
      });
-        
+     } else { //if trending   
           // Evaluate if trending 
                 
             const modelName = 'portfolio'
@@ -1004,6 +1005,7 @@
                 document.getElementById("r10amount").innerHTML = parseFloat(displayList_amount[9]).toPrecision(3);
                 return false;
                 }
+     }
         </script>
 {% endblock content %}
 
