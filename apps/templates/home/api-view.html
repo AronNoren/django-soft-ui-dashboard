@@ -1,7 +1,11 @@
 {% extends 'layouts/base.html' %}
 
 {% block title %} Dashboard {% endblock title %}
-
+{% block javascripts %} 
+  <script>
+  const istrending = 1;  //set var
+  </script>
+{% endblock javascripts %}
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
@@ -1012,11 +1016,4 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}
-  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
-  <script>
-  const istrending = 1;  
 
-
-  </script>
-{% endblock javascripts %}
