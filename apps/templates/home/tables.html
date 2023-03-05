@@ -143,6 +143,8 @@
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script>
+const start = new Date('2023-02-01').getTime();
+const end = new Date('2022-03-01').getTime();
 let BTCdata = [
     { 0: '2022-01-01', 1: 10, 2:0,3:0,4:5 },
     { 0: '2022-01-02', 1: 40, 2:0,3:0,4:0 },
@@ -158,7 +160,9 @@ function toggleCard(cardId) {
 axios.get('https://api.binance.com/api/v3/klines', {
   params: {
     symbol: 'BTCUSDT',
-    interval: '1M'
+    interval: '1D',
+    startTime: start,
+    endTime: end
   }
 })
 .then(response => {
@@ -201,19 +205,7 @@ axios.get('https://api.binance.com/api/v3/klines', {
             data: price,
             maxBarThickness: 6
 
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#575f9a",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290],
-            maxBarThickness: 6
-          },
+          }
         ],
       },
       options: {
