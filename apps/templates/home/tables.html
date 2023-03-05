@@ -4,6 +4,7 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
+<style>
 .card {
   border: 1px solid black;
   padding: 10px;
@@ -22,7 +23,7 @@
 .hidden {
   display: none;
 }
-
+</style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -40,15 +41,17 @@
 
       {% include "includes/footer.html" %}
 
-    </div>
     
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
+<script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+<script>
+let a = 0
 function toggleCard(card) {
   // toggle the "hidden" class on the card content div
   card.querySelector('.card-content').classList.toggle('hidden');
 }
-
+</script>
 {% endblock javascripts %}
