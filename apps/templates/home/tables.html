@@ -160,7 +160,7 @@ function toggleCard(cardId) {
 axios.get('https://api.binance.com/api/v3/klines', {
   params: {
     symbol: 'BTCUSDT',
-    interval: '1D',
+    interval: '1M',
     startTime: start,
     endTime: end
   }
