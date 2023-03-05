@@ -182,7 +182,7 @@ axios.get('https://api.binance.com/api/v3/klines', {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
-});
+}).sort((a, b) => new Date(a) - new Date(b));
   var ctx = document.getElementById("chart").getContext("2d");
 
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
