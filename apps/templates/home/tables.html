@@ -161,7 +161,7 @@ function toggleCard(cardId) {
 axios.get('https://api.binance.com/api/v3/klines', {
   params: {
     symbol: 'BTCUSDT',
-    interval: '1M',
+    interval: '1d',
     startTime: start,
     endTime: end
   }
@@ -175,6 +175,13 @@ axios.get('https://api.binance.com/api/v3/klines', {
 
   const date =BTCdata.map(function(item) {
   return new Date(item[0]);
+});
+  const formattedDateList = date.map(dateString => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 });
   var ctx = document.getElementById("chart").getContext("2d");
 
@@ -193,9 +200,9 @@ axios.get('https://api.binance.com/api/v3/klines', {
         new Chart(ctx, {
       type: "line",
       data: {
-        labels: date,
+        labels: formattedDateList,
         datasets: [{
-            label: "Mobile apps",
+            label: "Returns",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
