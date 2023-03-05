@@ -23,6 +23,24 @@
 .hidden {
   display: none;
 }
+.horizontal-table th,
+.horizontal-table td {
+  padding: 10px;
+}
+
+.horizontal-table th {
+  text-align: left;
+  font-weight: normal;
+}
+
+.horizontal-table tbody tr:first-child th {
+  text-align: center;
+}
+
+.horizontal-table tbody tr:first-child td {
+  text-align: center;
+}
+
 </style>
 {% endblock stylesheets %}
 
@@ -204,29 +222,25 @@
     </div>
     <div id = "card-content-2" class="card-content hidden">
       <p>Detailed returns</p>              
-      <table class="table align-items-center mb-0">
-        <thead>
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
-          </tr>
-        </thead>
+      <table class="table align-items-center mb-0 horizontal-table">
         <tbody>
           <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
             <td class="text-uppercase">Token 1</td>
-            <td>+10%</td>
-          </tr>
-          <tr>
             <td class="text-uppercase">Token 2</td>
-            <td>-5%</td>
+            <td class="text-uppercase">Token 3</td>
+            <!-- add more columns here -->
           </tr>
           <tr>
-            <td class="text-uppercase">Token 3</td>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+            <td>+10%</td>
+            <td>-5%</td>
             <td>+8%</td>
+            <!-- add more columns here -->
           </tr>
-          <!-- add more rows here -->
         </tbody>
       </table>
+
     </div>
   </div>
 
