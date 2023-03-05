@@ -46,175 +46,63 @@
 
 {% block content %}
 <!-- first -->
-<div class="card" onclick="toggleCard(1)">
+ <div id = "content2" class="card" onclick="toggleCard(1)">
     <div class="card-header">
-      <h2>Feb 2023, 18%</h2>
+      <h2>Jan 2023, 0%</h2>
     </div>
-    <div id = "card-content-1" class="card-content hidden">
-      <p>Detailed returns</p>              
-      <div class="row my-4">
-        <div class="col-8 mb-md-0 mb-4">
-                <div class="card">
-                  <div class="card-body px-0 pb-2">
-                    <div class="table-responsive">        
-                      <table class="table align-items-center mb-0">
-                        <thead>
-                          <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r1name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r1return">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r2name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r2price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r3name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r3price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r4name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r4price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r5name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r5price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r6name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r6price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r7name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r7price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r8name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r8price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r9name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r9price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex px-1 py-1">
-
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r10name">BTC</h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm" id = "r10price">19,840-19,890</h6>
-                                </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+    <div id = "card-content-2" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+              <td class="text-uppercase">Token 1</td>
+              <td class="text-uppercase">Token 2</td>
+              <td class="text-uppercase">Token 3</td>
+              <td class="text-uppercase">Token 4</td>
+              <td class="text-uppercase">Token 5</td>
+              <td class="text-uppercase">Token 6</td>
+              <td class="text-uppercase">Token 7</td>
+              <td class="text-uppercase">Token 8</td>
+              <td class="text-uppercase">Token 9</td>
+              <td class="text-uppercase">Token 10</td>
+              <!-- add more columns here -->
+            </tr>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <!-- add more columns here -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart" class="chart-canvas" height="300"></canvas>
               </div>
+            </div>
           </div>
         </div>
+      </div>
     </div>
+  </div>
+
 <!-- second -->
   <div id = "content2" class="card" onclick="toggleCard(2)">
     <div class="card-header">
@@ -252,12 +140,154 @@
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
-<script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
-<script>
+ <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ <script>
+let BTCdata = [
+    { 0: '2022-01-01', 1: 10, 2:0,3:0,4:5 },
+    { 0: '2022-01-02', 1: 40, 2:0,3:0,4:0 },
+    { 0: '2022-01-03', 1: 30, 2:0,3:0,4:0 },
+    { 0: '2022-01-04', 1: 40, 2:0,3:0,4:0 },
+    { 0: '2022-01-05', 1: 45, 2:0,3:0,4:0 }
+  ];
 let a = 0
 function toggleCard(cardId) {
   var cardBody = document.getElementById('card-content-' + cardId);
   cardBody.classList.toggle('hidden');
 }
+axios.get('https://api.binance.com/api/v3/klines', {
+  params: {
+    symbol: 'BTCUSDT',
+    interval: '1M'
+  }
+})
+.then(response => {
+  BTCdata = response.data;
+  console.log(BTCdata);
+    const price = BTCdata.map(function(item) {
+  return item[4];
+});
+
+  const date =BTCdata.map(function(item) {
+  return new Date(item[0]);
+});
+  var ctx = document.getElementById("chart").getContext("2d");
+
+    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+   
+    var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
+         
+        new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: date,
+        datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: price,
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#575f9a",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290],
+            maxBarThickness: 6
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+})
+.catch(error => {
+  console.log(error);
+  
+});
+  // Set the dimensions of the chart
+  var width = 500;
+  var height = 300;
+
+  // Set the margins of the chart
+  var margin = {
+    top: 20,
+    right: 20,
+    bottom: 30,
+    left: 50
+  };
+  console.log(BTCdata);
 </script>
 {% endblock javascripts %}
