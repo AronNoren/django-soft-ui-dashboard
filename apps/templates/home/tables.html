@@ -25,8 +25,8 @@
 }
 .horizontal-table th,
 .horizontal-table td {
-  padding: 4px;
-  font-size: 14px;
+  padding: 3px;
+  font-size: 10px;
 }
 
 .horizontal-table th {
@@ -48,6 +48,64 @@
 {% block content %}
 <!-- first -->
  <div id = "content2" class="card" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h2>Feb 2023, 0%</h2>
+    </div>
+    <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+              <td class="text-uppercase">Token 1</td>
+              <td class="text-uppercase">Token 2</td>
+              <td class="text-uppercase">Token 3</td>
+              <td class="text-uppercase">Token 4</td>
+              <td class="text-uppercase">Token 5</td>
+              <td class="text-uppercase">Token 6</td>
+              <td class="text-uppercase">Token 7</td>
+              <td class="text-uppercase">Token 8</td>
+              <td class="text-uppercase">Token 9</td>
+              <td class="text-uppercase">Token 10</td>
+              <!-- add more columns here -->
+            </tr>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <!-- add more columns here -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- second -->
+  <div id = "content2" class="card" onclick="toggleCard(1)">
     <div class="card-header">
       <h2>Jan 2023, 0%</h2>
     </div>
@@ -104,32 +162,175 @@
     </div>
   </div>
 
-<!-- second -->
-  <div id = "content2" class="card" onclick="toggleCard(2)">
-    <div class="card-header">
-      <h2>Jan 2023, 0%</h2>
-    </div>
-    <div id = "card-content-2" class="card-content hidden">
-      <p>Detailed returns</p>              
-      <table class="table align-items-center mb-0 horizontal-table">
-        <tbody>
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
-            <td class="text-uppercase">Token 1</td>
-            <td class="text-uppercase">Token 2</td>
-            <td class="text-uppercase">Token 3</td>
-            <!-- add more columns here -->
-          </tr>
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
-            <td>+10%</td>
-            <td>-5%</td>
-            <td>+8%</td>
-            <!-- add more columns here -->
-          </tr>
-        </tbody>
-      </table>
 
+<div id = "content2" class="card" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h2>Dec 2022, 0%</h2>
+    </div>
+    <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+              <td class="text-uppercase">Token 1</td>
+              <td class="text-uppercase">Token 2</td>
+              <td class="text-uppercase">Token 3</td>
+              <td class="text-uppercase">Token 4</td>
+              <td class="text-uppercase">Token 5</td>
+              <td class="text-uppercase">Token 6</td>
+              <td class="text-uppercase">Token 7</td>
+              <td class="text-uppercase">Token 8</td>
+              <td class="text-uppercase">Token 9</td>
+              <td class="text-uppercase">Token 10</td>
+              <!-- add more columns here -->
+            </tr>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <!-- add more columns here -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id = "content2" class="card" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h2>Nov 2022, 0%</h2>
+    </div>
+    <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+              <td class="text-uppercase">Token 1</td>
+              <td class="text-uppercase">Token 2</td>
+              <td class="text-uppercase">Token 3</td>
+              <td class="text-uppercase">Token 4</td>
+              <td class="text-uppercase">Token 5</td>
+              <td class="text-uppercase">Token 6</td>
+              <td class="text-uppercase">Token 7</td>
+              <td class="text-uppercase">Token 8</td>
+              <td class="text-uppercase">Token 9</td>
+              <td class="text-uppercase">Token 10</td>
+              <!-- add more columns here -->
+            </tr>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <!-- add more columns here -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id = "content2" class="card" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h2>Oct 2022, 0%</h2>
+    </div>
+    <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+              <td class="text-uppercase">Token 1</td>
+              <td class="text-uppercase">Token 2</td>
+              <td class="text-uppercase">Token 3</td>
+              <td class="text-uppercase">Token 4</td>
+              <td class="text-uppercase">Token 5</td>
+              <td class="text-uppercase">Token 6</td>
+              <td class="text-uppercase">Token 7</td>
+              <td class="text-uppercase">Token 8</td>
+              <td class="text-uppercase">Token 9</td>
+              <td class="text-uppercase">Token 10</td>
+              <!-- add more columns here -->
+            </tr>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <td>-5%</td>
+              <td>+8%</td>
+              <td>+10%</td>
+              <!-- add more columns here -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
