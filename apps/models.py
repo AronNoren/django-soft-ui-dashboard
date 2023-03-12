@@ -75,7 +75,6 @@ class MonthlyHistory(models.Model):
     class Meta:
         app_label = 'dyn_datatables'
 
-    id = models.CharField(max_length=100)
     yearmonth = models.CharField(max_length=100)
     coin1 = models.CharField(max_length=100)
     coin2 = models.CharField(max_length=100)
