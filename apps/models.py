@@ -86,4 +86,11 @@ class MonthlyHistory(models.Model):
     coin8 = models.CharField(max_length=100)
     coin9 = models.CharField(max_length=100)
     coin10 = models.CharField(max_length=100)
+class Trendline(models.Model):
+    class Meta:
+        app_label = 'dyn_datatables'
 
+    date = models.CharField(max_length=100)
+    trend = models.CharField(max_length=100)
+    actual = models.CharField(max_length=100)
+    
