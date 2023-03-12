@@ -71,5 +71,20 @@ class Returns(models.Model):
     dailyreturnBTChold = models.CharField(max_length=100)
     cumdailyreturnBTChold = models.CharField(max_length=100)
 
-    
+class MonthlyHistory(models.Model):
+    class Meta:
+        app_label = 'dyn_datatables'
+
+    id = models.CharField(max_length=100)
+    yearmonth = models.CharField(max_length=100)
+    coin1 = models.CharField(max_length=100)
+    coin2 = models.CharField(max_length=100)
+    coin3 = models.CharField(max_length=100)
+    coin4 = models.CharField(max_length=100)
+    coin5 = models.CharField(max_length=100)
+    coin6 = models.CharField(max_length=100)
+    coin7 = models.CharField(max_length=100)
+    coin8 = models.CharField(max_length=100)
+    coin9 = models.CharField(max_length=100)
+    coin10 = models.CharField(max_length=100)
 
