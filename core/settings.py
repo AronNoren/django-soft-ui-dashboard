@@ -192,7 +192,7 @@ API_GENERATOR = {
     'books': "Book",
     'portfolio': "Portfolio",
     'returns': "Returns",
-    'montlyhistory': "MonthlyReturns",
+    'monthlyhistory': "MonthlyHistory",
 }
 
 REST_FRAMEWORK = {
@@ -212,6 +212,6 @@ DYNAMIC_DATATB = {
     'books': "Book",
     'portfolio': "Portfolio",
     'returns': "Returns",
-    'montlyhistory': "MonthlyReturns",
+    'monthlyhistory': "MonthlyHistory",
 }
 
