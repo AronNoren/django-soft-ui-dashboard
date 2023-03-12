@@ -193,6 +193,7 @@ API_GENERATOR = {
     'portfolio': "Portfolio",
     'returns': "Returns",
     'monthlyhistory': "MonthlyHistory",
+    'trendline': "TrendLine",
 }
 
 REST_FRAMEWORK = {
@@ -213,5 +214,6 @@ DYNAMIC_DATATB = {
     'portfolio': "Portfolio",
     'returns': "Returns",
     'monthlyhistory': "MonthlyHistory",
+    'trendline': "TrendLine",
 }
 
