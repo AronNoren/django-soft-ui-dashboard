@@ -68,7 +68,7 @@
              </div>
             <div class="card-body p-3">
               <div class="chart">
-                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+                <canvas id="chart-1" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@
              </div>
             <div class="card-body p-3">
               <div class="chart">
-                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+                <canvas id="chart-2" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
              </div>
             <div class="card-body p-3">
               <div class="chart">
-                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+                <canvas id="chart-3" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@
              </div>
             <div class="card-body p-3">
               <div class="chart">
-                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+                <canvas id="chart-4" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -190,7 +190,7 @@
              </div>
             <div class="card-body p-3">
               <div class="chart">
-                <canvas id="chart" class="chart-canvas" height="300"></canvas>
+                <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -447,10 +447,13 @@ main();
   // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
   async function renderChart() {
-    const startDate = new Date(allStartDates[1]);
-    const endDate = new Date(allEndDates[1]);
+    for (let i = 0; i < allSymbols.length; i++) {
+    
+    
+    const startDate = new Date(allStartDates[i]);
+    const endDate = new Date(allEndDates[i]);
 
-    const coinData = await fetchAllCoinData(symbols1, startDate, endDate);
+    const coinData = await fetchAllCoinData(symbols[i], startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
 
     // Get the date data from the first coin
@@ -469,7 +472,7 @@ main();
 
     // Your existing code to create the chart goes here, but replace `price_rel` with `averageReturns`
     // ...
-    var ctx = document.getElementById("chart").getContext("2d");
+    var ctx = document.getElementById(`chart-${i}).getContext("2d");
     
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -557,8 +560,9 @@ main();
             }
           },
         },
-      }
+      },
     });
+   }
   }
 
   renderChart();
