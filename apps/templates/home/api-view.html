@@ -725,7 +725,7 @@ async function fetchBinanceBTCData() {
     const data = await prepareChartData();
     const slicedPrices = data.prices.slice(-90);
     const relativePrices = slicedPrices.map(price => price / slicedPrices[0]);
-    const slicedMA = data.prices.slice(-90);
+    const slicedMA = data.movingAverages.slice(-90);
     const relativeMA = slicedMA.map(movingAverages => movingAverages / slicedPrices[0]);
 
     new Chart(ctx, {
