@@ -437,6 +437,8 @@ async function calculateAverageReturns(coinData) {
     gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
+    averageReturns
+    const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -451,7 +453,7 @@ async function calculateAverageReturns(coinData) {
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: averageReturns, // Replace price_rel with averageReturns
+            data: averageReturnsrel, // Replace price_rel with averageReturns
             maxBarThickness: 6,
           },
         ],
