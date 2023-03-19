@@ -665,6 +665,11 @@
     gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
     gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+    var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors  
 const apiKey = 'YOUR_BINANCE_API_KEY';
 
 // Function to fetch Binance BTC data
@@ -720,19 +725,33 @@ async function fetchBinanceBTCData() {
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: data.labels,
+            labels: data.labels.slice(-90),
             datasets: [
+                    {
+            label: 'Market',
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: data.prices.slice(-90),
+            maxBarThickness: 6
+
+          },
+
                 {
-                    label: 'BTC Price',
-                    data: data.prices,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                },
-                {
-                    label: '90 Day Trend',
-                    data: data.movingAverages,
-                    borderColor: 'rgb(255, 99, 132)',
-                    tension: 0.1,
+            label: '90 day trend',
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: data.movingAverages.slice(-90),
+            maxBarThickness: 6
                 },
             ],
         },
