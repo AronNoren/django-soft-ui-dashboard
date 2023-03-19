@@ -665,11 +665,13 @@
     gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
     gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-    var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+    var gradientStroke3 = ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors  
+gradientStroke3.addColorStop(1, 'rgba(30, 136, 229, 0.2)');
+gradientStroke3.addColorStop(0.2, 'rgba(30, 136, 229, 0.0)');
+gradientStroke3.addColorStop(0, 'rgba(30, 136, 229, 0)'); // blue colors
+
+
 const apiKey = 'YOUR_BINANCE_API_KEY';
 
 // Function to fetch Binance BTC data
@@ -721,6 +723,10 @@ async function fetchBinanceBTCData() {
 }
      async function renderChart() {
     const data = await prepareChartData();
+    const slicedPrices = data.prices.slice(-90);
+    const relativePrices = slicedPrices.map(price => price / slicedPrices[0]);
+    const slicedMA = data.prices.slice(-90);
+    const relativeMA = slicedMA.map(movingAverages => movingAverages / slicedPrices[0]);
 
     new Chart(ctx, {
         type: 'line',
@@ -736,7 +742,7 @@ async function fetchBinanceBTCData() {
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: data.prices.slice(-90),
+            data: relativePrices,
             maxBarThickness: 6
 
           },
@@ -748,9 +754,9 @@ async function fetchBinanceBTCData() {
             pointRadius: 0,
             borderColor: "#cb0c9f",
             borderWidth: 3,
-            backgroundColor: gradientStroke2,
+            backgroundColor: gradientStroke3,
             fill: true,
-            data: data.movingAverages.slice(-90),
+            data: relativeMA,
             maxBarThickness: 6
                 },
             ],
