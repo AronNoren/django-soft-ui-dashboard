@@ -373,10 +373,11 @@ async function fetchCoinData(symbol, start, end) {
 //  }
 //}
 
-async function fetchAllCoinData(symbols) {
-  const coinData = await Promise.all(symbols.map(fetchCoinData));
+async function fetchAllCoinData(symbols, start, end) {
+  const coinData = await Promise.all(symbols.map(symbol => fetchCoinData(symbol, start, end)));
   return coinData;
 }
+
 
 async function calculateAverageReturns(coinData) {
   const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
