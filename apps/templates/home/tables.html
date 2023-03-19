@@ -338,13 +338,15 @@ const allEndDates = ['2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-1
     cardBody.classList.toggle('hidden');
   }
 async function fetchCoinData(symbol, start, end) {
+  const startTime = start.getTime();
+  const endTime = end.getTime();
   try {
     const response = await axios.get('https://api.binance.com/api/v3/klines', {
       params: {
         symbol,
         interval: '1d',
-        startTime: start.getTime(),
-        endTime: end.getTime()
+        startTime: startTime,
+        endTime: endTime
       }
     });
     return response.data;
