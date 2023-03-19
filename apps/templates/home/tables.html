@@ -47,7 +47,7 @@
 
 {% block content %}
 <!-- first -->
- <div id = "content2" class="card" onclick="toggleCard(1)">
+ <div id = "content1" class="card" onclick="toggleCard(1)">
     <div class="card-header">
       <h2>Feb 2023, 0%</h2>
     </div>
@@ -109,7 +109,7 @@
     <div class="card-header">
       <h2>Jan 2023, 0%</h2>
     </div>
-    <div id = "card-content-1" class="card-content hidden">
+    <div id = "card-content-2" class="card-content hidden">
       <p>Detailed returns</p>
       <div class="card">
         <table class="table align-items-center mb-0 horizontal-table">
@@ -163,11 +163,11 @@
   </div>
 
 
-<div id = "content2" class="card" onclick="toggleCard(3)">
+<div id = "content3" class="card" onclick="toggleCard(3)">
     <div class="card-header">
       <h2>Dec 2022, 0%</h2>
     </div>
-    <div id = "card-content-1" class="card-content hidden">
+    <div id = "card-content-3" class="card-content hidden">
       <p>Detailed returns</p>
       <div class="card">
         <table class="table align-items-center mb-0 horizontal-table">
@@ -220,11 +220,11 @@
     </div>
   </div>
 
-<div id = "content2" class="card" onclick="toggleCard(4)">
+<div id = "content4" class="card" onclick="toggleCard(4)">
     <div class="card-header">
       <h2>Nov 2022, 0%</h2>
     </div>
-    <div id = "card-content-1" class="card-content hidden">
+    <div id = "card-content-4" class="card-content hidden">
       <p>Detailed returns</p>
       <div class="card">
         <table class="table align-items-center mb-0 horizontal-table">
@@ -277,11 +277,11 @@
     </div>
   </div>
 
-<div id = "content2" class="card" onclick="toggleCard(5)">
+<div id = "content5" class="card" onclick="toggleCard(5)">
     <div class="card-header">
       <h2>Oct 2022, 0%</h2>
     </div>
-    <div id = "card-content-1" class="card-content hidden">
+    <div id = "card-content-5" class="card-content hidden">
       <p>Detailed returns</p>
       <div class="card">
         <table class="table align-items-center mb-0 horizontal-table">
@@ -343,80 +343,66 @@
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script>
-const start = new Date('2023-02-01').getTime();
-const end = new Date('2023-03-01').getTime();
-let BTCdata = [
-    { 0: '2022-01-01', 1: 10, 2:0,3:0,4:5 },
-    { 0: '2022-01-02', 1: 40, 2:0,3:0,4:0 },
-    { 0: '2022-01-03', 1: 30, 2:0,3:0,4:0 },
-    { 0: '2022-01-04', 1: 40, 2:0,3:0,4:0 },
-    { 0: '2022-01-05', 1: 45, 2:0,3:0,4:0 }
-  ];
-let a = 0
-function toggleCard(cardId) {
-  var cardBody = document.getElementById('card-content-' + cardId);
-  cardBody.classList.toggle('hidden');
-}
-axios.get('https://api.binance.com/api/v3/klines', {
-  params: {
-    symbol: 'BTCUSDT',
-    interval: '1d',
-    startTime: start,
-    endTime: end
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const symbols = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ]; // Add the symbols of the coins you want to include
+
+  function toggleCard(cardId) {
+    var cardBody = document.getElementById('card-content-' + cardId);
+    cardBody.classList.toggle('hidden');
   }
-})
-.then(response => {
-  BTCdata = response.data;
-  console.log(BTCdata);
-    const price = BTCdata.map(function(item) {
-  return item[4];
-});
 
-  const date =BTCdata.map(function(item) {
-  return new Date(item[0]);
-});
-  const formattedDateList = date.map(dateString => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}).sort((a, b) => new Date(a) - new Date(b));
-  const divisor = price[0]
-  var price_rel = price.map(i => i / divisor);
-  var ctx = document.getElementById("chart").getContext("2d");
+  // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
-    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+  async function renderChart() {
+    const coinData = await fetchAllCoinData(symbols);
+    const averageReturns = await calculateAverageReturns(coinData);
 
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-   
-    var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+    // Get the date data from the first coin
+    const dateData = coinData[0].map(entry => entry[0]);
 
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
-         
-        new Chart(ctx, {
-      type: "line",
+    // Define formattedDateList
+    const formattedDateList = dateData
+      .map(dateString => {
+        const date = new Date(parseInt(dateString));
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      })
+      .sort((a, b) => new Date(a) - new Date(b));
+
+    // Your existing code to create the chart goes here, but replace `price_rel` with `averageReturns`
+    // ...
+
+    new Chart(ctx, {
+      type: 'line',
       data: {
         labels: formattedDateList,
-        datasets: [{
-            label: "Returns",
+        datasets: [
+          {
+            label: 'Returns',
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
-            borderColor: "#cb0c9f",
+            borderColor: '#cb0c9f',
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: price_rel,
-            maxBarThickness: 6
-
-          }
+            data: averageReturns, // Replace price_rel with averageReturns
+            maxBarThickness: 6,
+          },
         ],
       },
       options: {
@@ -473,13 +459,13 @@ axios.get('https://api.binance.com/api/v3/klines', {
             }
           },
         },
-      },
+      }
     });
-})
-.catch(error => {
-  console.log(error);
-  
-});
+  }
+
+  renderChart();
+/////////////////////////////////////////////////////7
+
   // Set the dimensions of the chart
   var width = 500;
   var height = 300;
