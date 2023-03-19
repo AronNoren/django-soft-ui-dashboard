@@ -422,7 +422,8 @@ async function updateTable(symbols, monthlyReturns, cardId) {
 
   tokensHtml += '</tr>';
   returnsHtml += '</tr>';
-
+  console.log(tokensHtml);
+  console.log(returnsHtml);
   table.innerHTML = tokensHtml + returnsHtml;
 }
 function generateSymbols(baseSymbols, index) {
