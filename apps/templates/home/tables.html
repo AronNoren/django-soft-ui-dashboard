@@ -409,7 +409,7 @@ async function calculateMonthlyReturns(coinData) {
   return monthlyReturns;
 }
 async function updateTable(symbols, monthlyReturns, cardId) {
-  const table = document.querySelector(`#card-${cardId} .horizontal-table tbody`);
+  const table = document.querySelector(`#table-${cardId} .horizontal-table tbody`);
   
   let tokensHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>';
   let returnsHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>';
