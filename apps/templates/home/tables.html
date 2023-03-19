@@ -80,7 +80,7 @@
 <!-- second -->
   <div id = "content2" class="card" onclick="toggleCard(2)">
     <div class="card-header">
-      <h2>Jan 2023, 0%</h2>
+      <h2>Jan 2023, <span id="Return2" </span></h2>
     </div>
     <div id = "card-content-2" class="card-content hidden">
       <p>Detailed returns</p>
@@ -455,7 +455,7 @@ main();
 
     const coinData = await fetchAllCoinData(allSymbols[i], startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
-
+    document.getElementById("Return2").innerHTML = (averageReturns[averageReturns.length - 1]*100).toFixed(2) + '%';
     // Get the date data from the first coin
     const dateData = coinData[0].map(entry => entry[0]);
 
