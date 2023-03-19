@@ -56,34 +56,7 @@
       <div class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
-            <tr>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
-              <td class="text-uppercase">Token 1</td>
-              <td class="text-uppercase">Token 2</td>
-              <td class="text-uppercase">Token 3</td>
-              <td class="text-uppercase">Token 4</td>
-              <td class="text-uppercase">Token 5</td>
-              <td class="text-uppercase">Token 6</td>
-              <td class="text-uppercase">Token 7</td>
-              <td class="text-uppercase">Token 8</td>
-              <td class="text-uppercase">Token 9</td>
-              <td class="text-uppercase">Token 10</td>
-              <!-- add more columns here -->
-            </tr>
-            <tr>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>
-              <td>+10%</td>
-              <td>-5%</td>
-              <td>+8%</td>
-              <td>+10%</td>
-              <td>-5%</td>
-              <td>+8%</td>
-              <td>+10%</td>
-              <td>-5%</td>
-              <td>+8%</td>
-              <td>+10%</td>
-              <!-- add more columns here -->
-            </tr>
+           
           </tbody>
         </table>
       </div>
@@ -401,6 +374,45 @@ async function calculateAverageReturns(coinData) {
 
   return averageReturns;
 }
+async function calculateMonthlyReturns(coinData) {
+  const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
+
+  const monthlyReturns = [];
+
+  for (const returns of coinReturns) {
+    const firstPrice = returns[0];
+    const lastPrice = returns[returns.length - 1];
+    const returnPercentage = ((lastPrice - firstPrice) / firstPrice) * 100;
+    monthlyReturns.push(returnPercentage);
+  }
+
+  return monthlyReturns;
+}
+async function updateTable(symbols, monthlyReturns) {
+  const table = document.querySelector('.horizontal-table tbody');
+  
+  let tokensHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>';
+  let returnsHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>';
+
+  for (let i = 0; i < symbols.length; i++) {
+    const symbol = symbols[i].replace('USDT', '');
+    tokensHtml += `<td class="text-uppercase">${symbol}</td>`;
+    returnsHtml += `<td>${monthlyReturns[i].toFixed(2)}%</td>`;
+  }
+
+  tokensHtml += '</tr>';
+  returnsHtml += '</tr>';
+
+  table.innerHTML = tokensHtml + returnsHtml;
+}
+async function main() {
+  const coinData = await fetchAllCoinData(symbols);
+  const monthlyReturns = await calculateMonthlyReturns(coinData);
+  updateTable(symbols, monthlyReturns);
+  // call renderChart() here if needed
+}
+
+main();
 
   // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
