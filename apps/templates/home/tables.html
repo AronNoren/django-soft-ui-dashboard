@@ -362,6 +362,45 @@
     var cardBody = document.getElementById('card-content-' + cardId);
     cardBody.classList.toggle('hidden');
   }
+async function fetchCoinData(symbol) {
+  const start = new Date('2023-02-01').getTime();
+  const end = new Date('2023-03-01').getTime();
+
+  try {
+    const response = await axios.get('https://api.binance.com/api/v3/klines', {
+      params: {
+        symbol,
+        interval: '1d',
+        startTime: start,
+        endTime: end
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching data for ${symbol}:`, error);
+  }
+}
+
+async function fetchAllCoinData(symbols) {
+  const coinData = await Promise.all(symbols.map(fetchCoinData));
+  return coinData;
+}
+
+async function calculateAverageReturns(coinData) {
+  const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
+
+  const averageReturns = [];
+
+  const days = coinReturns[0].length;
+
+  for (let i = 0; i < days; i++) {
+    const sum = coinReturns.reduce((acc, returns) => acc + returns[i], 0);
+    const average = sum / coinReturns.length;
+    averageReturns.push(average);
+  }
+
+  return averageReturns;
+}
 
   // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
