@@ -175,8 +175,8 @@
     </div>
     <div id = "card-content-5" class="card-content hidden">
       <p>Detailed returns</p>
-      <div class="card">
-        <table id="table-5" class="table align-items-center mb-0 horizontal-table">
+      <div id="table-5" class="card">
+        <table  class="table align-items-center mb-0 horizontal-table">
           <tbody>
           
           </tbody>
@@ -410,7 +410,8 @@ async function calculateMonthlyReturns(coinData) {
 }
 async function updateTable(symbols, monthlyReturns, cardId) {
   const table = document.querySelector(`#table-${cardId} .horizontal-table tbody`);
-  
+   
+  console.log(cardId);
   let tokensHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>';
   let returnsHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>';
 
@@ -422,8 +423,7 @@ async function updateTable(symbols, monthlyReturns, cardId) {
 
   tokensHtml += '</tr>';
   returnsHtml += '</tr>';
-  console.log(tokensHtml);
-  console.log(returnsHtml);
+
   table.innerHTML = tokensHtml + returnsHtml;
 }
 function generateSymbols(baseSymbols, index) {
