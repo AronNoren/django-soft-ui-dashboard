@@ -49,7 +49,7 @@
 <!-- first -->
  <div id = "content1" class="card" onclick="toggleCard(1)">
     <div class="card-header">
-      <h2>Feb 2023, 0%</h2>
+      <h2>Feb 2023,<span id="Return1" </span></h2>
     </div>
     <div id = "card-content-1" class="card-content hidden">
       <p>Detailed returns</p>
@@ -111,7 +111,7 @@
 
 <div id = "content3" class="card" onclick="toggleCard(3)">
     <div class="card-header">
-      <h2>Dec 2022, 0%</h2>
+      <h2>Dec 2022,<span id="Return3" </span></h2>
     </div>
     <div id = "card-content-3" class="card-content hidden">
       <p>Detailed returns</p>
@@ -141,7 +141,7 @@
 
 <div id = "content4" class="card" onclick="toggleCard(4)">
     <div class="card-header">
-      <h2>Nov 2022, 0%</h2>
+      <h2>Nov 2022, <span id="Return4" </span></h2>
     </div>
     <div id = "card-content-4" class="card-content hidden">
       <p>Detailed returns</p>
@@ -171,7 +171,7 @@
 
 <div id = "content5" class="card" onclick="toggleCard(5)">
     <div class="card-header">
-      <h2>Oct 2022, 0%</h2>
+      <h2>Oct 2022, <span id="Return5" </span></h2>
     </div>
     <div id = "card-content-5" class="card-content hidden">
       <p>Detailed returns</p>
@@ -455,7 +455,7 @@ main();
 
     const coinData = await fetchAllCoinData(allSymbols[i], startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
-    document.getElementById("Return2").innerHTML = (averageReturns[averageReturns.length - 1]*100).toFixed(2) + '%';
+    
     // Get the date data from the first coin
     const dateData = coinData[0].map(entry => entry[0]);
 
@@ -487,6 +487,7 @@ main();
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
     const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
+    document.getElementById(`Return${i+1}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100).toFixed(2) + '%';
     new Chart(ctx, {
       type: 'line',
       data: {
