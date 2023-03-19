@@ -446,7 +446,10 @@ main();
   // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
   async function renderChart() {
-    const coinData = await fetchAllCoinData(symbols);
+    const startDate = new Date(allStartDates[1]);
+    const endDate = new Date(allEndDates[1]);
+
+    const coinData = await fetchAllCoinData(symbols1, startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
 
     // Get the date data from the first coin
