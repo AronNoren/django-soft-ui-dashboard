@@ -1,0 +1,999 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row mt-4">
+        <div class="col-8 mb-0">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                  <div class="d-flex flex-column h-100">
+                    <h5 class="font-weight-bolder">Bjorkfi portfolio</h5>
+                    <p class="mb-5">How to use the table below</p>
+                        <ol>
+                          <li>Fill in how much you want to invest.</li>
+                          <li>Buy the tokens reflected in the column “Amount to purchase”.</li>
+                          <li>If you already hold some of the tokens, adjust your positions to reflect the table.</li>
+                          <li>Wait for the next month, when we update our portfolio.</li>
+                        </ol>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card h-100">
+            <div class="overflow-hidden position-relative border-radius-xl bg-cover h-100" style="background-image: url('/static/assets/img/ivancik.jpg');">
+              <span class="mask bg-gradient-dark"></span>
+              <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+                <h5 class="text-white font-weight-bolder mb-4 pt-2">Invest with Bjorkfi</h5>
+                <p class="text-white">Bjorkfi's trading model follows the trend of the market. This way, we can avoid unnecessary losses when the market is in a downward trend.</p>
+                <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="https://bjorkfi.com/">
+                  Read More
+                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+     <div id="trendingContainer" style="display: none;">
+       <div class="row mt-4">
+        <div class="col-3 mb-xl-0 mb-0">
+         <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                 The market is currently trending and the Bjorkfi model is holding coins. The coins curretly held will be sold at feb 28 and a new position will be evaluated. 
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="col-6 mb-xl-0 mb-0">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Amount to invest (USD)</p>
+                    <h5 class="font-weight-bolder mb-0">
+                      <input type="text" id="invest" name="Amount to invest" value="100" />
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                    <button onClick="calc(this)" class="btn bg-gradient-primary mb-0">Calculate</button> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+
+
+       <div class="row mt-4">
+        <div class="col-3 mb-xl-0 mb-0">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                    <h5 class="font-weight-bolder mb-0">
+                      Current MTD return:
+                      <span id="MTDReturn" class="text-success text-sm font-weight-bolder"></span>
+                    </h5>
+              </div>
+            </div>
+          </div>        
+        </div>
+          <div class="col-6 mb-xl-0 mb-0">
+          
+          </div>
+        </div>
+        
+<div class="row my-4">
+  <div class="col-11 mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">        
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price at recommendation</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Weight</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount to purchase</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stop loss</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Profit/Loss</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r1name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r1price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r1weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r1amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r1stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r1current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar1" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="100%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r2name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r2price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r2weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r2amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r2stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r2current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar2" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r3name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r3price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r3weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r3amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r3stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r3current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar3" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r4name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r4price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r4weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r4amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r4stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r4current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar4" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r5name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r5price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r5weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r5amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r5stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r5current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar5" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r6name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r6price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r6weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r6amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r6stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r6current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar6" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r7name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r7price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r7weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r7amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r7stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r7current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar7" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r8name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r8price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r8weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r8amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r8stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r8current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar8" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r9name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r9price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r9weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r9amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r9stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r9current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar9" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="8%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r10name">BTC</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" id = "r10price">19,840-19,890</h6>
+                          </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold" id = "r10weight"> 5% </span>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r10amount">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r10stop">3%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                       <td class="align-middle">
+                        <div class="progress-wrapper w-75 mx-auto">
+                          <div class="progress-info">
+                            <div class="progress-percentage">
+                              <span class="text-xs font-weight-bold" id = "r10current">3%</span>
+                            </div>
+                          </div>
+                          <div class="progress">
+                            <div id="progress-bar10" class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="3%" aria-valuemin="-10%" aria-valuemax="10%"></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div id="notTrendingContainer" style="display: none;">
+        <div class="row mt-4">
+          <div class="col-2 mb-xl-0 mb-0">
+          </div>
+          <div class="col-8 mb-xl-0 mb-0">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                 Currently, our model says that the market is trending downwards, so we allocate our holdings to cash. Check back in soon, to know when we allocate to crypto again. The next evaluation will be done March 1st. 
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+             <div class="row mt-4">
+                <div class="col-11 mb-0">
+                  <div class="card">
+                     <div class="card-header pb-0">
+                      <h6>Market trend line</h6>
+                     </div>
+                    <div class="card-body p-3">
+                                   <div class="chart">
+                        <canvas id="btcChart" class="chart-canvas" height="400"></canvas>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+        </div>
+      
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+        <script>
+    const istrending = "1";  //set var   
+    // Plot if not trending 
+    if (istrending == "0") {
+   document.getElementById("notTrendingContainer").style.display = "block";
+   const ctx = document.getElementById('btcChart').getContext('2d');
+    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+    var gradientStroke3 = ctx.createLinearGradient(0, 230, 0, 50);
+
+gradientStroke3.addColorStop(1, 'rgba(30, 136, 229, 0.2)');
+gradientStroke3.addColorStop(0.2, 'rgba(30, 136, 229, 0.0)');
+gradientStroke3.addColorStop(0, 'rgba(30, 136, 229, 0)'); // blue colors
+
+
+const apiKey = 'YOUR_BINANCE_API_KEY';
+
+// Function to fetch Binance BTC data
+async function fetchBinanceBTCData() {
+    const endpoint = 'https://api.binance.com/api/v3/klines';
+    const symbol = 'BTCUSDT';
+    const interval = '1d';
+    const limit = 180;
+
+    try {
+        const response = await axios.get(endpoint, {
+            params: {
+                symbol,
+                interval,
+                limit,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching Binance BTC data:', error);
+    }
+}
+   async function prepareChartData() {
+    const btcData = await fetchBinanceBTCData();
+    const labels = [];
+    const prices = [];
+    const movingAverages = [];
+
+    btcData.forEach((entry, index) => {
+        const date = new Date(entry[0]);
+        const closePrice = parseFloat(entry[4]);
+        labels.push(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`);
+        prices.push(closePrice);
+
+        if (index >= 89) {
+            const sum = btcData.slice(index - 89, index + 1).reduce((acc, val) => acc + parseFloat(val[4]), 0);
+            movingAverages.push(sum / 90);
+        } else {
+            movingAverages.push(null);
+        }
+    });
+
+    return {
+        labels,
+        prices,
+        movingAverages,
+    };
+}
+     async function renderChart() {
+    const data = await prepareChartData();
+    const slicedPrices = data.prices.slice(-90);
+    const relativePrices = slicedPrices.map(price => price / slicedPrices[0]);
+    const slicedMA = data.movingAverages.slice(-90);
+    const relativeMA = slicedMA.map(movingAverages => movingAverages / slicedPrices[0]);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.labels.slice(-90),
+            datasets: [
+                    {
+            label: 'Market',
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: relativePrices,
+            maxBarThickness: 6
+
+          },
+
+                {
+            label: '90 day trend',
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#2025c7",
+            borderWidth: 3,
+            backgroundColor: gradientStroke3,
+            fill: true,
+            data: relativeMA,
+            maxBarThickness: 6
+                },
+            ],
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+}
+
+// Initialize the chart
+renderChart();
+     
+     } else { //if trending   
+          // Evaluate if trending 
+            document.getElementById("trendingContainer").style.display = "block";    
+            const modelName = 'portfolio'
+            const token = localStorage.getItem('token') || ''
+   
+            let displayList = [];
+            let displayList_name = [];
+            let displayList_buy = [];
+            let displayList_weight = [];
+            let displayList_returns = [];
+            let displayList_amount = [];
+            fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/portfolio/',{
+             method: 'GET',
+             headers: {
+            'Authorization': `token ${token}`
+             }
+             })
+            .then(function(response){
+                return response.json()
+            })
+            .then((res) => {
+                data = res.data
+                
+                res.data.forEach((item) => {
+                    displayList.push(item.token);
+                    displayList_name.push(item.token);
+                    displayList_buy.push(item.buy);
+                    displayList_returns.push(item.current);
+                    displayList_weight.push(item.weight);
+                    displayList_amount.push(100/(item.buy*10));
+                })
+                    // Det här var alltså innan chat gpt och jag har inte orkat fixa det Arek.
+                document.getElementById("r1name").innerHTML = displayList_name[0];
+                document.getElementById("r1price").innerHTML = parseFloat(displayList_buy[0]).toPrecision(3);
+                document.getElementById("r1weight").innerHTML = displayList_weight[0];
+                document.getElementById("r1amount").innerHTML = parseFloat(displayList_amount[0]).toPrecision(3);
+                document.getElementById("r1stop").innerHTML = (displayList_buy[0]*0.9).toPrecision(3);
+                document.getElementById("r1current").innerHTML = displayList_returns[0];
+                
+                document.getElementById("r2name").innerHTML = displayList_name[1];
+                document.getElementById("r2price").innerHTML = parseFloat(displayList_buy[1]).toPrecision(3);
+                document.getElementById("r2weight").innerHTML = displayList_weight[1];
+                document.getElementById("r2amount").innerHTML = parseFloat(displayList_amount[1]).toPrecision(3);
+                document.getElementById("r2stop").innerHTML = (displayList_buy[1]*0.9).toPrecision(3);
+                document.getElementById("r2current").innerHTML = displayList_returns[1];
+              
+                document.getElementById("r3name").innerHTML = displayList_name[2];
+                document.getElementById("r3price").innerHTML = parseFloat(displayList_buy[2]).toPrecision(3);
+                document.getElementById("r3weight").innerHTML = displayList_weight[2];
+                document.getElementById("r3amount").innerHTML = parseFloat(displayList_amount[2]).toPrecision(3);
+                document.getElementById("r3stop").innerHTML = (displayList_buy[2]*0.9).toPrecision(3);
+                document.getElementById("r3current").innerHTML = displayList_returns[2];
+              
+                document.getElementById("r4name").innerHTML = displayList_name[3];
+                document.getElementById("r4price").innerHTML = parseFloat(displayList_buy[3]).toPrecision(3);
+                document.getElementById("r4weight").innerHTML = displayList_weight[3];
+                document.getElementById("r4amount").innerHTML = parseFloat(displayList_amount[3]).toPrecision(3);
+                document.getElementById("r4stop").innerHTML = (displayList_buy[3]*0.9).toPrecision(3);
+                document.getElementById("r4current").innerHTML = displayList_returns[3];
+              
+                document.getElementById("r5name").innerHTML = displayList_name[4];
+                document.getElementById("r5price").innerHTML = parseFloat(displayList_buy[4]).toPrecision(3);
+                document.getElementById("r5weight").innerHTML = displayList_weight[4];
+                document.getElementById("r5amount").innerHTML = parseFloat(displayList_amount[4]).toPrecision(3);
+                document.getElementById("r5stop").innerHTML = (displayList_buy[4]*0.9).toPrecision(3);
+                document.getElementById("r5current").innerHTML = displayList_returns[4];
+              
+                document.getElementById("r6name").innerHTML = displayList_name[5];
+                document.getElementById("r6price").innerHTML = parseFloat(displayList_buy[5]).toPrecision(3);
+                document.getElementById("r6weight").innerHTML = displayList_weight[5];
+                document.getElementById("r6amount").innerHTML = parseFloat(displayList_amount[5]).toPrecision(3);
+                document.getElementById("r6stop").innerHTML = (displayList_buy[5]*0.9).toPrecision(3);
+                document.getElementById("r6current").innerHTML = displayList_returns[5];
+              
+                document.getElementById("r7name").innerHTML = displayList_name[6];
+                document.getElementById("r7price").innerHTML = parseFloat(displayList_buy[6]).toPrecision(3);
+                document.getElementById("r7weight").innerHTML = displayList_weight[6];
+                document.getElementById("r7amount").innerHTML = parseFloat(displayList_amount[6]).toPrecision(3);
+                document.getElementById("r7stop").innerHTML = (displayList_buy[6]*0.9).toPrecision(3);
+                document.getElementById("r7current").innerHTML = displayList_returns[6];
+             
+                document.getElementById("r8name").innerHTML = displayList_name[7];
+                document.getElementById("r8price").innerHTML = parseFloat(displayList_buy[7]).toPrecision(3);
+                document.getElementById("r8weight").innerHTML = displayList_weight[7];
+                document.getElementById("r8amount").innerHTML = parseFloat(displayList_amount[7]).toPrecision(3);
+                document.getElementById("r8stop").innerHTML = (displayList_buy[7]*0.9).toPrecision(3);
+                document.getElementById("r8current").innerHTML = displayList_returns[7];
+              
+                document.getElementById("r9name").innerHTML = displayList_name[8];
+                document.getElementById("r9price").innerHTML = parseFloat(displayList_buy[8]).toPrecision(3);
+                document.getElementById("r9weight").innerHTML = displayList_weight[8];
+                document.getElementById("r9amount").innerHTML = parseFloat(displayList_amount[8]).toPrecision(3);
+                document.getElementById("r9stop").innerHTML = (displayList_buy[8]*0.9).toPrecision(3);
+                document.getElementById("r9current").innerHTML = displayList_returns[8];
+              
+                document.getElementById("r10name").innerHTML = displayList_name[9];
+                document.getElementById("r10price").innerHTML = parseFloat(displayList_buy[9]).toPrecision(3);
+                document.getElementById("r10weight").innerHTML = displayList_weight[9];
+                document.getElementById("r10amount").innerHTML = parseFloat(displayList_amount[9]).toPrecision(3);
+                document.getElementById("r10stop").innerHTML = (displayList_buy[9]*0.9).toPrecision(3);
+                document.getElementById("r10current").innerHTML = displayList_returns[9];
+                console.log(displayList_name)
+                 let increment = 1;
+                
+                let MTDreturns = 0;
+                const requests = displayList_name.map(symbol => {
+                  return axios.get('https://api.binance.com/api/v3/ticker/price', {
+                    params: {
+                      symbol: `${symbol}USDT`
+                    }
+                  });
+                });
+
+                Promise.all(requests)
+                  .then(responses => {
+                    responses.forEach((response, index) => {
+                      const symbol = displayList_name[index];
+                      console.log(`${symbol}USDT`);
+                      console.log(response.data);
+                      console.log(response.data['value']);
+                      //document.getElementById(`r${index + 1}current`).innerHTML = (100*((response.data.price/displayList_buy[index])-1)).toFixed(2) + '%';
+                      document.getElementById(`r${index + 1}current`).innerHTML = Math.max(-10, (100*((response.data.price/displayList_buy[index])-1))).toFixed(2) + '%';
+                      //MTDreturns = MTDreturns + 100*((response.data.price/displayList_buy[index])-1);
+                      MTDreturns = MTDreturns +  Math.max(-10, (100*((response.data.price/displayList_buy[index])-1)))
+                      const progressBar = document.getElementById(`progress-bar${index + 1}`);
+                      progressBar.setAttribute('aria-valuenow', (100*((response.data.price/displayList_buy[index])-1)).toFixed(0) + '%');
+                    });
+                   document.getElementById("MTDReturn").innerHTML = (MTDreturns/10).toFixed(2) + '%';
+                  });   
+                 
+
+           
+            })
+            .catch((err) => {
+                console.log(`Error fetching: ${err}`)
+            });
+               
+           
+            <!-- calculate investments
+           
+            function calc(form) {
+                let displayList_amount = [];
+                var A = document.getElementById("invest").value;
+                displayList_buy.forEach((item) => {
+                         displayList_amount.push(A/(item*10));
+                })
+                document.getElementById("r1amount").innerHTML = parseFloat(displayList_amount[0]).toPrecision(3);
+                document.getElementById("r2amount").innerHTML = parseFloat(displayList_amount[1]).toPrecision(3);
+                document.getElementById("r3amount").innerHTML = parseFloat(displayList_amount[2]).toPrecision(3);
+                document.getElementById("r4amount").innerHTML = parseFloat(displayList_amount[3]).toPrecision(3); 
+                document.getElementById("r5amount").innerHTML = parseFloat(displayList_amount[4]).toPrecision(3);
+                document.getElementById("r6amount").innerHTML = parseFloat(displayList_amount[5]).toPrecision(3);
+                document.getElementById("r7amount").innerHTML = parseFloat(displayList_amount[6]).toPrecision(3);
+                document.getElementById("r8amount").innerHTML = parseFloat(displayList_amount[7]).toPrecision(3);
+                document.getElementById("r9amount").innerHTML = parseFloat(displayList_amount[8]).toPrecision(3);
+                document.getElementById("r10amount").innerHTML = parseFloat(displayList_amount[9]).toPrecision(3);
+                return false;
+                }
+     }
+          
+
+
+        </script>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+
