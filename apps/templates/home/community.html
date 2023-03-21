@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Billing {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="container-fluid py-4">
+    <div class="row">
+      <h2>&nbsp</h2>
+      <h2>&nbsp</h2>
+    </div>
+    <div class="row">
+      <h2>Community</h2>
+      <h2>&nbsp</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-9 col-md-6 mb-md-2 mb-4">
+          <div class="card h-100">
+            <div class="card-header pb-0">
+              <h3>Portfolio Updates:</h3>
+              <h5>Choose which medium you prefer for receiving updates on when we update our portfolio:</h5>
+                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://discord.gg/x3TED8zq">Discord</a>
+                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://twitter.com/Bjorkfi">Twitter</a>
+                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://www.tiktok.com/@bjorkfi">TikTok</a>
+              <h3>Join the conversation:</h3>
+              <h5>Talk about what happens in the markets, new investments ideas or give us product feedback via our dedicated discord channel: </h5>
+                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://discord.gg/x3TED8zq">Discord</a>
+              <h2>&nbsp</h2>   
+            </div>
+          </div>
+      </div>
+    </div>
+
+      {% include "includes/footer.html" %}
+
+  </div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
+
