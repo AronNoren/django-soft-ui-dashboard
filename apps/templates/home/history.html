@@ -5,7 +5,7 @@
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
 <style>
-.card {
+.cardstyle {
   border: 1px solid black;
   padding: 10px;
   cursor: pointer;
@@ -47,12 +47,11 @@
 
 {% block content %}
 <!-- first -->
- <div id = "content1" class="card" onclick="toggleCard(1)">
+ <div id = "content1" class="cardstyle" onclick="toggleCard(1)">
     <div class="card-header">
       <h2>Feb 2023,<span id="Return1" </span></h2>
     </div>
     <div id = "card-content-1" class="card-content hidden">
-      <p>Detailed returns</p>
       <div id="table-1" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -78,12 +77,11 @@
   </div>
 
 <!-- second -->
-  <div id = "content2" class="card" onclick="toggleCard(2)">
+  <div id = "content2" class="cardstyle" onclick="toggleCard(2)">
     <div class="card-header">
       <h2>Jan 2023, <span id="Return2" </span></h2>
     </div>
     <div id = "card-content-2" class="card-content hidden">
-      <p>Detailed returns</p>
       <div id="table-2" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -109,12 +107,11 @@
   </div>
 
 
-<div id = "content3" class="card" onclick="toggleCard(3)">
+<div id = "content3" class="cardstyle" onclick="toggleCard(3)">
     <div class="card-header">
       <h2>Dec 2022,<span id="Return3" </span></h2>
     </div>
     <div id = "card-content-3" class="card-content hidden">
-      <p>Detailed returns</p>
       <div id="table-3" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -139,12 +136,11 @@
     </div>
   </div>
 
-<div id = "content4" class="card" onclick="toggleCard(4)">
+<div id = "content4" class="cardstyle" onclick="toggleCard(4)">
     <div class="card-header">
       <h2>Nov 2022, <span id="Return4" </span></h2>
     </div>
     <div id = "card-content-4" class="card-content hidden">
-      <p>Detailed returns</p>
       <div id="table-4" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -168,37 +164,36 @@
       </div>
     </div>
   </div>
-
-<div id = "content5" class="card" onclick="toggleCard(5)">
-    <div class="card-header">
-      <h2>Oct 2022, <span id="Return5" </span></h2>
-    </div>
-    <div id = "card-content-5" class="card-content hidden">
-      <p>Detailed returns</p>
-      <div id="table-5" class="card">
-        <table  class="table align-items-center mb-0 horizontal-table">
-          <tbody>
-          
-          </tbody>
-        </table>
+<div class="col-lg-8 mb-lg-0 mb-4">
+  <div id = "content5" class="cardstyle" onclick="toggleCard(5)">
+      <div class="card-header">
+        <h2>Oct 2022, <span id="Return5" </span></h2>
       </div>
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card">
-             <div class="card-header pb-0">
-              <h6>Sales overview</h6>
-             </div>
-            <div class="card-body p-3">
-              <div class="chart">
-                <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
+      <div id = "card-content-5" class="card-content hidden">
+        <div id="table-5" class="card">
+          <table  class="table align-items-center mb-0 horizontal-table">
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="card">
+               <div class="card-header pb-0">
+                <h6>Sales overview</h6>
+               </div>
+              <div class="card-body p-3">
+                <div class="chart">
+                  <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+</div>
 
       {% include "includes/footer.html" %}
 
@@ -487,7 +482,7 @@ main();
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
     const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
-    document.getElementById(`Return${i+1}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100).toFixed(2) + '%';
+    document.getElementById(`Return${i+1}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100-100).toFixed(2) + '%';
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -502,7 +497,7 @@ main();
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: averageReturnsrel, // Replace price_rel with averageReturns
+            data: averageReturnsrel, 
             maxBarThickness: 6,
           },
         ],
