@@ -1,0 +1,584 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+.card {
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-content {
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+.horizontal-table th,
+.horizontal-table td {
+  padding: 3px;
+  font-size: 10px;
+}
+
+.horizontal-table th {
+  text-align: left;
+  font-weight: normal;
+}
+
+.horizontal-table tbody tr:first-child th {
+  text-align: center;
+}
+
+.horizontal-table tbody tr:first-child td {
+  text-align: center;
+}
+
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- first -->
+ <div id = "content1" class="card" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h2>Feb 2023,<span id="Return1" </span></h2>
+    </div>
+    <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-1" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-1" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- second -->
+  <div id = "content2" class="card" onclick="toggleCard(2)">
+    <div class="card-header">
+      <h2>Jan 2023, <span id="Return2" </span></h2>
+    </div>
+    <div id = "card-content-2" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-2" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-2" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div id = "content3" class="card" onclick="toggleCard(3)">
+    <div class="card-header">
+      <h2>Dec 2022,<span id="Return3" </span></h2>
+    </div>
+    <div id = "card-content-3" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-3" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-3" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id = "content4" class="card" onclick="toggleCard(4)">
+    <div class="card-header">
+      <h2>Nov 2022, <span id="Return4" </span></h2>
+    </div>
+    <div id = "card-content-4" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-4" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-4" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id = "content5" class="card" onclick="toggleCard(5)">
+    <div class="card-header">
+      <h2>Oct 2022, <span id="Return5" </span></h2>
+    </div>
+    <div id = "card-content-5" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-5" class="card">
+        <table  class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+          
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+      {% include "includes/footer.html" %}
+
+    
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+ <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const symbols1 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols2 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols3 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols4 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols5 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols6 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols7 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols8 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols9 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];
+    const symbols10 = [
+    'APTUSDT',
+    'FTMUSDT',
+    'MANAUSDT',
+    'LDOUSDT',
+    'IMXUSDT',
+    'SOLUSDT',
+    'LRCUSDT',
+    'CRVUSDT',
+    'AVAXUSDT',
+    'ENJUSDT',
+  ];// Add the symbols of the coins you want to include
+const allSymbols = [symbols1, symbols2, symbols3, symbols4, symbols5];
+const allStartDates = ['2023-02-01','2023-01-01','2022-12-01','2022-11-01','2022-10-01'];
+const allEndDates = ['2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01'];
+  function toggleCard(cardId) {
+    var cardBody = document.getElementById('card-content-' + cardId);
+    cardBody.classList.toggle('hidden');
+  }
+async function fetchCoinData(symbol, start, end) {
+  const startTime = start.getTime();
+  const endTime = end.getTime();
+  try {
+    const response = await axios.get('https://api.binance.com/api/v3/klines', {
+      params: {
+        symbol,
+        interval: '1d',
+        startTime: startTime,
+        endTime: endTime
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching data for ${symbol}:`, error);
+  }
+}
+//async function fetchCoinData(symbol) {
+//  const start = new Date('2023-02-01').getTime();
+//  const end = new Date('2023-03-01').getTime();
+
+//  try {
+//    const response = await axios.get('https://api.binance.com/api/v3/klines', {
+ //     params: {
+//        symbol,
+//        interval: '1d',
+//        startTime: start,
+//        endTime: end
+//      }
+//    });
+//    return response.data;
+//  } catch (error) {
+//    console.error(`Error fetching data for ${symbol}:`, error);
+//  }
+//}
+
+async function fetchAllCoinData(symbols, start, end) {
+  const coinData = await Promise.all(symbols.map(symbol => fetchCoinData(symbol, start, end)));
+  return coinData;
+}
+
+
+async function calculateAverageReturns(coinData) {
+  const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
+
+  const averageReturns = [];
+
+  const days = coinReturns[0].length;
+
+  for (let i = 0; i < days; i++) {
+    const sum = coinReturns.reduce((acc, returns) => acc + returns[i], 0);
+    const average = sum / coinReturns.length;
+    averageReturns.push(average);
+  }
+
+  return averageReturns;
+}
+async function calculateMonthlyReturns(coinData) {
+  const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
+
+  const monthlyReturns = [];
+
+  for (const returns of coinReturns) {
+    const firstPrice = returns[0];
+    const lastPrice = returns[returns.length - 1];
+    const returnPercentage = ((lastPrice - firstPrice) / firstPrice) * 100;
+    monthlyReturns.push(returnPercentage);
+  }
+
+  return monthlyReturns;
+}
+async function updateTable(symbols, monthlyReturns, cardId) {
+  const table = document.querySelector(`#table-${cardId} .horizontal-table tbody`);
+   
+  console.log(cardId);
+  let tokensHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Token</th>';
+  let returnsHtml = '<tr><th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profit / Loss</th>';
+
+  for (let i = 0; i < symbols.length; i++) {
+    const symbol = symbols[i].replace('USDT', '');
+    tokensHtml += `<td class="text-uppercase">${symbol}</td>`;
+    returnsHtml += `<td>${monthlyReturns[i].toFixed(2)}%</td>`;
+  }
+
+  tokensHtml += '</tr>';
+  returnsHtml += '</tr>';
+
+  table.innerHTML = tokensHtml + returnsHtml;
+}
+function generateSymbols(baseSymbols, index) {
+  return baseSymbols.map(symbol => `${symbol}${index}USDT`);
+}
+async function main() {
+  for (let i = 0; i < allSymbols.length; i++) {
+    const symbols = allSymbols[i];
+
+    const startDate = new Date(allStartDates[i]);
+    const endDate = new Date(allEndDates[i]);
+
+    const coinData = await fetchAllCoinData(symbols, startDate, endDate);
+    const monthlyReturns = await calculateMonthlyReturns(coinData);
+    updateTable(symbols, monthlyReturns, i + 1);
+  }
+}
+
+main();
+
+  // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
+
+  async function renderChart() {
+    for (let i = 0; i < allSymbols.length; i++) {
+    
+    
+    const startDate = new Date(allStartDates[i]);
+    const endDate = new Date(allEndDates[i]);
+
+    const coinData = await fetchAllCoinData(allSymbols[i], startDate, endDate);
+    const averageReturns = await calculateAverageReturns(coinData);
+    
+    // Get the date data from the first coin
+    const dateData = coinData[0].map(entry => entry[0]);
+
+    // Define formattedDateList
+    const formattedDateList = dateData
+      .map(dateString => {
+        const date = new Date(parseInt(dateString));
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      })
+      .sort((a, b) => new Date(a) - new Date(b));
+
+    // Your existing code to create the chart goes here, but replace `price_rel` with `averageReturns`
+    // ...
+    var ctx = document.getElementById(`chart-${i+1}`).getContext("2d");
+    
+    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+   
+    var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
+    averageReturns
+    const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
+    document.getElementById(`Return${i+1}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100).toFixed(2) + '%';
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: formattedDateList,
+        datasets: [
+          {
+            label: 'Returns',
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: '#cb0c9f',
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: averageReturnsrel, // Replace price_rel with averageReturns
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+   }
+  }
+
+  renderChart();
+/////////////////////////////////////////////////////7
+
+  // Set the dimensions of the chart
+  var width = 500;
+  var height = 300;
+
+  // Set the margins of the chart
+  var margin = {
+    top: 20,
+    right: 20,
+    bottom: 30,
+    left: 50
+  };
+</script>
+{% endblock javascripts %}
