@@ -5,10 +5,12 @@
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
 <style>
-.card {
+.stylecard, .card {
   border: 1px solid black;
   padding: 10px;
   cursor: pointer;
+  border-radius: 10px; /* Add rounded edges */
+  margin-bottom: 15px; /* Add spacing between cards */
 }
 
 .card-header {
@@ -47,7 +49,7 @@
 
 {% block content %}
 <!-- first -->
- <div id = "content1" class="card" onclick="toggleCard(1)">
+ <div id = "content1" class="stylecard" onclick="toggleCard(1)">
     <div class="card-header">
       <h2>Feb 2023,<span id="Return1" </span></h2>
     </div>
