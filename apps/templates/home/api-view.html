@@ -167,7 +167,7 @@
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                            <img src="{{ ASSETS_ROOT }}/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd" id="crypto-icon">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm" id = "r2name">BTC</h6>
@@ -966,8 +966,37 @@ renderChart();
             .catch((err) => {
                 console.log(`Error fetching: ${err}`)
             });
-               
-           
+              
+           //Icons
+        const cryptoList = ['btc']; // Since you only need the BTC icon in this case
+        const cryptoIconElement = document.querySelector('#crypto-icon');
+
+        async function getIcons(cryptoList) {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + cryptoList.join(','));
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayIcon(data[0]);
+                } else {
+                    console.error('Error fetching data:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function displayIcon(crypto) {
+            cryptoIconElement.src = crypto.image;
+            cryptoIconElement.alt = `${crypto.symbol.toUpperCase()} icon`;
+        }
+
+        getIcons(cryptoList)
+
+
+
+
+   
             <!-- calculate investments
            
             function calc(form) {
