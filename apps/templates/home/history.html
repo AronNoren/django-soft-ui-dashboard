@@ -9,6 +9,10 @@
   border: 1px solid black;
   padding: 10px;
   cursor: pointer;
+  border-radius: 10px; /* Add rounded edges */
+  margin-bottom: 15px; /* Add spacing between cards */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(240, 240, 240, 0.2));
+
 }
 
 .card-header {
@@ -47,11 +51,41 @@
 
 {% block content %}
 <!-- first -->
- <div id = "content1" class="card" onclick="toggleCard(1)">
+<div id = "content0" class="stylecard" onclick="toggleCard(0)">
     <div class="card-header">
-      <h4>Feb 2023,<span id="Return1" </span></h4>
+      <h4>Mar 2023, <span id="Return0" </span></h4>
+    </div>
+    <div id = "card-content-0" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-0" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-0" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <div id = "content1" class="stylecard" onclick="toggleCard(1)">
+    <div class="card-header">
+      <h4>Feb 2023, <span id="Return1" </span></h4>
     </div>
     <div id = "card-content-1" class="card-content hidden">
+      <p>Detailed returns</p>
       <div id="table-1" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -60,10 +94,10 @@
         </table>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-10 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
              <div class="card-header pb-0">
-              <h6>Returns</h6>
+              <h6>Sales overview</h6>
              </div>
             <div class="card-body p-3">
               <div class="chart">
@@ -77,11 +111,12 @@
   </div>
 
 <!-- second -->
-  <div id = "content2" class="card" onclick="toggleCard(2)">
+  <div id = "content2" class="stylecard" onclick="toggleCard(2)">
     <div class="card-header">
       <h4>Jan 2023, <span id="Return2" </span></h4>
     </div>
     <div id = "card-content-2" class="card-content hidden">
+      <p>Detailed returns</p>
       <div id="table-2" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -90,7 +125,7 @@
         </table>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-10 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
              <div class="card-header pb-0">
               <h6>Sales overview</h6>
@@ -107,11 +142,12 @@
   </div>
 
 
-<div id = "content3" class="card" onclick="toggleCard(3)">
+<div id = "content3" class="stylecard" onclick="toggleCard(3)">
     <div class="card-header">
       <h4>Dec 2022,<span id="Return3" </span></h4>
     </div>
     <div id = "card-content-3" class="card-content hidden">
+      <p>Detailed returns</p>
       <div id="table-3" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -120,10 +156,10 @@
         </table>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-10 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
              <div class="card-header pb-0">
-              <h6>Returns</h6>
+              <h6>Sales overview</h6>
              </div>
             <div class="card-body p-3">
               <div class="chart">
@@ -136,11 +172,12 @@
     </div>
   </div>
 
-<div id = "content4" class="card" onclick="toggleCard(4)">
+<div id = "content4" class="stylecard" onclick="toggleCard(4)">
     <div class="card-header">
       <h4>Nov 2022, <span id="Return4" </span></h4>
     </div>
     <div id = "card-content-4" class="card-content hidden">
+      <p>Detailed returns</p>
       <div id="table-4" class="card">
         <table class="table align-items-center mb-0 horizontal-table">
           <tbody>
@@ -149,10 +186,10 @@
         </table>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-10 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
              <div class="card-header pb-0">
-              <h6>Returns</h6>
+              <h6>Sales overview</h6>
              </div>
             <div class="card-body p-3">
               <div class="chart">
@@ -164,36 +201,37 @@
       </div>
     </div>
   </div>
-<div class="col-lg-10 mb-lg-0 mb-4">
-  <div id = "content5" class="stylecard" onclick="toggleCard(5)">
-      <div class="card-header">
-        <h4>Oct 2022, <span id="Return5" </span></h4>
-      </div>
-      <div id = "card-content-5" class="card-content hidden">
-        <div id="table-5" class="card">
-          <table  class="table align-items-center mb-0 horizontal-table">
-            <tbody>
 
-            </tbody>
-          </table>
-        </div>
-        <div class="row mt-4">
-          <div class="col-lg-12 mb-lg-0 mb-4">
-            <div class="card">
-               <div class="card-header pb-0">
-                <h6>Returns</h6>
-               </div>
-              <div class="card-body p-3">
-                <div class="chart">
-                  <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
-                </div>
+<div id = "content5" class="stylecard" onclick="toggleCard(5)">
+    <div class="card-header">
+      <h4>Oct 2022, <span id="Return5" </span></h4>
+    </div>
+    <div id = "card-content-5" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-5" class="card">
+        <table  class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+          
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-5" class="chart-canvas" height="300"></canvas>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
+
 
       {% include "includes/footer.html" %}
 
@@ -205,6 +243,18 @@
  <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+const symbols0 = [
+    'APTUSDT',
+    'GRTUSDT',
+    'IMXUSDT',
+    'FTMUSDT',
+    'LDOUSDT',
+    'LRCUSDT',
+    'MANAUSDT',
+    'ENJUSDT',
+    'CRVUSDT',
+    'SOLUSDT',
+  ];
   const symbols1 = [
     'APTUSDT',
     'FTMUSDT',
@@ -325,9 +375,9 @@
     'AVAXUSDT',
     'ENJUSDT',
   ];// Add the symbols of the coins you want to include
-const allSymbols = [symbols1, symbols2, symbols3, symbols4, symbols5];
-const allStartDates = ['2023-02-01','2023-01-01','2022-12-01','2022-11-01','2022-10-01'];
-const allEndDates = ['2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01'];
+const allSymbols = [symbols0,symbols1, symbols2, symbols3, symbols4, symbols5];
+const allStartDates = ['2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01','2022-10-01'];
+const allEndDates = ['2023-04-01','2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01'];
   function toggleCard(cardId) {
     var cardBody = document.getElementById('card-content-' + cardId);
     cardBody.classList.toggle('hidden');
@@ -425,7 +475,7 @@ function generateSymbols(baseSymbols, index) {
   return baseSymbols.map(symbol => `${symbol}${index}USDT`);
 }
 async function main() {
-  for (let i = 0; i < allSymbols.length; i++) {
+  for (let i = 0; i <= allSymbols.length; i++) {
     const symbols = allSymbols[i];
 
     const startDate = new Date(allStartDates[i]);
@@ -433,7 +483,7 @@ async function main() {
 
     const coinData = await fetchAllCoinData(symbols, startDate, endDate);
     const monthlyReturns = await calculateMonthlyReturns(coinData);
-    updateTable(symbols, monthlyReturns, i + 1);
+    updateTable(symbols, monthlyReturns, i);
   }
 }
 
@@ -442,7 +492,7 @@ main();
   // ... (fetchCoinData, fetchAllCoinData, and calculateAverageReturns functions)
 
   async function renderChart() {
-    for (let i = 0; i < allSymbols.length; i++) {
+    for (let i = 0; i <= allSymbols.length; i++) {
     
     
     const startDate = new Date(allStartDates[i]);
@@ -467,7 +517,7 @@ main();
 
     // Your existing code to create the chart goes here, but replace `price_rel` with `averageReturns`
     // ...
-    var ctx = document.getElementById(`chart-${i+1}`).getContext("2d");
+    var ctx = document.getElementById(`chart-${i}`).getContext("2d");
     
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -482,7 +532,7 @@ main();
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
     const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
-    document.getElementById(`Return${i+1}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100-100).toFixed(2) + '%';
+    document.getElementById(`Return${i}`).innerHTML = (averageReturnsrel[averageReturnsrel.length - 1]*100).toFixed(2) + '%';
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -497,7 +547,7 @@ main();
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: averageReturnsrel, 
+            data: averageReturnsrel, // Replace price_rel with averageReturns
             maxBarThickness: 6,
           },
         ],
