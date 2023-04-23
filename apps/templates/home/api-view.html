@@ -666,7 +666,7 @@
     // Plot if not trending 
     function customNumberFormat(num) {
   if (num >= 1) {
-    return num.toFixed(0);
+    return num.toFixed(2);
   } else {
     const precision = 3;
     let decimals = -Math.floor(Math.log10(num)) + (precision - 1);
