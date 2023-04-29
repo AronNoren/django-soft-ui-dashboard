@@ -2,29 +2,26 @@ import os
 import logging
 import requests
 from django.http import JsonResponse
-
-
+import openai
+from django.shortcuts import render
 logger = logging.getLogger(__name__)
-
+api_key = os.getenv('GPT4Key')
 def chat(request):
+    chatresponse = None
     try:
-        message = "Hi GPT"#request.POST.get('message')
-        response = requests.post(
-            'https://api.openai.com/v1/completions',#'https://api.openai.com/v1/engines/davinci-codex/completions',
-            headers={
-                'Authorization': 'Bearer ' + os.getenv('GPT4Key'),
-                'Content-Type': 'application/json'
-            },
-            json={
-                'prompt': message,
-                'max_tokens': 60,
-                'temperature': 0.5,
-                'model': 'davinci-codex',
-            }
-        )
-        response.raise_for_status()
-        data = response.json()
-        return JsonResponse({'reply': data['choices'][0]['text'].strip()})
-    except Exception as e:
-        logger.error(f"Error during chat: {e}")
-        return JsonResponse({'error': 'An error occurred'}, status=500)
+        if api_key not None and request.method == 'POST':
+            message = "Hi GPT"#request.POST.get('message')
+            openai.api_key = api_key
+            user_input = request.POST.get('user_input')
+            response = openai.Completion.create(
+                engine: 'text-davinci-003',
+                prompt: user_input,
+                max_tokens=256,
+                temperature = 0.5
+            
+            )
+            print(response)
+            return render((request,'billing.html',{})
+        except Exception as e:
+            logger.error(f"Error during chat: {e}")
+            return JsonResponse({'error': 'An error occurred'}, status=500)
