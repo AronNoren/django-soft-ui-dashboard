@@ -4,9 +4,9 @@ logger = logging.getLogger(__name__)
 
 def chat(request):
     try:
-        message = request.POST.get('message')
+        message = "Hi GPT"#request.POST.get('message')
         response = requests.post(
-            'https://api.openai.com/v1/engines/davinci-codex/completions',
+            'https://api.openai.com/v1/completions',#'https://api.openai.com/v1/engines/davinci-codex/completions',
             headers={
                 'Authorization': 'Bearer ' + os.getenv('GPT4Key'),
                 'Content-Type': 'application/json'
