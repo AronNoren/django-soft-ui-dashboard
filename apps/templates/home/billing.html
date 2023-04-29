@@ -1,62 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Chat with AI</title>
 </head>
 <body>
-    <form id="chat-form" method="post">
-        <input name="user_input" type="text" class="form-control">
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
-    <div id="response"></div>
+    <h1>Chat with AI</h1>
+
+    <div id="chat-container">
+        <div id="messages"></div>
+
+        <form id="message-form">
+            <input type="text" name="message" placeholder="Type your message here...">
+            <button type="submit">Send</button>
+        </form>
+    </div>
 
     <script>
-    const apiKey = 'your_openai_api_key_here';  // Replace this with your actual OpenAI API key.
+        const messagesContainer = document.querySelector('#messages');
+        const messageForm = document.querySelector('#message-form');
 
-    async function getOpenAIResponse(userInput) {
-        const apiUrl = 'https://api.openai.com/v1/chat/completions';
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
-        };
-
-        const requestBody = {
-            model: 'gpt-4',
-            messages: [
-                {
-                    role: 'user',
-                    content: userInput,
-                },
-            ],
-        };
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify(requestBody),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                return data.choices[0].message.content;
-            } else {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('Error fetching OpenAI response:', error);
-        }
-    }
-
-    $(document).ready(function () {
-        $('#chat-form').on('submit', async function (event) {
+        messageForm.addEventListener('submit', event => {
             event.preventDefault();
 
-            const userInput = $('input[name="user_input"]').val();
-            const responseText = await getOpenAIResponse(userInput);
-            $('#response').html(responseText);
+            const messageInput = messageForm.querySelector('[name="message"]');
+            const messageText = messageInput.value;
+
+            // Send message to server
+            fetch(`/chat?message=${messageText}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display AI response
+                    const aiMessage = document.createElement('div');
+                    aiMessage.classList.add('message', 'ai');
+                    aiMessage.textContent = data.message;
+
+                    messagesContainer.appendChild(aiMessage);
+                })
+                .catch(error => console.error(error));
+
+            // Clear input field
+            messageInput.value = '';
         });
-    });
     </script>
 </body>
 </html>
