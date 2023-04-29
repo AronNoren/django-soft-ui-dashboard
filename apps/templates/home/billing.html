@@ -3,28 +3,3 @@
     <input id="userInput" type="text">
     <button type="submit">Send</button>
 </form>
-
-<script>
-    $('#chatForm').on('submit', function(e) {
-        e.preventDefault();
-
-        let userMessage = $('#userInput').val();
-        $('#chat').append(`<p>You: ${userMessage}</p>`);
-
-        $.ajax({
-            url: '{% url "chat" %}',
-            method: 'POST',
-            headers: {'X-CSRFToken': '{{ csrf_token }}'},
-            data: { message: userMessage },
-            success: function(data) {
-                $('#chat').append(`<p>AI: ${data.reply}</p>`);
-            },
-            error: function(err) {
-                console.error(err);
-                $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
-            }
-        });
-
-        $('#userInput').val('');
-    });
-</script>
