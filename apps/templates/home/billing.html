@@ -1,32 +1,10 @@
-<form id="chatForm">
+<form method="post">
     {% csrf_token %}
-    <input id="userInput" type="text">
-    <button type="submit">Send</button>
+    <input name="user_input" type="text" class="form-control">
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
-
-<script>
-    document.getElementById('chatForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        let userMessage = document.getElementById('userInput').value;
-        document.getElementById('chat').innerHTML += `<p>You: ${userMessage}</p>`;
-
-        fetch('{% url "chat" %}', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: userMessage })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('chat').innerHTML += `<p>AI: ${data.reply}</p>`;
-            document.getElementById('userInput').value = '';
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById('chat').innerHTML += `<p>AI: I'm sorry, I couldn't understand that.</p>`;
-        });
-    });
-</script>
+{% if response %}
+    <div>
+        {{ response|safe}}
+    </div>
+{% endif %}
