@@ -9,43 +9,38 @@
 {% block content %}
 
   <div class="container-fluid py-4">
-<head>
-    <title>Chat with AI</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <div id="chat">
-    </div>
+<div id="chat">
+</div>
 
-    <form id="chatForm">
-        <input id="userInput" type="text">
-        <button type="submit">Send</button>
-    </form>
+<form id="chatForm">
+    {% csrf_token %}
+    <input id="userInput" type="text">
+    <button type="submit">Send</button>
+</form>
 
-    <script>
-        $('#chatForm').on('submit', function(e) {
-            e.preventDefault();
+<script>
+    $('#chatForm').on('submit', function(e) {
+        e.preventDefault();
 
-            let userMessage = $('#userInput').val();
-            $('#chat').append(`<p>You: ${userMessage}</p>`);
-            
-            $.ajax({
-                url: '/api/chat',
-                method: 'POST',
-                data: { message: userMessage },
-                success: function(data) {
-                    $('#chat').append(`<p>AI: ${data.reply}</p>`);
-                },
-                error: function(err) {
-                    console.error(err);
-                    $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
-                }
-            });
-
-            $('#userInput').val('');
+        let userMessage = $('#userInput').val();
+        $('#chat').append(`<p>You: ${userMessage}</p>`);
+        
+        $.ajax({
+            url: '{% url "chat" %}',
+            method: 'POST',
+            data: { message: userMessage },
+            success: function(data) {
+                $('#chat').append(`<p>AI: ${data.reply}</p>`);
+            },
+            error: function(err) {
+                console.error(err);
+                $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
+            }
         });
-    </script>
-</body>
+
+        $('#userInput').val('');
+    });
+</script>
 </html>
 
       {% include "includes/footer.html" %}
@@ -57,35 +52,4 @@
 
 <!-- Specific JS goes HERE --> 
 {% block javascripts %}
-<script>
-const express = require('express');
-const axios = require('axios');
-const app = express();
-
-app.use(express.json()); 
-
-app.post('/api/chat', async (req, res) => {
-    try {
-        const { message } = req.body;
-
-        const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
-            prompt: message,
-            max_tokens: 60,
-            temperature: 0.5,
-        }, {
-            headers: {
-                'Authorization': ${process.env.GPT4Key},
-                'Content-Type': 'application/json'
-            }
-        });
-
-        res.json({ reply: response.data.choices[0].text.trim() });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Something went wrong');
-    }
-});
-
-app.listen(3000, () => console.log('Server is listening on port 3000'));
-</script>
 {% endblock javascripts %}
