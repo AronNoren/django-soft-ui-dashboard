@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Billing {% endblock title %}
+{% block title %} Chat with AI {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -8,45 +8,43 @@
 
 {% block content %}
 
-  <div class="container-fluid py-4">
-<div id="chat">
-</div>
+<div class="container-fluid py-4">
+    <div id="chat"></div>
 
-<form id="chatForm">
-    {% csrf_token %}
-    <input id="userInput" type="text">
-    <button type="submit">Send</button>
-</form>
+    <form id="chatForm">
+        {% csrf_token %}
+        <input id="userInput" type="text">
+        <button type="submit">Send</button>
+    </form>
 
-<script>
-    $('#chatForm').on('submit', function(e) {
-        e.preventDefault();
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('#chatForm').on('submit', function(e) {
+            e.preventDefault();
 
-        let userMessage = $('#userInput').val();
-        $('#chat').append(`<p>You: ${userMessage}</p>`);
-        
-        $.ajax({
-            url: '{% url "chat" %}',
-            method: 'POST',
-            data: { message: userMessage },
-            success: function(data) {
-                $('#chat').append(`<p>AI: ${data.reply}</p>`);
-            },
-            error: function(err) {
-                console.error(err);
-                $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
-            }
+            let userMessage = $('#userInput').val();
+            $('#chat').append(`<p>You: ${userMessage}</p>`);
+
+            $.ajax({
+                url: '{% url "chat" %}',
+                method: 'POST',
+                headers: { "X-CSRFToken": '{{ csrf_token }}' },
+                data: { message: userMessage },
+                success: function(data) {
+                    $('#chat').append(`<p>AI: ${data.reply}</p>`);
+                },
+                error: function(err) {
+                    console.error(err);
+                    $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
+                }
+            });
+
+            $('#userInput').val('');
         });
-
-        $('#userInput').val('');
-    });
-</script>
-</html>
-
-      {% include "includes/footer.html" %}
-
-  </div>
-
+    </script>
+    
+    {% include "includes/footer.html" %}
+</div>
 
 {% endblock content %}
 
