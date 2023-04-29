@@ -22,6 +22,6 @@ def chat(request):
             )
             print(response)
             return render((request,'billing.html',{})
-        except Exception as e:
-            logger.error(f"Error during chat: {e}")
-            return JsonResponse({'error': 'An error occurred'}, status=500)
+     except Exception as e:
+        logger.error(f"Error during chat: {e}")
+        return JsonResponse({'error': 'An error occurred'}, status=500)
