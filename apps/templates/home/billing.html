@@ -1,10 +1,25 @@
-<form method="post">
+<form id="chat-form" method="post">
     {% csrf_token %}
     <input name="user_input" type="text" class="form-control">
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
-{% if response %}
-    <div>
-        {{ response|safe}}
-    </div>
-{% endif %}
+<div id="response"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#chat-form").on("submit", function(event){
+        event.preventDefault();
+
+        $.ajax({
+            url: "/api/chat/",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response){
+                $("#response").html(response);
+            }
+        });
+    });
+});
+</script>
+
