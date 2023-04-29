@@ -14,8 +14,8 @@ def chat(request):
             openai.api_key = api_key
             user_input = request.POST.get('user_input')
             response = openai.Completion.create(
-                engine: 'text-davinci-003',
-                prompt: user_input,
+                engine= 'text-davinci-003',
+                prompt= user_input,
                 max_tokens=256,
                 temperature = 0.5
             
