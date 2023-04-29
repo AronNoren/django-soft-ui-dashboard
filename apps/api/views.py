@@ -93,27 +93,27 @@ class BookView(APIView):
         }, status=HTTPStatus.OK)
 
 
+from django.http import JsonResponse
+import openai
+import os
+# Set your OpenAI API key
+openai.api_key = os.getenv('GPT4Key')
 
-class ChatView(APIView):
-    
-    def post(self, request):
-        try:
-            message = request.POST.get('message')
-            response = requests.post(
-                'https://api.openai.com/v1/engines/davinci-codex/completions',
-                headers={
-                    'Authorization': 'Bearer ' + os.getenv('GPT4Key'),
-                    'Content-Type': 'application/json'
-                },
-                json={
-                    'prompt': message,
-                    'max_tokens': 60,
-                    'temperature': 0.5,
-                }
-            )
-            response.raise_for_status()
-            data = response.json()
-            return JsonResponse({'reply': data['choices'][0]['text'].strip()})
-        except Exception as e:
-            logger.error(f"Error during chat: {e}")
-            return Response({'error': 'An error occurred'}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+def chat(request):
+    user_message = request.GET.get('message', None)
+
+    if user_message:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": user_message}
+            ]
+        )
+
+        ai_message = response['choices'][0]['message']['content']
+
+        return JsonResponse({'message': ai_message})
+
+    else:
+        return JsonResponse({'error': 'No message provided'})
