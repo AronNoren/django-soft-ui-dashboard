@@ -25,6 +25,6 @@ def chat(request):
         #response_text = response_json["choices"][0]["text"]
 
         #return render(request, 'billing.html', {'response': response_text})
-        return " Hi Aron"
+        return render(request, 'billing.html', {'response': " Hi Aron"})
     #else:
         #return render(request, 'billing.html')
