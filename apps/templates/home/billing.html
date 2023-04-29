@@ -17,30 +17,47 @@
 
     <script>
         const messagesContainer = document.querySelector('#messages');
-        const messageForm = document.querySelector('#message-form');
+const messageForm = document.querySelector('#message-form');
 
-        messageForm.addEventListener('submit', event => {
-            event.preventDefault();
+messageForm.addEventListener('submit', event => {
+    event.preventDefault();
 
-            const messageInput = messageForm.querySelector('[name="message"]');
-            const messageText = messageInput.value;
+    const messageInput = messageForm.querySelector('[name="message"]');
+    const messageText = messageInput.value;
 
-            // Send message to server
-            fetch(`/chat?message=${messageText}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Display AI response
-                    const aiMessage = document.createElement('div');
-                    aiMessage.classList.add('message', 'ai');
-                    aiMessage.textContent = data.message;
+    // Send message to server
+    fetch(`/chat?message=${messageText}`)
+        .then(response => {
+            // Check if response is valid JSON
+            if (!response.ok || !response.headers.get('content-type').includes('application/json')) {
+                throw new Error('Unexpected response from server');
+            }
 
-                    messagesContainer.appendChild(aiMessage);
-                })
-                .catch(error => console.error(error));
+            return response.json();
+        })
+        .then(data => {
+            // Display AI response
+            const aiMessage = document.createElement('div');
+            aiMessage.classList.add('message', 'ai');
+            aiMessage.textContent = data.message;
 
-            // Clear input field
-            messageInput.value = '';
+            messagesContainer.appendChild(aiMessage);
+        })
+        .catch(error => {
+            console.error(error);
+
+            // Display error message
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('message', 'error');
+            errorMessage.textContent = 'An error occurred. Please try again later.';
+
+            messagesContainer.appendChild(errorMessage);
         });
+
+    // Clear input field
+    messageInput.value = '';
+});
+
     </script>
 </body>
 </html>
