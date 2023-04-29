@@ -17,7 +17,7 @@
     const apiKey = 'your_openai_api_key_here';
 
     async function getOpenAIResponse(userInput) {
-        const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+        const apiUrl = 'https://api.openai.com/v1/chat/completions';
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer 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',
@@ -27,6 +27,7 @@
             prompt: userInput,
             max_tokens: 256,
             temperature: 0.5,
+            model: "gpt-4"
         };
 
         try {
