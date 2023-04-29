@@ -1,25 +1,62 @@
-<form id="chat-form" method="post">
-    {% csrf_token %}
-    <input name="user_input" type="text" class="form-control">
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-</form>
-<div id="response"></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#chat-form").on("submit", function(event){
-        event.preventDefault();
 
-        $.ajax({
-            url: "/api/chat/",
-            type: "POST",
-            data: $(this).serialize(),
-            success: function(response){
-                $("#response").html(response);
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="chat-form" method="post">
+        {% csrf_token %}
+        <input name="user_input" type="text" class="form-control">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+    const apiKey = 'your_openai_api_key_here';
+
+    async function getOpenAIResponse(userInput) {
+        const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': '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',
+        };
+
+        const requestBody = {
+            prompt: userInput,
+            max_tokens: 256,
+            temperature: 0.5,
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(requestBody),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.choices[0].text;
+            } else {
+                throw new Error(`HTTP error: ${response.status}`);
             }
+        } catch (error) {
+            console.error('Error fetching OpenAI response:', error);
+        }
+    }
+
+    $(document).ready(function () {
+        $('#chat-form').on('submit', async function (event) {
+            event.preventDefault();
+
+            const userInput = $('input[name="user_input"]').val();
+            const responseText = await getOpenAIResponse(userInput);
+            $('#response').html(responseText);
         });
     });
-});
-</script>
+    </script>
+</body>
+</html>
 
