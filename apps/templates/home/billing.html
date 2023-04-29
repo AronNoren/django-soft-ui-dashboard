@@ -3,28 +3,30 @@
     <input id="userInput" type="text">
     <button type="submit">Send</button>
 </form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
-    $('#chatForm').on('submit', function(e) {
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        let userMessage = $('#userInput').val();
-        $('#chat').append(`<p>You: ${userMessage}</p>`);
+        let userMessage = document.getElementById('userInput').value;
+        document.getElementById('chat').innerHTML += `<p>You: ${userMessage}</p>`;
 
-        $.ajax({
-            url: '{% url "chat" %}',
+        fetch('{% url "chat" %}', {
             method: 'POST',
-            headers: {'X-CSRFToken': '{{ csrf_token }}'},
-            data: { message: userMessage },
-            success: function(data) {
-                $('#chat').append(`<p>AI: ${data.reply}</p>`);
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
             },
-            error: function(err) {
-                console.error(err);
-                $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
-            }
+            body: JSON.stringify({ message: userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('chat').innerHTML += `<p>AI: ${data.reply}</p>`;
+            document.getElementById('userInput').value = '';
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('chat').innerHTML += `<p>AI: I'm sorry, I couldn't understand that.</p>`;
         });
-
-        $('#userInput').val('');
     });
 </script>
