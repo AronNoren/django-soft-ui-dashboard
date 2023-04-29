@@ -9,7 +9,7 @@ api_key = os.getenv('GPT4Key')
 def chat(request):
     chatresponse = None
     try:
-        if api_key not None and request.method == 'POST':
+        if api_key is not None and request.method == 'POST':
             message = "Hi GPT"#request.POST.get('message')
             openai.api_key = api_key
             user_input = request.POST.get('user_input')
