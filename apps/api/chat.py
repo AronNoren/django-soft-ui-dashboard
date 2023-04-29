@@ -7,10 +7,8 @@ import json
 from django.http import HttpResponse
 
 def chat(request):
-    if request.method == 'POST':
-        return HttpResponse("Post request received.")
-    else:
-        return HttpResponse("Not a POST request.")
+    user_input = request.POST.get('user_input')
+    return HttpResponse(user_input)
 
 #def chat(request):
 #    if api_key is not None:
