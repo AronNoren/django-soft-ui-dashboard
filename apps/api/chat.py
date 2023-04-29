@@ -21,5 +21,5 @@ def chat(request):
 
         )
         print(response)
-        return render((request,'billing.html',{}))
+        return render((request,'billing.html',{response["choices"][0]["text"]}))
 
