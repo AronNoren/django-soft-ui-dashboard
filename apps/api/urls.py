@@ -6,6 +6,6 @@ from apps.api.chat import chat
 urlpatterns = [
 
 	re_path("books/((?P<pk>\d+)/)?", csrf_exempt(BookView.as_view())),
-        path("chat/", ChatView.as_view(), name="chat"),
+        path("", chat, name="chat"),
 
 ]
