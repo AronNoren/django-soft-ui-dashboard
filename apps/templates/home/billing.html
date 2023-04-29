@@ -9,81 +9,82 @@
 {% block content %}
 
   <div class="container-fluid py-4">
-    <div class="row">
-      <h2>&nbsp</h2>
+<head>
+    <title>Chat with AI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="chat">
+    </div>
 
-    </div>
-    <div class="row">
-         <div class="col-lg-1 col-md-1 mb-md-0 mb-0">
-         </div>
-         <div class="col-lg-9 col-md-6 mb-md-0 mb-4">
-      <h2>Get started</h2>
-      <h2>&nbsp</h2>
-    </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-9 col-md-6 mb-md-0 mb-4">
-        <div class="row">
-         <div class="col-lg-1 col-md-1 mb-md-0 mb-0">
-         </div>
-         <div class="col-lg-9 col-md-6 mb-md-0 mb-4">
-          <div class="card h-100">
-            <div class="card-header pb-0">
-              <h4>We're glad you're here. It's great to see you've decided to become a better investor. Here's how to use Bjorkfi.</h4>
-            </div>
-            <div class="card-body p-3">
-              <div class="timeline timeline-one-side">
-                <div class="timeline-block mb-3">
-                  <span class="timeline-step">
-                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                  </span>
-                  <div class="timeline-content">
-                    <h5 class="text-dark text-sm font-weight-bold mb-0">Sign up for a trading account with one of our recommended platforms (or any other of your choice):</h5>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://www.binance.com">Binance</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://www.coinbase.com">Coinbase</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://www.kraken.com">Kraken</a>
-                  </div>
-                </div>
-                <div class="timeline-block mb-3">
-                  <span class="timeline-step">
-                    <i class="fa fa-lock text-danger text-gradient"></i>
-                  </span>
-                  <div class="timeline-content">
-                    <h5 class="text-dark text-sm font-weight-bold mb-0">Deposit your funds in the exchange of your choosing. Remember, we are not custodians. Since we only provide you with trades, make sure you replicate the Bjorkfi portfolio every month.
-</h5>
-                  </div>
-                </div>
-                <div class="timeline-block mb-3">
-                  <span class="timeline-step">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                  <div class="timeline-content">
-                    <h5 class="text-dark text-sm font-weight-bold mb-0">Here's how you'll get updates when our portfolio's updated:  </h5>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://bjorkfi.com">Discord</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://bjorkfi.com">Telegram</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://bjorkfi.com">Mail</a>
-                  </div>
-                </div>
-                <div class="timeline-block mb-3">
-                  <span class="timeline-step">
-                    <i class="ni ni-bell-55 text-warning text-gradient"></i>
-                  </span>
-                  <div class="timeline-content">
-                    <h5 class="text-dark text-sm font-weight-bold mb-0">Each month you will be notified when the portfolio is updated. </h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <form id="chatForm">
+        <input id="userInput" type="text">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        $('#chatForm').on('submit', function(e) {
+            e.preventDefault();
+
+            let userMessage = $('#userInput').val();
+            $('#chat').append(`<p>You: ${userMessage}</p>`);
+            
+            $.ajax({
+                url: '/api/chat',
+                method: 'POST',
+                data: { message: userMessage },
+                success: function(data) {
+                    $('#chat').append(`<p>AI: ${data.reply}</p>`);
+                },
+                error: function(err) {
+                    console.error(err);
+                    $('#chat').append(`<p>AI: I'm sorry, I couldn't understand that.</p>`);
+                }
+            });
+
+            $('#userInput').val('');
+        });
+    </script>
+</body>
+</html>
 
       {% include "includes/footer.html" %}
 
-    </div>
+  </div>
 
 
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+const express = require('express');
+const axios = require('axios');
+const app = express();
+
+app.use(express.json()); 
+
+app.post('/api/chat', async (req, res) => {
+    try {
+        const { message } = req.body;
+
+        const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+            prompt: message,
+            max_tokens: 60,
+            temperature: 0.5,
+        }, {
+            headers: {
+                'Authorization': ${process.env.GPT4Key},
+                'Content-Type': 'application/json'
+            }
+        });
+
+        res.json({ reply: response.data.choices[0].text.trim() });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Something went wrong');
+    }
+});
+
+app.listen(3000, () => console.log('Server is listening on port 3000'));
+
+{% endblock javascripts %}
