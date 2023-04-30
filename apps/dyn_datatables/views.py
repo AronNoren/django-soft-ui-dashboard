@@ -260,5 +260,5 @@ def chat(request):
                 return JsonResponse({'error': 'No message provided'}, status=400)
         else:
             return JsonResponse({'message': 'This is an error message'})
-    catch:
+    except:
         return JsonResponse({'message': 'Sorry there was an internal error'})
