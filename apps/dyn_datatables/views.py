@@ -239,10 +239,12 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def chat(request):
     try:
+        print(request)
         if request.method == 'POST':
             data = json.loads(request.body)
+            print(data)
             user_message = data.get('message', None)
-
+            print(user_message)
             if user_message:
                 response = openai.ChatCompletion.create(
                     model="gpt-4",
@@ -251,9 +253,10 @@ def chat(request):
                         {"role": "user", "content": user_message}
                     ]
                 )
+                
 
                 ai_message = response['choices'][0]['message']['content']
-
+                print(ai_message)
                 return JsonResponse({'message': ai_message})
 
             else:
