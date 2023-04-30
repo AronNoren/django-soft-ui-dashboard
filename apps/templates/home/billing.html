@@ -26,40 +26,25 @@ messageForm.addEventListener('submit', event => {
     const messageText = messageInput.value;
 
     // Send message to server
-    fetch(`api/chat?message=${messageText}`)
-        .then(response => {
-            response.text().then(text => console.log(text));
-            console.log(response)
-            // Check if response is valid JSON
-            if (!response.ok || !response.headers.get('content-type').includes('application/json')) {
-                throw new Error('Unexpected response from server');
-            }
-
-            return response.json();
-        })
-        .then(data => {
-            // Display AI response
-            const aiMessage = document.createElement('div');
-            aiMessage.classList.add('message', 'ai');
-            aiMessage.textContent = data.message;
-
-            messagesContainer.appendChild(aiMessage);
-        })
-        .catch(error => {
-            
-            console.error(error);
-
-            // Display error message
-            const errorMessage = document.createElement('div');
-            errorMessage.classList.add('message', 'error');
-            errorMessage.textContent = 'An error occurred. Please try again later.';
-
-            messagesContainer.appendChild(errorMessage);
-        });
-
-    // Clear input field
-    messageInput.value = '';
+fetch('/api/chat/', {
+    method: 'POST',
+    body: JSON.stringify({
+        message: messageText,
+    }),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then((response) => response.json())
+.then((res) => {
+    // Handle the response from the server
+    console.log(res);
+})
+.catch((err) => {
+    console.log(err);
 });
+
+
 
     </script>
 </body>
