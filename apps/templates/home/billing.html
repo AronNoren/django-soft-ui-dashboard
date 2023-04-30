@@ -45,7 +45,7 @@
         const messageText = messageInput.value;
 
         // Send message to server
-        fetch('/api/chat/', {
+        fetch('/chat/', {
             method: 'POST',
             body: JSON.stringify({
                 message: messageText,
