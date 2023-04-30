@@ -98,7 +98,8 @@ import openai
 import os
 # Set your OpenAI API key
 openai.api_key = os.getenv('GPT4Key')
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def chat(request):
     if request.method == 'POST':
         data = json.loads(request.body)
