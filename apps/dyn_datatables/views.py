@@ -264,4 +264,4 @@ def chat(request):
         else:
             return JsonResponse({'message': 'This is an error message'})
     except Exception as ve:
-        return JsonResponse('detail': str(ve))
+        return JsonResponse({'detail': str(ve)})
