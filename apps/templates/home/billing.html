@@ -28,6 +28,7 @@ messageForm.addEventListener('submit', event => {
     // Send message to server
     fetch(`/chat?message=${messageText}`)
         .then(response => {
+            response.text().then(text => console.log(text));
             console.log(response)
             // Check if response is valid JSON
             if (!response.ok || !response.headers.get('content-type').includes('application/json')) {
