@@ -227,3 +227,35 @@ def get_random_string(length):
     # choose from all lowercase letter
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(length))
+
+
+
+from django.http import JsonResponse
+import openai
+import os
+# Set your OpenAI API key
+openai.api_key = os.getenv('GPT4Key')
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def chat(request):
+    if request.method == 'POST' and 1 == 0:
+        data = json.loads(request.body)
+        user_message = data.get('message', None)
+
+        if user_message:
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": user_message}
+                ]
+            )
+
+            ai_message = response['choices'][0]['message']['content']
+
+            return JsonResponse({'message': ai_message})
+
+        else:
+            return JsonResponse({'error': 'No message provided'}, status=400)
+    else:
+        return JsonResponse({'message': 'This is an error message'})
