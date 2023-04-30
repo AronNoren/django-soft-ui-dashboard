@@ -247,9 +247,9 @@ def chat(request):
             print(user_message)
             if user_message:
                 response = openai.ChatCompletion.create(
-                    model="gpt-4",
+                    model = "gpt-3.5-turbo-0301",#model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "system", "content": "You are a helpful but sassy assistant and you like to use emojis."},
                         {"role": "user", "content": user_message}
                     ]
                 )
