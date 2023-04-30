@@ -16,36 +16,34 @@
     </div>
 
     <script>
-        const messagesContainer = document.querySelector('#messages');
-const messageForm = document.querySelector('#message-form');
+    const messagesContainer = document.querySelector('#messages');
+    const messageForm = document.querySelector('#message-form');
 
-messageForm.addEventListener('submit', event => {
-    event.preventDefault();
+    messageForm.addEventListener('submit', event => {
+        event.preventDefault();
 
-    const messageInput = messageForm.querySelector('[name="message"]');
-    const messageText = messageInput.value;
+        const messageInput = messageForm.querySelector('[name="message"]');
+        const messageText = messageInput.value;
 
-    // Send message to server
-fetch('/api/chat/', {
-    method: 'POST',
-    body: JSON.stringify({
-        message: messageText,
-    }),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-.then((response) => response.json())
-.then((res) => {
-    // Handle the response from the server
-    console.log(res);
-})
-.catch((err) => {
-    console.log(err);
-});
-
-
-
+        // Send message to server
+        fetch('/api/chat/', {
+            method: 'POST',
+            body: JSON.stringify({
+                message: messageText,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((res) => {
+            // Handle the response from the server
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    });
     </script>
 </body>
 </html>
