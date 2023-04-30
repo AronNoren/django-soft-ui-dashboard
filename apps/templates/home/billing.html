@@ -10,6 +10,7 @@
         <div id="messages"></div>
 
         <form id="message-form">
+            {% csrf_token %}
             <input type="text" name="message" placeholder="Type your message here...">
             <button type="submit">Send</button>
         </form>
