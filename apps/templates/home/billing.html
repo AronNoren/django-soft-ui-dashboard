@@ -28,6 +28,7 @@ messageForm.addEventListener('submit', event => {
     // Send message to server
     fetch(`/chat?message=${messageText}`)
         .then(response => {
+            console.log(response)
             // Check if response is valid JSON
             if (!response.ok || !response.headers.get('content-type').includes('application/json')) {
                 throw new Error('Unexpected response from server');
@@ -44,7 +45,7 @@ messageForm.addEventListener('submit', event => {
             messagesContainer.appendChild(aiMessage);
         })
         .catch(error => {
-            console.log(response);
+            
             console.error(error);
 
             // Display error message
