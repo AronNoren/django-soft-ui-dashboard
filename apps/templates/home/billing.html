@@ -44,6 +44,7 @@ messageForm.addEventListener('submit', event => {
             messagesContainer.appendChild(aiMessage);
         })
         .catch(error => {
+            console.log(response);
             console.error(error);
 
             // Display error message
