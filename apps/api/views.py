@@ -100,20 +100,24 @@ import os
 openai.api_key = os.getenv('GPT4Key')
 
 def chat(request):
-    user_message = request.GET.get('message', None)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_message = data.get('message', None)
 
-    if user_message:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": user_message}
-            ]
-        )
+        if user_message:
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": user_message}
+                ]
+            )
 
-        ai_message = response['choices'][0]['message']['content']
+            ai_message = response['choices'][0]['message']['content']
 
-        return JsonResponse({'message': ai_message})
+            return JsonResponse({'message': ai_message})
 
+        else:
+            return JsonResponse({'error': 'No message provided'}, status=400)
     else:
-        return JsonResponse({'error': 'No message provided'})
+        return JsonResponse({'error': 'Invalid request'}, status=400)
