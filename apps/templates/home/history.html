@@ -51,6 +51,36 @@
 
 {% block content %}
 <!-- first -->
+<div id = "content10" class="stylecard" onclick="toggleCard(10)">
+    <div class="card-header">
+      <h4>April 2023, <span id="Return10" </span></h4>
+    </div>
+    <div id = "card-content-10" class="card-content hidden">
+      <p>Detailed returns</p>
+      <div id="table-10" class="card">
+        <table class="table align-items-center mb-0 horizontal-table">
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+             <div class="card-header pb-0">
+              <h6>Sales overview</h6>
+             </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-10" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div id = "content0" class="stylecard" onclick="toggleCard(0)">
     <div class="card-header">
       <h4>Mar 2023, <span id="Return0" </span></h4>
@@ -364,20 +394,21 @@ const symbols0 = [
     'ENJUSDT',
   ];
     const symbols10 = [
-    'APTUSDT',
-    'FTMUSDT',
-    'MANAUSDT',
-    'LDOUSDT',
+    'NEOUSDT',
     'IMXUSDT',
-    'SOLUSDT',
+    'XLMUSDT',
+    'BTCUSDT',
     'LRCUSDT',
-    'CRVUSDT',
-    'AVAXUSDT',
-    'ENJUSDT',
+    'GRTUSDT',
+    'FTMUSDT',
+    'ETHUSDT',
+    'ADAUSDT',
+    'EOSUSDT',
   ];// Add the symbols of the coins you want to include
-const allSymbols = [symbols0,symbols1, symbols2, symbols3, symbols4, symbols5];
-const allStartDates = ['2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01','2022-10-01'];
-const allEndDates = ['2023-04-01','2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01'];
+const mylist = [10,0,1,2,3,4,5]
+const allSymbols = [symbols10,symbols0,symbols1, symbols2, symbols3, symbols4, symbols5];
+const allStartDates = ['2023-04-01','2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01','2022-10-01'];
+const allEndDates = ['2023-05-01','2023-04-01','2023-03-01','2023-02-01','2023-01-01','2022-12-01','2022-11-01'];
   function toggleCard(cardId) {
     var cardBody = document.getElementById('card-content-' + cardId);
     cardBody.classList.toggle('hidden');
@@ -475,7 +506,7 @@ function generateSymbols(baseSymbols, index) {
   return baseSymbols.map(symbol => `${symbol}${index}USDT`);
 }
 async function main() {
-  for (let i = 0; i <= allSymbols.length; i++) {
+  for (let i = 0; i < mylist.length; i++)  {
     const symbols = allSymbols[i];
 
     const startDate = new Date(allStartDates[i]);
@@ -483,7 +514,7 @@ async function main() {
 
     const coinData = await fetchAllCoinData(symbols, startDate, endDate);
     const monthlyReturns = await calculateMonthlyReturns(coinData);
-    updateTable(symbols, monthlyReturns, i);
+    updateTable(symbols, monthlyReturns, mylist[i]);
   }
 }
 
