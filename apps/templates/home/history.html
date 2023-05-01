@@ -475,7 +475,14 @@ async function calculateAverageCumulativeReturns(coinData) {
 
   const cumulativeReturns = coinReturns.map(returns => {
     const firstPrice = returns[0];
-    return returns.map(price => ((price - firstPrice) / firstPrice) * 100);
+    let hasDropped20Percent = false;
+    return returns.map(price => {
+      let returnPercentage = ((price - firstPrice) / firstPrice) * 100;
+      if (returnPercentage <= -20) {
+        hasDropped20Percent = true;
+      }
+      return hasDropped20Percent ? -20 : returnPercentage;
+    });
   });
 
   const averageCumulativeReturns = [];
@@ -490,6 +497,7 @@ async function calculateAverageCumulativeReturns(coinData) {
 
   return averageCumulativeReturns;
 }
+
 
 async function fetchAllCoinData(symbols, start, end) {
   const coinData = await Promise.all(symbols.map(symbol => fetchCoinData(symbol, start, end)));
@@ -519,13 +527,18 @@ async function calculateMonthlyReturns(coinData) {
 
   for (const returns of coinReturns) {
     const firstPrice = returns[0];
-    const lastPrice = returns[returns.length - 1];
+    let lastPrice = returns[returns.length - 1];
+    let hasDropped20Percent = returns.some(price => ((price - firstPrice) / firstPrice) * 100 <= -20);
+    if (hasDropped20Percent) {
+      lastPrice = firstPrice * 0.8;  // If it drops more than 20%, calculate return as if it stopped at -20%
+    }
     const returnPercentage = ((lastPrice - firstPrice) / firstPrice) * 100;
     monthlyReturns.push(returnPercentage);
   }
 
   return monthlyReturns;
 }
+
 async function updateTable(symbols, monthlyReturns, cardId) {
   const table = document.querySelector(`#table-${cardId} .horizontal-table tbody`);
    
