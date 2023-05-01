@@ -89,8 +89,8 @@
 
 
 
-    const messagesContainer = document.querySelector('#messages');
-    const messageForm = document.querySelector('#message-form');
+//    const messagesContainer = document.querySelector('#messages');
+//    const messageForm = document.querySelector('#message-form');
 
 //    messageForm.addEventListener('submit', event => {
 //        event.preventDefault();
@@ -124,7 +124,6 @@
 //    });
 
 
-
 const chatContainer = document.createElement('div');
 chatContainer.classList.add('chat-container');
 document.body.appendChild(chatContainer);
@@ -138,7 +137,7 @@ chatToggle.addEventListener('click', () => {
 document.body.appendChild(chatToggle);
 
 const messagesContainer = document.createElement('div');
-messagesContainer.id = 'messages';
+messagesContainer.classList.add('card', 'chat-box');
 chatContainer.appendChild(messagesContainer);
 
 const messageForm = document.querySelector('#message-form');
@@ -166,7 +165,7 @@ messageForm.addEventListener('submit', event => {
         console.log(res);
         const aiMessage = res.message;
         const messageCard = document.createElement('div');
-        messageCard.classList.add('card', 'ai-message');
+        messageCard.classList.add('card', 'bot-message');
         const messageCardBody = document.createElement('div');
         messageCardBody.classList.add('card-body');
         messageCardBody.textContent = aiMessage;
