@@ -470,6 +470,26 @@ async function calculateAveragePercentageReturns(coinData) {
 //    console.error(`Error fetching data for ${symbol}:`, error);
 //  }
 //}
+async function calculateAverageCumulativeReturns(coinData) {
+  const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
+
+  const cumulativeReturns = coinReturns.map(returns => {
+    const firstPrice = returns[0];
+    return returns.map(price => ((price - firstPrice) / firstPrice) * 100);
+  });
+
+  const averageCumulativeReturns = [];
+
+  const days = cumulativeReturns[0].length;
+
+  for (let i = 0; i < days; i++) {
+    const sum = cumulativeReturns.reduce((acc, returns) => acc + returns[i], 0);
+    const average = sum / cumulativeReturns.length;
+    averageCumulativeReturns.push(average);
+  }
+
+  return averageCumulativeReturns;
+}
 
 async function fetchAllCoinData(symbols, start, end) {
   const coinData = await Promise.all(symbols.map(symbol => fetchCoinData(symbol, start, end)));
@@ -589,7 +609,8 @@ main();
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
     console.log(averageReturns)
-    //const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
+    const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
+    const averageReturnsCum = await calculateAverageCumulativeReturns(coinData);
     //document.getElementById(`Return${mylist[i]}`).innerHTML = ((averageReturnsrel[averageReturnsrel.length - 1]-1)*100).toFixed(2) + '%';
     const averagePercentageReturn = await calculateAveragePercentageReturns(coinData);
     document.getElementById(`Return${mylist[i]}`).innerHTML = averagePercentageReturn.toFixed(2) + '%';
@@ -608,7 +629,7 @@ main();
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: averagePercentageReturn, // Replace price_rel with averageReturns
+            data: averageReturnsCum, // Replace price_rel with averageReturns
             maxBarThickness: 6,
           },
         ],
