@@ -249,7 +249,7 @@ def chat(request):
                 response = openai.ChatCompletion.create(
                     model = "gpt-3.5-turbo-0301",#model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are a helpful but sassy assistant and you like to use emojis."},
+                        {"role": "system", "content": "You are sassy custoemr support for a crypto website called bjorkfi and you like to use emojis. For any question regarding strategy you can refer to our website bjorkfi.com"},
                         {"role": "user", "content": user_message}
                     ]
                 )
