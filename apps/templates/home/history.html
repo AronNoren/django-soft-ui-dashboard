@@ -430,7 +430,6 @@ async function fetchCoinData(symbol, start, end) {
     console.error(`Error fetching data for ${symbol}:`, error);
   }
 }
-
 async function calculateAveragePercentageReturns(coinData) {
   const coinReturns = coinData.map(data => data.map(entry => parseFloat(entry[4])));
 
@@ -439,7 +438,13 @@ async function calculateAveragePercentageReturns(coinData) {
   for (const returns of coinReturns) {
     const firstPrice = returns[0];
     const lastPrice = returns[returns.length - 1];
-    const returnPercentage = ((lastPrice - firstPrice) / firstPrice) * 100;
+    let returnPercentage = ((lastPrice - firstPrice) / firstPrice) * 100;
+
+    // Cap the loss at -20%
+    if (returnPercentage < -20) {
+      returnPercentage = -20;
+    }
+
     percentageReturns.push(returnPercentage);
   }
 
