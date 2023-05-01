@@ -43,14 +43,18 @@
         .user-message {
             text-align: right;
         }
+        
+        .hidden {
+          display: none;
+        }
     </style>
 </head>
 <body>
 <!-- Chat button -->
-<div id="chat-button">Chat with customer support</div>
+<div id="chat-button" onclick="togglechat()" >Chat with customer support</div>
 
 <!-- Chat container -->
-<div id="chat-container">
+<div id="chat-container" class="card-content hidden">
     <!-- Chat box -->
     <div id="chat-box" class="card">
         <div class="card-header">
@@ -122,7 +126,10 @@
 //            console.log(err);
 //        });
 //    });
-
+function toggleChat() {
+    var cardBody = document.getElementById('chat-container');
+    cardBody.classList.toggle('hidden');
+  }
 
 const chatContainer = document.createElement('div');
 chatContainer.classList.add('chat-container');
