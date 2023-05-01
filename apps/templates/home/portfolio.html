@@ -960,9 +960,9 @@ renderChart();
                       console.log(response.data);
                       console.log(response.data['value']);
                       //document.getElementById(`r${index + 1}current`).innerHTML = (100*((response.data.price/displayList_buy[index])-1)).toFixed(2) + '%';
-                      document.getElementById(`r${index + 1}current`).innerHTML = Math.max(-10, (100*((response.data.price/displayList_buy[index])-1))).toFixed(2) + '%';
+                      document.getElementById(`r${index + 1}current`).innerHTML = Math.max(-20, (100*((response.data.price/displayList_buy[index])-1))).toFixed(2) + '%';
                       //MTDreturns = MTDreturns + 100*((response.data.price/displayList_buy[index])-1);
-                      MTDreturns = MTDreturns +  Math.max(-10, (100*((response.data.price/displayList_buy[index])-1)))
+                      MTDreturns = MTDreturns +  Math.max(-20, (100*((response.data.price/displayList_buy[index])-1)))
                       const progressBar = document.getElementById(`progress-bar${index + 1}`);
                       progressBar.setAttribute('aria-valuenow', (100*((response.data.price/displayList_buy[index])-1)).toFixed(0) + '%');
                     });
