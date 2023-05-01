@@ -59,6 +59,10 @@
         .then((res) => {
             // Handle the response from the server
             console.log(res);
+            const aiMessage = res.message;
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = aiMessage;
+            messagesContainer.appendChild(messageDiv);
         })
         .catch((err) => {
             console.log(err);
