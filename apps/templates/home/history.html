@@ -531,9 +531,11 @@ main();
   
     const coinData = await fetchAllCoinData(allSymbols[i], startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
+    console.log(mylist[i])
     console.log(startDate)
     console.log(endDate)
     console.log(allSymbols[i])
+    console.log(coinData)
     // Get the date data from the first coin
     const dateData = coinData[0].map(entry => entry[0]);
 
@@ -564,6 +566,7 @@ main();
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
+    console.log(averageReturns)
     const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
     document.getElementById(`Return${mylist[i]}`).innerHTML = ((averageReturnsrel[averageReturnsrel.length - 1]-1)*100).toFixed(2) + '%';
     new Chart(ctx, {
