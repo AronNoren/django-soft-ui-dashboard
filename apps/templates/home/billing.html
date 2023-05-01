@@ -14,6 +14,9 @@
             right: 0;
             z-index: 9999;
         }
+        .hidden {
+          display: none;
+        }
 
         #chat-button {
             position: absolute;
@@ -44,9 +47,7 @@
             text-align: right;
         }
         
-        .hidden {
-          display: none;
-        }
+
     </style>
 </head>
 <body>
@@ -126,26 +127,34 @@
 //            console.log(err);
 //        });
 //    });
+document.querySelector('.btn-close').addEventListener('click', () => {
+    document.getElementById('chat-container').classList.add('hidden');
+});
 function toggleChat() {
     var cardBody = document.getElementById('chat-container');
     cardBody.classList.toggle('hidden');
-  }
+    if (!cardBody.classList.contains('hidden')) {
+        document.getElementById('chat-box').style.display = 'block';
+    } else {
+        document.getElementById('chat-box').style.display = 'none';
+    }
+}
 
-const chatContainer = document.createElement('div');
-chatContainer.classList.add('chat-container');
-document.body.appendChild(chatContainer);
+//const chatContainer = document.createElement('div');
+//chatContainer.classList.add('chat-container');
+//document.body.appendChild(chatContainer);
 
-const chatToggle = document.createElement('button');
-chatToggle.classList.add('chat-toggle');
-chatToggle.textContent = 'Chat';
-chatToggle.addEventListener('click', () => {
-    chatContainer.classList.toggle('active');
-});
-document.body.appendChild(chatToggle);
+//const chatToggle = document.createElement('button');
+//chatToggle.classList.add('chat-toggle');
+//chatToggle.textContent = 'Chat';
+//chatToggle.addEventListener('click', () => {
+//    chatContainer.classList.toggle('active');
+//});
+//document.body.appendChild(chatToggle);
 
-const messagesContainer = document.createElement('div');
-messagesContainer.classList.add('card', 'chat-box');
-chatContainer.appendChild(messagesContainer);
+//const messagesContainer = document.createElement('div');
+//messagesContainer.classList.add('card', 'chat-box');
+//chatContainer.appendChild(messagesContainer);
 
 const messageForm = document.querySelector('#message-form');
 
