@@ -548,7 +548,7 @@ main();
 
     // Your existing code to create the chart goes here, but replace `price_rel` with `averageReturns`
     // ...
-    var ctx = document.getElementById(`chart-${i}`).getContext("2d");
+    var ctx = document.getElementById(`chart-${mylist[i]}`).getContext("2d");
     
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -563,7 +563,7 @@ main();
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors   
     averageReturns
     const averageReturnsrel = averageReturns.map(price => price / averageReturns[0]);
-    document.getElementById(`Return${i}`).innerHTML = ((averageReturnsrel[averageReturnsrel.length - 1]-1)*100).toFixed(2) + '%';
+    document.getElementById(`Return${mylist[i]}`).innerHTML = ((averageReturnsrel[averageReturnsrel.length - 1]-1)*100).toFixed(2) + '%';
     new Chart(ctx, {
       type: 'line',
       data: {
