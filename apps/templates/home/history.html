@@ -528,10 +528,12 @@ main();
     
     const startDate = new Date(allStartDates[i]);
     const endDate = new Date(allEndDates[i]);
-
+  
     const coinData = await fetchAllCoinData(allSymbols[i], startDate, endDate);
     const averageReturns = await calculateAverageReturns(coinData);
-    
+    console.log(startDate)
+    console.log(endDate)
+    console.log(allSymbols[i])
     // Get the date data from the first coin
     const dateData = coinData[0].map(entry => entry[0]);
 
