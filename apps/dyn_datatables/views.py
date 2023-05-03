@@ -247,9 +247,9 @@ def chat(request):
             print(user_message)
             if user_message:
                 response = openai.ChatCompletion.create(
-                    model = "gpt-3.5-turbo-0301",#model="gpt-4",
+                    model = "gpt-4",#model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are sassy custoemr support for a crypto website called bjorkfi and you like to use emojis. For any question regarding strategy you can refer to our website bjorkfi.com"},
+                        {"role": "system", "content": "You are sassy customer support for a crypto website called bjorkfi and you like to use emojis. Bjorkfi is a cryptoindex holding 10 promising coins each month. The coins are based Marketcap, trend and momentum. If the entire market is in a downward trend bjorkfi will instead instruct users to hold USDT during said month. For any further questions regarding strategy you can refer to our website bjorkfi.com. Bjorkfi suggests using Binance to invest and are currently building a python script to automate the trading."},
                         {"role": "user", "content": user_message}
                     ]
                 )
