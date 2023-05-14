@@ -57,4 +57,228 @@
 
     </div>
     </div>
-  </div>
+  </div> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vpxykv0sC/8icbA+0/1JkQZC/Uod27XlN1l+ovq3dDtvN3OioycMzPpFdFccxSz"
+          crossorigin="anonymous">
+    <!-- Include custom CSS -->
+    <style>
+        #chat-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 9999;
+        }
+        .hidden {
+          display: none;
+        }
+
+        #chat-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border-top-left-radius: 8px;
+            cursor: pointer;
+        }
+
+        #chat-box {
+            display: none;
+            height: 300px;
+            overflow-y: scroll;
+            max-width: 300px;
+
+        }
+
+        .card-body {
+            font-size: 1rem;
+        }
+
+        .bot-message {
+            text-align: left;
+            background-color: #f8f9fa; /* Light gray */
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6; /* Light gray border */
+        }
+
+        .user-message {
+            text-align: right;
+            background-color: #007bff; /* Blue */
+            color: #fff; /* White text */
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border: 1px solid #007bff; /* Blue border */
+        }
+        
+
+    </style>
+</head>
+<body>
+<!-- Chat button -->
+<div id="chat-button" onclick="toggleChat()" >Chat with customer support</div>
+
+<!-- Chat container -->
+<div id="chat-container" class="card-content hidden">
+    <!-- Chat box -->
+    <div id="chat-box" class="card">
+        <div class="card-header">
+            Chat with Lucy
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            <div id="messages"></div>
+            <form id="message-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="message" class="form-control" placeholder="Hi how can i help you?">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+
+//    const messagesContainer = document.querySelector('#messages');
+//    const messageForm = document.querySelector('#message-form');
+
+//    messageForm.addEventListener('submit', event => {
+//        event.preventDefault();
+
+//        const messageInput = messageForm.querySelector('[name="message"]');
+//        const messageText = messageInput.value;
+
+        // Send message to server
+//        fetch('/chat1/', {
+//            method: 'POST',
+//            body: JSON.stringify({
+//                message: messageText,
+//            }),
+//            headers: {
+//                'Content-Type': 'application/json',
+//                'X-CSRFToken': getCookie('csrftoken')
+//            }
+//        })
+//        .then((response) => response.json())
+//        .then((res) => {
+            // Handle the response from the server
+//            console.log(res);
+//            const aiMessage = res.message;
+//            const messageDiv = document.createElement('div');
+//            messageDiv.textContent = aiMessage;
+//            messagesContainer.appendChild(messageDiv);
+//        })
+//        .catch((err) => {
+//            console.log(err);
+//        });
+//    });
+document.querySelector('.btn-close').addEventListener('click', () => {
+    document.getElementById('chat-container').classList.add('hidden');
+});
+function toggleChat() {
+    var cardBody = document.getElementById('chat-container');
+    cardBody.classList.toggle('hidden');
+    if (!cardBody.classList.contains('hidden')) {
+        document.getElementById('chat-box').style.display = 'block';
+    } else {
+        document.getElementById('chat-box').style.display = 'none';
+    }
+}
+
+//const chatContainer = document.createElement('div');
+//chatContainer.classList.add('chat-container');
+//document.body.appendChild(chatContainer);
+
+//const chatToggle = document.createElement('button');
+//chatToggle.classList.add('chat-toggle');
+//chatToggle.textContent = 'Chat';
+//chatToggle.addEventListener('click', () => {
+//    chatContainer.classList.toggle('active');
+//});
+//document.body.appendChild(chatToggle);
+
+//const messagesContainer = document.createElement('div');
+//messagesContainer.classList.add('card', 'chat-box');
+//chatContainer.appendChild(messagesContainer);
+
+const messageForm = document.querySelector('#message-form');
+const messagesContainer = document.querySelector('#messages');
+messageForm.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const messageInput = messageForm.querySelector('[name="message"]');
+    const messageText = messageInput.value;
+
+    // Create a new div for the user's message
+    const userMessageCard = document.createElement('div');
+    userMessageCard.classList.add('card', 'user-message');
+    const userMessageCardBody = document.createElement('div');
+    userMessageCardBody.classList.add('card-body');
+    userMessageCardBody.textContent = messageText;
+    userMessageCard.appendChild(userMessageCardBody);
+    messagesContainer.appendChild(userMessageCard);
+
+    // Send message to server
+    fetch('/chat1/', {
+        method: 'POST',
+        body: JSON.stringify({
+            message: messageText,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then((response) => response.json())
+    .then((res) => {
+        // Handle the response from the server
+        console.log(res);
+        const aiMessage = res.message;
+        const messageCard = document.createElement('div');
+        messageCard.classList.add('card', 'bot-message');
+        const messageCardBody = document.createElement('div');
+        messageCardBody.classList.add('card-body');
+        messageCardBody.textContent = aiMessage;
+        messageCard.appendChild(messageCardBody);
+        messagesContainer.appendChild(messageCard);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+    // Clear input field
+    messageInput.value = '';
+});
+
+
+
+
+    </script>
+</body>
+</html>
