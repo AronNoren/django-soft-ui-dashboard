@@ -286,7 +286,7 @@ from langchain.prompts.chat import (
 )
 import textwrap
 
-embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
+
 #embeddings = OpenAIEmbeddings(openai_api_key = openai.api_key)
 
 @csrf_exempt
@@ -346,6 +346,7 @@ def get_response_from_query(db, query, k=4):
     return response, docs
 @csrf_exempt
 def chat_insurance(request):
+    embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
     db = create_db_from_youtube_video_url()
 
     #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
