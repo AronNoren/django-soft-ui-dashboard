@@ -279,6 +279,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from dotenv import find_dotenv, load_dotenv
 import os
+from django.conf import settings
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
@@ -291,7 +292,7 @@ import textwrap
 
 @csrf_exempt
 def create_db_from_youtube_video_url():
-    loader = UnstructuredFileLoader("./website_data.txt")
+    loader = UnstructuredFileLoader(os.path.join(settings.BASE_DIR, 'apps/dyn_datatables/website_data.txt'))
     text = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=6000, chunk_overlap=500)
