@@ -291,7 +291,7 @@ import textwrap
 #embeddings = OpenAIEmbeddings(openai_api_key = openai.api_key)
 
 @csrf_exempt
-def create_db_from_youtube_video_url():
+def create_db_from_youtube_video_url(embeddings):
     loader = UnstructuredFileLoader(os.path.join(settings.BASE_DIR, 'apps/dyn_datatables/website_data.txt'))
     text = loader.load()
 
@@ -348,7 +348,7 @@ def get_response_from_query(db, query, k=4):
 @csrf_exempt
 def chat_insurance(request):
     embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
-    db = create_db_from_youtube_video_url()
+    db = create_db_from_youtube_video_url(embeddings)
 
     #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
     response, docs = get_response_from_query(db, request)
