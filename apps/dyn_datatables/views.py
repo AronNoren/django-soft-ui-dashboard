@@ -278,6 +278,7 @@ from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from dotenv import find_dotenv, load_dotenv
+import os
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
@@ -285,8 +286,8 @@ from langchain.prompts.chat import (
 )
 import textwrap
 
-
-embeddings = OpenAIEmbeddings(openai_api_key = openai.api_key)
+embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
+#embeddings = OpenAIEmbeddings(openai_api_key = openai.api_key)
 
 @csrf_exempt
 def create_db_from_youtube_video_url():
@@ -309,7 +310,7 @@ def get_response_from_query(db, query, k=4):
     docs = db.similarity_search(query, k=k)
     docs_page_content = " ".join([d.page_content for d in docs])
 
-    chat = ChatOpenAI(model_name="gpt-4", temperature=0.2,openai_api_key = openai.api_key)
+    chat = ChatOpenAI(model_name="gpt-4", temperature=0.2,openai_api_key=os.getenv('OPENAI_API_KEY'))
 
     # Template to use for the system message prompt
     template = """
