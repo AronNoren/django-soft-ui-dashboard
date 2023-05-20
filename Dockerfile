@@ -8,7 +8,8 @@ COPY requirements.txt .
 
 # install python dependencies
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip install --no-cache-dir -r requirements.txt
+RUN while read requirement; do pip install --no-cache-dir $requirement; done < requirements.txt
 
 COPY env.sample .env
 
