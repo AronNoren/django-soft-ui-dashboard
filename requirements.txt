@@ -22,4 +22,4 @@ pdf2image
 tabulate
 chromadb
 tiktoken
-faiss-cpu
+faiss
