@@ -351,6 +351,6 @@ def chat_insurance(request):
     db = create_db_from_youtube_video_url(embeddings)
 
     #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
-    response, docs = get_response_from_query(db, request)
+    response, docs = get_response_from_query(db, json.loads(request.body))
     JsonResponse({'message': response})
 
