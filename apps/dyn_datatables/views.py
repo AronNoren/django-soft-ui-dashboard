@@ -265,3 +265,89 @@ def chat(request):
             return JsonResponse({'message': 'This is an error message'})
     except Exception as ve:
         return JsonResponse({'detail': str(ve)})
+
+    
+    
+########################### NEW dev 
+
+#from langchain.document_loaders import YoutubeLoader
+from langchain.document_loaders import UnstructuredFileLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import LLMChain
+from dotenv import find_dotenv, load_dotenv
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+)
+import textwrap
+
+
+embeddings = OpenAIEmbeddings(openai_api_key = openai.api_key)
+
+@csrf_exempt
+def create_db_from_youtube_video_url():
+    loader = UnstructuredFileLoader("./website_data.txt")
+    text = loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=6000, chunk_overlap=500)
+    docs = text_splitter.split_documents(text)
+
+    db = FAISS.from_documents(docs, embeddings)
+    return db
+
+@csrf_exempt
+def get_response_from_query(db, query, k=4):
+    """
+    gpt-3.5-turbo can handle up to 4097 tokens. Setting the chunksize to 1000 and k to 4 maximizes
+    the number of tokens to analyze.
+    """
+
+    docs = db.similarity_search(query, k=k)
+    docs_page_content = " ".join([d.page_content for d in docs])
+
+    chat = ChatOpenAI(model_name="gpt-4", temperature=0.2,openai_api_key = openai.api_key)
+
+    # Template to use for the system message prompt
+    template = """
+        Du är en hjälpsam assistent som svarar på frågor gällande IF försäkringars olika försäkringar.
+        baserat på IF's dokumentation: {docs}
+        Dina svar bör vara noggranna och detaljerade. Kom ihåg att bara svara på frågor relaterat till if's försäkringar. Referera också till URLen som hör till infon.
+        """
+    #Använd bara faktaenlig information från dokumentationen och refferera till hemsidan som finns i dokumnetationen.
+    #        dokumentationen är hämtad från if's hemsida och följer formatet
+    #        {this is the URL:
+    #            url
+    #            }
+    #            This is the content
+    #            {
+    #                information
+    #            }
+    #        Om du inte har tillräckligt med information bör du säga att du inte vet och be användaren kontakta if's support
+            
+    system_message_prompt = SystemMessagePromptTemplate.from_template(template)
+
+    # Human question prompt
+    human_template = "Svara på följande fråga: {question}"
+    human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
+
+    chat_prompt = ChatPromptTemplate.from_messages(
+        [system_message_prompt, human_message_prompt]
+    )
+
+    chain = LLMChain(llm=chat, prompt=chat_prompt)
+
+    response = chain.run(question=query, docs=docs_page_content)
+    response = response.replace("\n", "")
+    return response, docs
+@csrf_exempt
+def chat_insurance(request):
+    db = create_db_from_youtube_video_url()
+
+    #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
+    response, docs = get_response_from_query(db, request)
+    JsonResponse({'message': response})
+
