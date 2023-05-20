@@ -17,3 +17,10 @@ matplotlib~=3.5.2
 psycopg2-binary==2.9.3
 django-cors-headers~=3.14.0
 openai==0.27.5
+langchain
+openai
+pdf2image
+tabulate
+chromadb
+tiktoken
+faiss-cpu
