@@ -60,12 +60,32 @@
     </style>
 </head>
 <body>
-<!-- Chat button -->
+    
+<div id="chat-container" class="card-content">
+    <!-- Chat box -->
+    <div id="chat-box" class="card">
+        <div class="card-header">
+            Chat with Lucy
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="card-body">
+            <div id="messages"></div>
+            <form id="message-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="message" class="form-control" placeholder="Hi how can I help you?">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Chat button 
 <div id="chat-button" onclick="toggleChat()" >Chat with customer support</div>
 
-<!-- Chat container -->
+<!-- Chat container 
 <div id="chat-container" class="card-content hidden">
-    <!-- Chat box -->
+    <!-- Chat box 
     <div id="chat-box" class="card">
         <div class="card-header">
             Chat with Lucy
@@ -83,7 +103,7 @@
         </div>
     </div>
 </div>
-
+-->
     <script>
 
     function getCookie(name) {
