@@ -9,30 +9,15 @@
         #chat-container {
             position: fixed;
             bottom: 0;
-            right: 0;
+            right: 50%;
+            transform: translateX(50%);
             z-index: 9999;
-        }
-        .hidden {
-          display: none;
-        }
-
-        #chat-button {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: #007bff;
-            color: #fff;
-            padding: 8px 16px;
-            border-top-left-radius: 8px;
-            cursor: pointer;
         }
 
         #chat-box {
-            display: none;
             height: 300px;
             overflow-y: scroll;
             max-width: 300px;
-
         }
 
         .card-body {
@@ -41,22 +26,20 @@
 
         .bot-message {
             text-align: left;
-            background-color: #f8f9fa; /* Light gray */
+            background-color: #f8f9fa;
             margin-bottom: 8px;
             border-radius: 5px;
-            border: 1px solid #dee2e6; /* Light gray border */
+            border: 1px solid #dee2e6;
         }
 
         .user-message {
             text-align: right;
-            background-color: #007bff; /* Blue */
-            color: #fff; /* White text */
+            background-color: #007bff;
+            color: #fff;
             margin-bottom: 8px;
             border-radius: 5px;
-            border: 1px solid #007bff; /* Blue border */
+            border: 1px solid #007bff;
         }
-        
-
     </style>
 </head>
 <body>
