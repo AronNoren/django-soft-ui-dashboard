@@ -347,11 +347,16 @@ def get_response_from_query(db, query, k=4):
     return response, docs
 @csrf_exempt
 def chat_insurance(request):
-    embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
-    db = create_db_from_youtube_video_url(embeddings)
+    try:
+        print(request)
+        embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
+        db = create_db_from_youtube_video_url(embeddings)
 
-    #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
-    print(json.loads(request.body))
-    response, docs = get_response_from_query(db,"Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?")
-    return JsonResponse({'message': response})
-
+        #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
+        print(json.loads(request.body))
+        data = json.loads(request.body)
+        print(data.get('message', None))
+        response, docs = get_response_from_query(db,data.get('message', None))
+        return JsonResponse({'message': response})
+    except Exception as ve:
+        return JsonResponse({'message': str(ve)})
