@@ -295,7 +295,7 @@ def create_db_from_youtube_video_url(embeddings):
     loader = UnstructuredFileLoader(os.path.join(settings.BASE_DIR, 'apps/dyn_datatables/website_data.txt'))
     text = loader.load()
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=6000, chunk_overlap=500)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=4000, chunk_overlap=500)
     docs = text_splitter.split_documents(text)
 
     db = FAISS.from_documents(docs, embeddings)
@@ -317,7 +317,8 @@ def get_response_from_query(db, query, k=4):
     template = """
         Du är en hjälpsam assistent som svarar på frågor gällande IF försäkringars olika försäkringar.
         baserat på IF's dokumentation: {docs}
-        Dina svar bör vara noggranna och detaljerade. Kom ihåg att bara svara på frågor relaterat till if's försäkringar. Referera också till URLen som hör till infon.
+        Dina svar bör vara noggranna, faktaenliga och detaljerade. Kom ihåg att bara svara på frågor relaterat till if's försäkringar. Referera också till URLen som hör till infon.
+        Om du inte har tillräckligt med information bör du säga att du inte vet och be användaren kontakta if's support
         """
     #Använd bara faktaenlig information från dokumentationen och refferera till hemsidan som finns i dokumnetationen.
     #        dokumentationen är hämtad från if's hemsida och följer formatet
