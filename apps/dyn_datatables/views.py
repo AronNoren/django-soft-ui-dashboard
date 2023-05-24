@@ -295,7 +295,7 @@ def create_db_from_youtube_video_url(embeddings):
     loader = UnstructuredFileLoader(os.path.join(settings.BASE_DIR, 'apps/dyn_datatables/website_data.txt'))
     text = loader.load()
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=400)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     docs = text_splitter.split_documents(text)
 
     db = FAISS.from_documents(docs, embeddings)
