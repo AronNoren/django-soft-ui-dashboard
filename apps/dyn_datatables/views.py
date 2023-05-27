@@ -346,10 +346,11 @@ def get_response_from_query(db, query, k=4):
     response = response.replace("\n", "")
     return response, docs
 @csrf_exempt
+embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
 def chat_insurance(request):
     try:
         print(request)
-        embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
+        
         db = create_db_from_youtube_video_url(embeddings)
 
         #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
