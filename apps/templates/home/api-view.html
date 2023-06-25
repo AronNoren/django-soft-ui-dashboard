@@ -664,24 +664,20 @@
         <script>
 let istrending = "0";
 const token = localStorage.getItem('token') || ''
-fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
-             method: 'GET',
-             headers: {
-            'Authorization': `token ${token}`
-             }
-             })
-            .then(function(response){
-                console.log(response.json())
-                return response.json()
-            })
-            .then((res) => {
-                data = res.data
-                
-                res.data.forEach((item) => {
-                    istrending = item.trend
-                    console.log(istrending)
-                })
-            })
+
+async function fetchData() {
+  const response = await fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/', {
+    method: 'GET',
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  });
+  
+  const res = await response.json();
+
+  res.data.forEach(item => {
+    istrending = item.trend;
+  });
 console.log(istrending)
       //set var   
     // Plot if not trending 
