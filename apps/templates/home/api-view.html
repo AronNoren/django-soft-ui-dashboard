@@ -662,7 +662,7 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
         <script>
-const istrending = "0";
+let istrending = "0";
 fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
              method: 'GET',
              headers: {
@@ -677,7 +677,8 @@ fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
                 
                 res.data.forEach((item) => {
                     istrending = item.trend
-})
+                })
+            }
       //set var   
     // Plot if not trending 
     function customNumberFormat(num) {
