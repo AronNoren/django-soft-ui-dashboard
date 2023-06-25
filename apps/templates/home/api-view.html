@@ -678,6 +678,7 @@ async function fetchData() {
   res.data.forEach(item => {
     istrending = item.trend;
   });
+
 console.log(istrending)
       //set var   
     // Plot if not trending 
@@ -1014,7 +1015,8 @@ renderChart();
                 return false;
                 }
      }
-          
+}
+fetchData()   
 
 
         </script>
