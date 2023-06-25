@@ -663,6 +663,7 @@
         <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
         <script>
 let istrending = "0";
+const token = localStorage.getItem('token') || ''
 fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
              method: 'GET',
              headers: {
