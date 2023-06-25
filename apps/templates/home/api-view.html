@@ -671,6 +671,7 @@ fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
              }
              })
             .then(function(response){
+                console.log(response.json())
                 return response.json()
             })
             .then((res) => {
@@ -678,8 +679,10 @@ fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
                 
                 res.data.forEach((item) => {
                     istrending = item.trend
+                    console.log(istrending)
                 })
             })
+console.log(istrending)
       //set var   
     // Plot if not trending 
     function customNumberFormat(num) {
@@ -692,6 +695,7 @@ fetch('https://sea-lion-app-ydqoo.ondigitalocean.app/api/trendline/',{
   }
 }
     if (istrending == "0") {
+   console.log(istrending)
    document.getElementById("notTrendingContainer").style.display = "block";
    const ctx = document.getElementById('btcChart').getContext('2d');
     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
