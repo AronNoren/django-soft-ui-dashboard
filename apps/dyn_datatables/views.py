@@ -452,14 +452,16 @@ def sell_everything(logs=False):
     
 def invest(new_coins, logs=False,stop_loss=0.05):
     api_key = os.getenv('BIN_API_KEY')
-    secret_key = os.getenv('BIN_API_KEY')
+    secret_key = os.getenv('BIN_API_SECRET')
     print("......... Doing Binance Stuff ..........")
-        
+    print("connecting to client")
     client = Client(api_key,secret_key)
+    print("got client")
     info = client.get_exchange_info()
 
     old_coins, old_amounts = portfolio(client,logs)
     #print("Old portfolio : ", old_coins, old_amounts)
+    '''
     total_amounts = np.sum(old_amounts)
     
     coin_lot_sizes = {}
@@ -543,7 +545,7 @@ def invest(new_coins, logs=False,stop_loss=0.05):
         except Exception as e:
             print(e)
         
-    print("Done!")
+    print("Done!")'''
     return 0
 
 
