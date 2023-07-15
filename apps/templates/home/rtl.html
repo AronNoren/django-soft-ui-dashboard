@@ -7,41 +7,62 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
-  <div class="container-fluid py-4">
-    <div class="row">
-      <h2>&nbsp</h2>
-      <h2>&nbsp</h2>
-    </div>
-    <div class="row">
-      <h2>Community</h2>
-      <h2>&nbsp</h2>
-    </div>
-    <div class="row">
-      <div class="col-lg-9 col-md-6 mb-md-2 mb-4">
-          <div class="card h-100">
-            <div class="card-header pb-0">
-              <h3>Portfolio Updates:</h3>
-              <h5>Choose which medium you prefer for receiving updates on when we update our portfolio:</h5>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://discord.gg/x3TED8zq">Discord</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://twitter.com/Bjorkfi">Twitter</a>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://www.tiktok.com/@bjorkfi">TikTok</a>
-              <h3>Join the conversation:</h3>
-              <h5>Talk about what happens in the markets, new investments ideas or give us product feedback via our dedicated discord channel: </h5>
-                     <a class="btn btn-outline-primary btn-sm mb-0" href="https://discord.gg/x3TED8zq">Discord</a>
-              <h2>&nbsp</h2>   
-            </div>
-          </div>
-      </div>
-    </div>
+ <form id="api-form">
+  <label for="api-key">API Key:</label><br>
+  <input type="text" id="api-key" name="api-key"><br>
+  <label for="api-secret">API Secret:</label><br>
+  <input type="text" id="api-secret" name="api-secret"><br>
+  <input type="submit" value="Submit">
+</form>
 
       {% include "includes/footer.html" %}
 
   </div>
-
-
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script>
+document.getElementById('api-form').addEventListener('submit', async function(event) {
+  event.preventDefault(); // Prevent the form from being submitted normally
+  
+  var apiKey = document.getElementById('api-key').value;
+  var apiSecret = document.getElementById('api-secret').value;
 
+  var symbol = 'BTCUSDT'; // The token pair to buy
+  var side = 'BUY';
+  var type = 'MARKET';
+  var quantity = 1; // The amount to buy
+
+  // Build the query parameters
+  var params = {
+    symbol: symbol,
+    side: side,
+    type: type,
+    quantity: quantity,
+    timestamp: Date.now(),
+    recvWindow: 5000 // Specify your own value here
+  };
+  
+  var query = new URLSearchParams(params).toString();
+
+  // Sign the query parameters with your API secret
+  var signature = CryptoJS.HmacSHA256(query, apiSecret).toString(CryptoJS.enc.Hex);
+
+  // Add the signature to the query parameters
+  params.signature = signature;
+  
+  try {
+    let response = await axios.post('https://api.binance.com/api/v3/order', params, {
+      headers: {
+        'X-MBX-APIKEY': apiKey
+      }
+    });
+    console.log('Order placed successfully:', response.data);
+  } catch(error) {
+    console.error('Error placing order:', error);
+  }
+});
+</script>
+{% endblock javascripts %}
