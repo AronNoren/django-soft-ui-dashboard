@@ -346,17 +346,211 @@ def get_response_from_query(db, query, k=4):
     response = response.replace("\n", "")
     return response, docs
 @csrf_exempt
-def chat_insurance(request):
-    try:
-        print(request)
-        embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
-        db = create_db_from_youtube_video_url(embeddings)
+import requests
+import params as pm
+import sys
+import numpy as np
+import math
+import datetime
 
-        #query = "Jag vill åka till spanien med min katt. Täcker min försäkring om katten blir sjuk och behöver vård?"
-        print(json.loads(request.body))
-        data = json.loads(request.body)
-        print(data.get('message', None))
-        response, docs = get_response_from_query(db,data.get('message', None))
-        return JsonResponse({'message': response})
-    except Exception as ve:
-        return JsonResponse({'message': str(ve)})
+from binance import Client
+from binance.client import Client
+
+def sell(client, amount, symbol="BTCUSDT",logs=False):
+
+
+    try:
+        balance = client.get_asset_balance(asset=symbol[:-4])
+        #print(f"Your current {symbol[:-4]} balance is: {balance['free']}")
+        if float(balance['free']) >= amount:
+            order = client.order_market_sell(symbol=symbol, quantity=amount)
+        else:
+            print(f"Insufficient {symbol[:-4]} balance to execute the sell order.")
+    except Exception as e:
+        print(e)
+
+def buy(client, amount, symbol="BTCUSDT", logs=False):
+    
+
+    try:
+        balance = client.get_asset_balance(asset=symbol[-4:])
+        #print(f"Your current {symbol[-4:]} balance is: {balance['free']}")
+        order = client.order_market_buy(symbol=symbol, quantity=amount)
+        #print("Market buy order sent")
+        #print("Order details:")
+
+    except Exception as e:
+        print(e)
+
+def place_stop_loss(client, symbol,  quantity, stop_price,stop_price_sell, logs=False):
+    try:
+        order = client.create_order(
+            symbol=symbol,
+            side="SELL",
+            type="STOP_LOSS_LIMIT",
+            quantity=quantity,
+            stopPrice=stop_price,
+            price=stop_price_sell,
+            timeInForce=client.TIME_IN_FORCE_GTC
+        )
+    except Exception as e:
+        print(str(e))
+def portfolio(client, logs=False):
+    data = client.get_account()
+    coins = []
+    amounts = []
+
+    for i in data["balances"]:
+        if float(i["free"]) +float(i["locked"]) >10**-5:
+            coins.append(i["asset"])
+            amounts.append(float(i["free"]))
+    return coins, amounts
+
+def sell_everything(logs=False):
+    api_key = os.getenv('BIN_API_KEY')
+    secret_key = os.getenv('BIN_API_KEY')
+    client = Client(api_key,secret_key)
+    info = client.get_exchange_info()
+
+    old_coins, old_amounts = portfolio(client,logs)
+    #print("Old portfolio : ", old_coins, old_amounts)
+    total_amounts = np.sum(old_amounts)
+    
+    coin_lot_sizes = {}
+    coin_tick_size = {}
+    
+    for i in info["symbols"]:
+        #print(i)
+        if  i["symbol"][:-4] in old_coins and i["symbol"][-4:] == "USDT":
+            coin_lot_sizes[i["symbol"][:-4]] = float(i["filters"][1]["stepSize"])
+            coin_tick_size[i["symbol"][:-4]] = float(i["filters"][0]["tickSize"])
+    for c,a in zip(old_coins, old_amounts):
+        if c != "USDT":
+            orders = client.get_open_orders(symbol=c+"USDT")
+            #print(orders)
+            if len(orders) > 0:
+                for o in orders:
+                    orderId = o["orderId"]
+                    result = client.cancel_order(
+                        symbol=c+"USDT",
+                        orderId=orderId)
+            
+
+    old_coins, old_amounts = portfolio(client)
+
+    total_amounts = np.sum(old_amounts)  
+    for c,a in zip(old_coins, old_amounts):
+        if c != "USDT":
+            amount_to_sell = a
+            amount_to_sell = float(round(10**5*(math.floor(amount_to_sell/coin_lot_sizes[c])*coin_lot_sizes[c]))/10**5)
+            #amount_to_sell = a
+            if amount_to_sell > 0:
+                sell(client, amount_to_sell,c+"USDT", logs=logs)
+                #print("Sold: ", amount_to_sell, " - " ,c+"USDT")
+            else:
+                #print("Too low quantity to sell")
+                pass         
+    
+def invest(new_coins, logs=False,stop_loss=0.05):
+    api_key = os.getenv('BIN_API_KEY')
+    secret_key = os.getenv('BIN_API_KEY')
+    print("......... Doing Binance Stuff ..........")
+        
+    client = Client(api_key,secret_key)
+    info = client.get_exchange_info()
+
+    old_coins, old_amounts = portfolio(client,logs)
+    #print("Old portfolio : ", old_coins, old_amounts)
+    total_amounts = np.sum(old_amounts)
+    
+    coin_lot_sizes = {}
+    coin_tick_size = {}
+    
+    for i in info["symbols"]:
+        #print(i)
+        if (i["symbol"][:-4] in new_coins or i["symbol"][:-4] in old_coins) and i["symbol"][-4:] == "USDT":
+            coin_lot_sizes[i["symbol"][:-4]] = float(i["filters"][1]["stepSize"])
+            coin_tick_size[i["symbol"][:-4]] = float(i["filters"][0]["tickSize"])
+    successfull_coins = []
+    successfull_amounts = []
+    for c,a in zip(old_coins, old_amounts):
+        if c != "USDT":
+            try:
+                orders = client.get_open_orders(symbol=c+"USDT")
+                successfull_coins.append(c)
+                successfull_amounts.append(a)
+            except Exception as e:
+                logs.write("Coin {} could not be fetched. {}".format(c, e))
+            #print(orders)
+            if len(orders) > 0:
+                for o in orders:
+                    orderId = o["orderId"]
+                    result = client.cancel_order(
+                        symbol=c+"USDT",
+                        orderId=orderId)
+                    
+
+
+    old_coins, old_amounts = portfolio(client)
+
+    total_amounts = np.sum(old_amounts)  
+    
+    for c,a in zip(old_coins, old_amounts):
+        if c != "USDT":
+            amount_to_sell = a
+            amount_to_sell = float(round(10**5*(math.floor(amount_to_sell/coin_lot_sizes[c])*coin_lot_sizes[c]))/10**5)
+            #amount_to_sell = a
+            if amount_to_sell > 0:
+                sell(client, amount_to_sell,c+"USDT", logs=logs)
+                #print("Sold: ", amount_to_sell, " - " ,c+"USDT")
+            else:
+                #print("Too low quantity to sell")
+                pass
+           
+    old_coins, old_amounts = portfolio(client)
+    for c,a in zip(old_coins,old_amounts):
+        if c=="USDT":
+            total_amounts = np.sum(a)*0.99
+    
+    for c in new_coins:
+        #print("-----------------------------------")
+        money_per_coin = total_amounts/len(new_coins)
+        try:
+            coin_price = client.get_avg_price(symbol=c+"USDT")["price"]
+            #print("Current price of ", c, " : ", coin_price)
+            if coin_price:
+                amount_to_buy = money_per_coin / float(coin_price)
+                amount_to_buy = float(round(10**5*(math.floor(amount_to_buy/coin_lot_sizes[c])*coin_lot_sizes[c]))/10**5)
+                #print("Trying to buy : ", amount_to_buy)
+            else:
+                amount_to_buy=0
+                #print("Did not get a coin price")
+            buy(client,amount_to_buy,c+"USDT",logs=logs)
+        except Exception as e:
+            #print(e)
+            if logs:
+                logs.write(str(e))
+        try:
+            balance = client.get_asset_balance(asset=c)
+            q = float(balance['free'])
+            q = float(round(10**5*(math.floor(q/coin_lot_sizes[c])*coin_lot_sizes[c]))/10**5)
+
+            stop_loss_coin_price = float(coin_price)*(1-stop_loss)
+            stop_loss_coin_price = float(round(10**5*(math.floor(stop_loss_coin_price/coin_tick_size[c])*coin_tick_size[c]))/10**5)
+            stop_loss_coin_price_sell = float(round(10**5*(math.floor(stop_loss_coin_price*0.99/coin_tick_size[c])*coin_tick_size[c]))/10**5)
+            #print(stop_loss_coin_price)
+        #print(c, q, coin_price, stop_loss, 1 - stop_loss, coin_price*(1 - stop_loss))
+            place_stop_loss(client, c+"USDT", q , float(stop_loss_coin_price),float(stop_loss_coin_price_sell), logs=logs)
+        except Exception as e:
+            #print(e)
+        
+    print("Done!")
+    return 0
+
+
+
+
+
+def chat_insurance(request):
+    coins_to_hold = ['BCHUSDT','COMPUSDT','ETHUSDT','BTCUSDT']
+    invest(coins_to_hold,False,0.2)
