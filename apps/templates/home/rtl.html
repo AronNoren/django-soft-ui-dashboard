@@ -24,45 +24,51 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 <script>
-document.getElementById('api-form').addEventListener('submit', async function(event) {
-  event.preventDefault(); // Prevent the form from being submitted normally
-  
-  var apiKey = document.getElementById('api-key').value;
-  var apiSecret = document.getElementById('api-secret').value;
+const express = require('express');
+const axios = require('axios');
+const crypto = require('crypto');
+const app = express();
 
-  var symbol = 'BTCUSDT'; // The token pair to buy
-  var side = 'BUY';
-  var type = 'MARKET';
-  var quantity = 1; // The amount to buy
+app.post('/order', async (req, res) => {
+  // Retrieve the API key and secret from the request
+  const apiKey = req.body.apiKey;
+  const apiSecret = req.body.apiSecret;
 
-  // Build the query parameters
-  var params = {
-    symbol: symbol,
-    side: side,
-    type: type,
-    quantity: quantity,
+  // Define your order parameters
+  let params = {
+    symbol: 'BTCUSDT',
+    side: 'BUY',
+    type: 'MARKET',
+    quantity: 1,
     timestamp: Date.now(),
-    recvWindow: 5000 // Specify your own value here
+    recvWindow: 5000
   };
-  
-  var query = new URLSearchParams(params).toString();
 
-  // Sign the query parameters with your API secret
-  var signature = CryptoJS.HmacSHA256(query, apiSecret).toString(CryptoJS.enc.Hex);
+  let query = new URLSearchParams(params).toString();
 
-  // Add the signature to the query parameters
+  // Sign the parameters
+  let signature = crypto.createHmac('sha256', apiSecret).update(query).digest('hex');
   params.signature = signature;
-  
+
+  // Make the API request
   try {
     let response = await axios.post('https://api.binance.com/api/v3/order', params, {
       headers: {
         'X-MBX-APIKEY': apiKey
       }
     });
-    console.log('Order placed successfully:', response.data);
-  } catch(error) {
-    console.error('Error placing order:', error);
+
+    // Send the response back to the client
+    res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'An error occurred' });
   }
 });
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
 </script>
 {% endblock javascripts %}
