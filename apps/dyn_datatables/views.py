@@ -347,7 +347,6 @@ def get_response_from_query(db, query, k=4):
     return response, docs
 
 import requests
-import params as pm
 import sys
 import numpy as np
 import math
@@ -480,7 +479,7 @@ def invest(new_coins, logs=False,stop_loss=0.05):
                 successfull_coins.append(c)
                 successfull_amounts.append(a)
             except Exception as e:
-                logs.write("Coin {} could not be fetched. {}".format(c, e))
+                print("Coin {} could not be fetched. {}".format(c, e))
             #print(orders)
             if len(orders) > 0:
                 for o in orders:
@@ -529,7 +528,7 @@ def invest(new_coins, logs=False,stop_loss=0.05):
         except Exception as e:
             #print(e)
             if logs:
-                logs.write(str(e))
+                print(str(e))
         try:
             balance = client.get_asset_balance(asset=c)
             q = float(balance['free'])
