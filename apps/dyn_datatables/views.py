@@ -542,7 +542,7 @@ def invest(new_coins, logs=False,stop_loss=0.05):
         #print(c, q, coin_price, stop_loss, 1 - stop_loss, coin_price*(1 - stop_loss))
             place_stop_loss(client, c+"USDT", q , float(stop_loss_coin_price),float(stop_loss_coin_price_sell), logs=logs)
         except Exception as e:
-            #print(e)
+            print(e)
         
     print("Done!")
     return 0
