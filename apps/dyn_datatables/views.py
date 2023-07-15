@@ -345,7 +345,7 @@ def get_response_from_query(db, query, k=4):
     response = chain.run(question=query, docs=docs_page_content)
     response = response.replace("\n", "")
     return response, docs
-@csrf_exempt
+
 import requests
 import params as pm
 import sys
